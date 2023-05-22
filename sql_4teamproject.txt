@@ -1,0 +1,31 @@
+-- drop table members;
+-- drop table nonmembers;
+-- drop table waybill;
+
+
+CREATE TABLE `members` (
+	`memid` VARCHAR(15) NOT NULL COMMENT '회원 ID',
+	`memname` VARCHAR(10) NOT NULL COMMENT '회원 성함',
+	`mempw` VARCHAR(20) not null Comment '회원 비밀번호',
+	`memaddr` VARCHAR(100) not null COMMENT '회원 주소',
+	`memcp` VARCHAR(20) not null comment '회원 전화번호',
+	PRIMARY KEY (`memid`)
+);
+
+create table `nonmembers` (
+	`nonname` VARCHAR(10) NOT NULL COMMENT '비회원 성함',
+	`noncp` VARCHAR(20) not null comment '비회원 전화번호',
+	`nonaddr` VARCHAR(100) not null COMMENT '비회원 주소',
+	PRIMARY KEY (`noncp`)
+);
+
+create table `waybill` (
+	`waybillnum` decimal(20) not null comment '운송장 번호',
+	`receivername` VARCHAR(10) not null comment '받는사람 이름',
+	`receiveraddr` varchar(100) not null comment '받는사람 주소',
+	`receivercp` varchar(20) not null comment '받는사람 전화번호',
+	`parcelcompany` varchar(10) comment '택배사',
+	`memid` varchar(15) not null comment '회원 ID',
+	`noncp` varchar(20) not null comment '비회원 전화번호',
+	 primary key (`waybillnum`)
+);
