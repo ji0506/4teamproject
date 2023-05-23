@@ -75,7 +75,7 @@ public class NonuserDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "insert into nonuser value(?,?,?)";
+			String sql = "insert into nonuser values(?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -85,7 +85,7 @@ public class NonuserDao {
 			
 			stmt.executeUpdate();
 			stmt.close();
-			conn.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -77,7 +77,7 @@ public class UserDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "insert into user value(?,?,?,?,?,?)";
+			String sql = "insert into user values(?,?,?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -86,7 +86,6 @@ public class UserDao {
 			stmt.setString(3, vo.getUserPwd());
 			stmt.setString(4, vo.getUserAddr());
 			stmt.setString(5, vo.getUserCp());
-			stmt.setString(6, vo.getUserEmail());
 
 			stmt.executeUpdate();
 
@@ -103,15 +102,14 @@ public class UserDao {
 			Connection conn = SuperDao.getConnection();
 			
 
-			String sql = "update user set  user_name = ?,user_pw = ?, user_addr = ?, user_cp= ?, user_email=?   where user_id=? ";
+			String sql = "update user set  user_name = ?,user_pw = ?, user_addr = ?, user_cp= ? where user_id=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, vo.getUserName());
 			stmt.setString(2, vo.getUserPwd());
 			stmt.setString(3, vo.getUserAddr());
 			stmt.setString(4, vo.getUserCp());
-			stmt.setString(5, vo.getUserEmail());			
-			stmt.setString(6, vo.getUserId());
+			stmt.setString(5, vo.getUserId());
 
 			stmt.executeUpdate();
 			stmt.close();
