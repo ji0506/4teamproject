@@ -107,12 +107,12 @@ public class UserDao {
 			String sql = "update user set  user_name = ?,user_pw = ?, user_addr = ?, user_cp= ?, user_email=?   where user_id=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(2, vo.getUserName());
-			stmt.setString(3, vo.getUserPwd());
-			stmt.setString(4, vo.getUserAddr());
-			stmt.setString(5, vo.getUserCp());
-			stmt.setString(6, vo.getUserEmail());			
-			stmt.setString(7, vo.getUserId());
+			stmt.setString(1, vo.getUserName());
+			stmt.setString(2, vo.getUserPwd());
+			stmt.setString(3, vo.getUserAddr());
+			stmt.setString(4, vo.getUserCp());
+			stmt.setString(5, vo.getUserEmail());			
+			stmt.setString(6, vo.getUserId());
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -129,7 +129,7 @@ public class UserDao {
 			Connection conn = SuperDao.getConnection();
 			
 
-			String sql = "update user set where user_id=? and user_pw=?";
+			String sql = "delete from user where user_id=? and user_pw=?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, vo.getUserId());
