@@ -5,21 +5,24 @@ import java.sql.DriverManager;
 import java.util.List;
 import model.User;
 
-public interface SuperDao {
+public class SuperDao {
 	
-	public static Connection con = null; 
+	public static Connection con ; 
 	
-	public static Connection Load()
+	public static void Load()
 	{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		//	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/team","root","12345");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/team","root","12345");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return con;
 
+	}
+	public static Connection getConnection()
+	{
+		return con;
 	}
 
 }
