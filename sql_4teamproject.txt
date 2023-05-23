@@ -11,8 +11,7 @@ CREATE TABLE `user` (
 	user_name VARCHAR(10) NOT NULL COMMENT '회원 성함',
 	user_pw VARCHAR(20) not null COMMENT '회원 비밀번호',
 	user_addr VARCHAR(100) not null COMMENT '회원 주소',
-	user_cp VARCHAR(20) not null comment '회원 전화번호',
-	user_email VARCHAR(20) not null comment '회원 이메일'
+	user_cp VARCHAR(20) not null comment '회원 전화번호'
 );
 
 
@@ -46,11 +45,8 @@ create table parcel(
 	`parcel_no` int(10) NOT NULL AUTO_INCREMENT  comment '택배 번호',
 	`parcel_name` varchar(10) NOT NULL comment '택배 명',
 	`parcel_weight` int(10) comment '택배 무게',
-	`parcel_size` varchar(10) comment '택배 크기',
+	`parcel_size` varchar(15) comment '택배 크기',
 	`parcel_fee` int(10) comment '요금',
 	`waybill_no` INT(12) not null comment '운송장 번호',
 	 primary key (`parcel_no`)
 );
-
-
-
