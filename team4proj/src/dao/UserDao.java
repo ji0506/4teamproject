@@ -26,17 +26,22 @@ public class UserDao {
 	public void create(User use)
 	{
 		
+		String sql = "insert into value(?,?,?,?)";
+		
 		return;
 	}
 
 	public void update(User use)
 	{
+		String sql;
+
 		
 		return;
 	}
 
 	public void delete(User use)
 	{
+		String sql;
 		
 		return;
 	}

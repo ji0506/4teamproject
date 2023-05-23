@@ -13,7 +13,7 @@ public class MainView {
 	}
 
 	public static void main(String[] args) {		
-		UserExam uexm = new UserExam();
+		UserView uexm = new UserView();
 		String userId;
 		while(true)
 		{
