@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Nonuser;
-import model.User;
 
 public class NonuserDao {
 
