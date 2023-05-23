@@ -13,7 +13,4 @@ public class Nonuser {
 
 	private String nonuserAddr;
 
-
-
-	
 }

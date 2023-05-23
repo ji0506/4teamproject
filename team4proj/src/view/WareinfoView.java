@@ -10,13 +10,17 @@ public class WareinfoView {
 	private static Scanner scan = new Scanner(System.in);
 
 	public static void ParcelInfo() {
+
 		Parcel parcel = new Parcel();
+		ParcelDao pdao = new ParcelDao();
 
 		try {
+			
 			parcelNum++;
 			int cost;
 			int mass;
 			
+			//화면 출력
 			System.out.println();
 			System.out.println("물품의 내용을 입력해주세요");
 			System.out.print("물품 내용 : ");
@@ -27,7 +31,8 @@ public class WareinfoView {
 			System.out.println("---------------------------------------------------------------");
 			System.out.println("무게와 크기를 입력해 주세요");
 			System.out.println("---------------------------------------------------------------");
-
+			
+			//무게당 요금 계산
 			while (true) {
 				System.out.print("무게(kg) :");
 				mass = scan.nextInt();
@@ -48,10 +53,12 @@ public class WareinfoView {
 					continue;
 				}
 			}
-
+			
+			//택배 규격 확인
 			int width;
 			int length;
 			int height;
+			
 			while (true) {
 				System.out.print("가로(cm) :");
 				width = scan.nextInt();
@@ -67,18 +74,21 @@ public class WareinfoView {
 				break;
 			}
 			
+			//택배 크기 정의
 			String volume = String.format("%d*%d*%d(cm)", width, length, height);
 			
-			
+			// 입력값들 set 
 			parcel.setParcelNo(parcelNum);
 			parcel.setParcelName(parcelName);
 			parcel.setParcelFee(cost);
 			parcel.setParcelWeight(mass);
 			parcel.setParcelSize(volume);
 			
-			ParcelDao pdao = new ParcelDao();
+			//데이터 베이스에 입력
 			pdao.create(parcel);
 			
+			
+			//마지막 확인 화면 출력
 			System.out.println("운송물 정보 확인");
 			System.out.println("--------------------------------------------------------");
 			System.out.printf("| 내용 : %s || 크기 : %s || 무게 : %d |\n",parcelName,volume,mass);
