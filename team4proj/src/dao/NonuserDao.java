@@ -34,7 +34,6 @@ public class NonuserDao {
 			}
 			re.close();
 			stmt.close();
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,7 +61,6 @@ public class NonuserDao {
 			}
 			re.close();
 			stmt.close();
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,6 +83,7 @@ public class NonuserDao {
 			stmt.setString(2, vo.getNonuserName());
 			stmt.setString(3, vo.getNonuserAddr());
 			
+			stmt.executeUpdate();
 			stmt.close();
 			conn.close();
 		} catch (Exception e) {

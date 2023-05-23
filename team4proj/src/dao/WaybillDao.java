@@ -39,7 +39,6 @@ public class WaybillDao {
 			}
 			re.close();
 			stmt.close();
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,7 +71,6 @@ public class WaybillDao {
 			}
 			re.close();
 			stmt.close();
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -99,8 +97,8 @@ public class WaybillDao {
 			stmt.setString(6, vo.getUserId());
 			stmt.setString(7, vo.getNonCp());
 
+			stmt.executeUpdate();
 			stmt.close();
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -34,7 +34,6 @@ public class UserDao {
 			}
 			re.close();
 			stmt.close();
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -64,7 +63,6 @@ public class UserDao {
 			}
 			re.close();
 			stmt.close();
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -90,8 +88,9 @@ public class UserDao {
 			stmt.setString(5, vo.getUserCp());
 			stmt.setString(6, vo.getUserEmail());
 
+			stmt.executeUpdate();
+
 			stmt.close();
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -37,7 +37,6 @@ public class ParcelDao {
 			}
 			re.close();
 			stmt.close();
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -68,7 +67,6 @@ public class ParcelDao {
 			}
 			re.close();
 			stmt.close();
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -92,8 +90,9 @@ public class ParcelDao {
 			stmt.setInt(4, vo.getParcelFee());
 			stmt.setInt(5, vo.getWaybillNo());
 			
+			stmt.executeUpdate();
+
 			stmt.close();
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
