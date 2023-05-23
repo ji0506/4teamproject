@@ -3,20 +3,20 @@ package view;
 import java.util.Scanner;
 
 import dao.ParcelDao;
+import dao.SuperDao;
 import model.Parcel;
 
 public class WareinfoView {
-	static int parcelNum = 0;
 	private static Scanner scan = new Scanner(System.in);
 
 	public static void ParcelInfo() {
-
+		
+		SuperDao.Load();
 		Parcel parcel = new Parcel();
 		ParcelDao pdao = new ParcelDao();
-
+		
 		try {
 			
-			parcelNum++;
 			int cost;
 			int mass;
 			
@@ -78,7 +78,6 @@ public class WareinfoView {
 			String volume = String.format("%d*%d*%d(cm)", width, length, height);
 			
 			// 입력값들 set 
-			parcel.setParcelNo(parcelNum);
 			parcel.setParcelName(parcelName);
 			parcel.setParcelFee(cost);
 			parcel.setParcelWeight(mass);
@@ -89,13 +88,14 @@ public class WareinfoView {
 			
 			
 			//마지막 확인 화면 출력
+			System.out.println();
+			System.out.println("--------------------------------------------------------");
 			System.out.println("운송물 정보 확인");
 			System.out.println("--------------------------------------------------------");
 			System.out.printf("| 내용 : %s || 크기 : %s || 무게 : %d |\n",parcelName,volume,mass);
 			System.out.println("--------------------------------------------------------");
 
 		} catch (Exception e) {
-			parcelNum--;
 			e.printStackTrace();
 		}
 
@@ -104,7 +104,6 @@ public class WareinfoView {
 	public static void exit() {
 		System.out.println("** 프로그램 종료 **");
 		System.exit(0);
-
 	}
 
 	public static void main(String[] args) {

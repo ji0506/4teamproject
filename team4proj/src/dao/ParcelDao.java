@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Nonuser;
 import model.Parcel;
+import model.User;
 
 public class ParcelDao {
 
@@ -81,7 +83,7 @@ public class ParcelDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "insert into parcel(parcel_name,parcel_weight,parcel_size,parcel_fee,waybill_no) value(?,?,?,?,?)";
+			String sql = "insert into parcel(parcel_name,parcel_weight,parcel_size,parcel_fee,waybill_no) values(?,?,?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, vo.getParcelName());
@@ -142,6 +144,8 @@ public class ParcelDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		
 	}
 
 }
