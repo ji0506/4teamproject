@@ -1,31 +1,56 @@
--- drop table members;
--- drop table nonmembers;
--- drop table waybill;
+
+DROP TABLE  if exists user;
+DROP TABLE  if exists nonuser;
+DROP TABLE  if exists waybill;
+DROP TABLE  if exists company;
+DROP TABLE  if exists parcel;
 
 
-CREATE TABLE `members` (
-	`memid` VARCHAR(15) NOT NULL COMMENT '회원 ID',
-	`memname` VARCHAR(10) NOT NULL COMMENT '회원 성함',
-	`mempw` VARCHAR(20) not null Comment '회원 비밀번호',
-	`memaddr` VARCHAR(100) not null COMMENT '회원 주소',
-	`memcp` VARCHAR(20) not null comment '회원 전화번호',
-	PRIMARY KEY (`memid`)
+CREATE TABLE `user` (
+	user_id VARCHAR(15) NOT NULL PRIMARY KEY COMMENT '회원 ID',
+	user_name VARCHAR(10) NOT NULL COMMENT '회원 성함',
+	user_pw VARCHAR(20) not null COMMENT '회원 비밀번호',
+	user_addr VARCHAR(100) not null COMMENT '회원 주소',
+	user_cp VARCHAR(20) not null comment '회원 전화번호',
+	user_email VARCHAR(20) not null comment '회원 이메일'
 );
 
-create table `nonmembers` (
-	`nonname` VARCHAR(10) NOT NULL COMMENT '비회원 성함',
-	`noncp` VARCHAR(20) not null comment '비회원 전화번호',
-	`nonaddr` VARCHAR(100) not null COMMENT '비회원 주소',
-	PRIMARY KEY (`noncp`)
+
+create table `nonuser` (
+	`non_cp` VARCHAR(20) not null comment '비회원 전화번호',
+	`non_name` VARCHAR(10) NOT NULL COMMENT '비회원 성함',
+	`non_addr` VARCHAR(100) not null COMMENT '비회원 주소',
+	PRIMARY KEY (`non_cp`)
 );
 
 create table `waybill` (
-	`waybillnum` decimal(20) not null comment '운송장 번호',
-	`receivername` VARCHAR(10) not null comment '받는사람 이름',
-	`receiveraddr` varchar(100) not null comment '받는사람 주소',
-	`receivercp` varchar(20) not null comment '받는사람 전화번호',
-	`parcelcompany` varchar(10) comment '택배사',
-	`memid` varchar(15) not null comment '회원 ID',
-	`noncp` varchar(20) not null comment '비회원 전화번호',
-	 primary key (`waybillnum`)
+	`waybill_no` INT(12) not null comment '운송장 번호',
+	`rcvr_name` VARCHAR(10) not null comment '받는사람 이름',
+	`rcvr_addr` varchar(100) not null comment '받는사람 주소',
+	`rcvr_cp` varchar(20) not null comment '받는사람 전화번호',
+	`company_cd` varchar(2) comment '택배사 코드',
+	`user_id` varchar(15) not null comment '회원 ID',
+	`non_cp` varchar(20) not null comment '비회원 전화번호',
+	`reg_date` DATETIME NOT NULL DEFAULT current_timestamp() comment '등록날짜',
+	`up_date` DATETIME comment '받은날짜',
+	 primary key (`waybill_no`)
 );
+
+create table company(
+	`company_cd` varchar(2) NOT NULL comment '택배사 코드',
+	`company_name` varchar(10) comment '택배사명',
+	primary key (`company_cd`)
+);
+
+create table parcel(
+	`parcel_no` varchar(2) NOT NULL comment '택배 번호',
+	`parcel_name` varchar(10) NOT NULL comment '택배 명',
+	`parcel_weight` int(10) comment '택배 무게',
+	`parcel_size` varchar(10) comment '택배 크기',
+	`parcel_fee` int(10) comment '요금',
+	`waybill_no` INT(12) not null comment '운송장 번호',
+	 primary key (`parcel_no`)
+);
+
+
+
