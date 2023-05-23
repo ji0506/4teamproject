@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import model.User;
+
 import model.Waybill;
 
 public class WaybillDao {
@@ -59,7 +59,7 @@ public class WaybillDao {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
 			ResultSet re = stmt.executeQuery();
-			if(re != null) {
+			while (re.next()) {
 				vo = new Waybill();
 				vo.setWaybillNo(re.getInt("waybill_no"));
 				vo.setRcvrName(re.getString("rcvr_name"));
@@ -149,8 +149,36 @@ public class WaybillDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int selectzipcode(String sido, String gugun,String dong, int num)
+	{
+		try {
+			Connection conn = SuperDao.getConnection();
+			
 
+			String sql = "select DISTINCT  zipcode from sigugun where sido=? and gugun=? and dong like ? and num=?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, sido);
+			stmt.setString(2, gugun);
+			stmt.setString(3, dong + "%");
+			stmt.setInt(4, num);
+
+			ResultSet re = stmt.executeQuery();
+			int i = 0;
+			while (re.next()) {
+				i =re.getInt("zipcode");
+			}
+			stmt.close();
+
+			return i;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
+		
+		return -1;
 	}
 
 }

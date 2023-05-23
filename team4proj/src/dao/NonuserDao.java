@@ -54,7 +54,7 @@ public class NonuserDao {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, nonCp);
 			ResultSet re = stmt.executeQuery();
-			if(re != null) {
+			while (re.next()) {
 				vo = new Nonuser();
 				vo.setNonuserCp(re.getString("non_cp"));
 				vo.setNonuserName(re.getString("non_name"));

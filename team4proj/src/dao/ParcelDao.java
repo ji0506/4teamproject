@@ -57,7 +57,7 @@ public class ParcelDao {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, nonCp);
 			ResultSet re = stmt.executeQuery();
-			if(re != null) {
+			while (re.next()) {
 				vo = new Parcel();
 				vo.setParcelNo(re.getInt("parcel_no"));
 				vo.setParcelName(re.getString("parcel_name"));

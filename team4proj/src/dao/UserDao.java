@@ -54,7 +54,7 @@ public class UserDao {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
 			ResultSet re = stmt.executeQuery();
-			if(re != null) {
+			while (re.next()) {
 				vo = new User();
 				vo.setUserId(re.getString("user_id"));
 				vo.setUserPwd(re.getString("user_pw"));
