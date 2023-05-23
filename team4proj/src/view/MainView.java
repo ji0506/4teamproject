@@ -1,27 +1,24 @@
 package view;
 
 import java.util.Scanner;
-
 import dao.SuperDao;
 
 public class MainView {
 
 	private static Scanner scan = new Scanner(System.in);
-	
+
 	public void exit() {
 		System.out.println("** 프로그램 종료 **");
 		System.exit(0);
-
 	}
 
-	public static void main(String[] args) {	
-		
-		UserView uexm = new UserView();
+	public static void main(String[] args) {
+
+		UserView userV = new UserView();
 		String userId;
 		SuperDao.Load();
-		
-		while(true)
-		{
+
+		while (true) {
 			System.out.println("--------------------------------------------------------");
 			System.out.println("                     [메인 메뉴]");
 			System.out.println("--------------------------------------------------------");
@@ -31,37 +28,30 @@ public class MainView {
 
 			System.out.print("메뉴 선택: ");
 			String menuNo = scan.nextLine();
-			
+
 			if ("1".equals(menuNo)) {
-				userId = uexm.login();
-				
-				if(userId != "")
-				{
+				userId = userV.Login();
+
+				if (userId != "fail") {
 					System.out.println("로그인에 성공하셨습니다.");
 					break;
-				}
-				else {
+				} else {
 					System.out.println("로그인에 실패하셨습니다.");
+					continue;
 				}
-			} 
-			else if ("2".equals(menuNo)) {
-				boolean btrue = uexm.create();
-				if(btrue)
-					System.out.println("비회원 로그인에 성공하셨습니다.");
-				else 
-					System.out.println("비회원 로그인에 실패하셨습니다.");
+			} else if ("2".equals(menuNo)) {
+				userV.Non_userlogin();
+				break;
 			} else if ("3".equals(menuNo)) {
-				boolean btrue = uexm.create();
-				if(btrue)
-					System.out.println("회원가입되셨습니다.");
-				else 
-					System.out.println("회원가입에 실패하셨습니다.");
-			} else 
+				userV.JoinUser();
+				main(args);
+				break;
+			} else
 				return;
 		}
+		
+		SuperDao.close();
 
-		
-		
 	}
 
 }

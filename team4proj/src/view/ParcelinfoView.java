@@ -6,12 +6,11 @@ import dao.ParcelDao;
 import dao.SuperDao;
 import model.Parcel;
 
-public class WareinfoView {
+public class ParcelinfoView {
 	private static Scanner scan = new Scanner(System.in);
 
 	public static void ParcelInfo() {
 		
-		SuperDao.Load();
 		Parcel parcel = new Parcel();
 		ParcelDao pdao = new ParcelDao();
 		
@@ -107,8 +106,9 @@ public class WareinfoView {
 	}
 
 	public static void main(String[] args) {
+		SuperDao.Load();
 		ParcelInfo();
-
+		SuperDao.close();
 	}
 
 }
