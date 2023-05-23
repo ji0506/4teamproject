@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class SuperDao {
 	
@@ -18,9 +19,21 @@ public class SuperDao {
 		}
 
 	}
+	public static void close() {
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
 	public static Connection getConnection()
 	{
 		return con;
 	}
+	
+	
 
 }
