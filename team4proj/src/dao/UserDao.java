@@ -72,7 +72,7 @@ public class UserDao {
 		return vo;
 	}
 
-	public void create(User vo) {
+	public boolean create(User vo) {
 
 
 		try {
@@ -87,14 +87,13 @@ public class UserDao {
 			stmt.setString(4, vo.getUserAddr());
 			stmt.setString(5, vo.getUserCp());
 
-			stmt.executeUpdate();
-
+			stmt.executeUpdate(); // 여기서 에러
 			stmt.close();
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-
+		return false;
 	}
 
 	public void update(User vo) {

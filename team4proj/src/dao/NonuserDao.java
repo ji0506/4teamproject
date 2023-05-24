@@ -70,7 +70,7 @@ public class NonuserDao {
 		return vo;
 	}
 
-	public void create(Nonuser vo) {
+	public boolean create(Nonuser vo) {
 
 
 		try {
@@ -85,11 +85,13 @@ public class NonuserDao {
 			
 			stmt.executeUpdate();
 			stmt.close();
+			return true;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
+		return false;
 
 	}
 
