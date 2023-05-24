@@ -104,6 +104,32 @@ public class ParcelDao {
 		return vo;
 	}
 
+	public int selectParcelFee(int parcelNum) {
+		
+		int parcelFee = 0;
+		
+		try {
+			Connection conn = SuperDao.getConnection();
+			String sql = "select parcel_fee from parcel where parcel_no=?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, parcelNum);
+			ResultSet re = stmt.executeQuery();
+			
+			re.next();
+			
+			parcelFee = re.getInt("parcel_fee");
+			
+			re.close();
+			stmt.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return parcelFee;
+	}
+
 	public int selectCountId() {
 
 		int cnt = 0;
