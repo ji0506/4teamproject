@@ -11,7 +11,7 @@ public class ParcelinfoView {
 
 	public static void ParcelInfo(String userId) {
 		
-		Parcel parcel = new Parcel();
+Parcel parcel = new Parcel();
 		ParcelDao pdao = new ParcelDao();
 		
 		try {
@@ -21,8 +21,8 @@ public class ParcelinfoView {
 			
 			//화면 출력
 			System.out.println();
-			System.out.println("물품의 내용을 입력해주세요");
-			System.out.print("물품 내용 : ");
+			System.out.println("상품명을 입력해주세요");
+			System.out.print("상품명 : ");
 			String parcelName = scan.nextLine();
 			
 
@@ -98,13 +98,14 @@ public class ParcelinfoView {
 			System.out.println("--------------------------------------------------------");
 			System.out.println();
 			System.out.println("                   ○ 운송물 정보 확인 ○");
+			System.out.println();
 			System.out.println("--------------------------------------------------------");
+			System.out.println();
 			System.out.printf("    | 내용 : %s || 크기 : %s || 무게 : %d |\n",parcelName,volume,mass);
+			System.out.println();
 			System.out.println("--------------------------------------------------------");
 
-			
-			
-			
+							
 			ToReceiverInfoView.receiver(userId,parcelNum);
 			
 		} catch (Exception e) {

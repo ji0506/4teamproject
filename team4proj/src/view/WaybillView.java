@@ -2,10 +2,7 @@ package view;
 
 import java.util.Scanner;
 
-import dao.SuperDao;
-import dao.WaybillDao;
-import model.Nonuser;
-import model.Waybill;
+import model.Parcel;
 
 public class WaybillView {
 
@@ -15,58 +12,47 @@ public class WaybillView {
 		System.out.println("** 프로그램 종료 **");
 		System.exit(0);
 	}
-
-	public static void main(String[] args) {
+	
+	public static void waybillList () {
 		
-//		
-//		UserView userV = new UserView();
-//		Nonuser Nuser = new Nonuser();
-//		String userId;
-//		
-//		SuperDao.Load();
-//
-//		System.out.print("주소: ");
-//		WaybillView view = new WaybillView();
-//		String str = scan.nextLine();
-//		int zipcode = view.getzipCode(str);
-//		System.out.println(zipcode);
-//
-//		
-//		
-//		SuperDao.close();
-//	}
-//	
-//	public int getzipCode(String line) {
-//
-//		String[] strToStrArray = line.split(" ");
-//		WaybillDao wdao = new WaybillDao();
-//		int zipcode = 0;
-//		
-//		
-//		//가평군 등의 '군'의 경우
-//		if(strToStrArray.length == 4)
-//		{
-//			//문자열을 잘라 도,시,동, 번호 구분			
-//			String [] numTobunum = strToStrArray[3].split("-");
-//			if(numTobunum.length >= 2) 	//부 번호가 있는경우			
-//				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1],strToStrArray[2], Integer.parseInt(numTobunum[0]),Integer.parseInt(numTobunum[1]));
-//			else  //부 번호가 없는경우	
-//				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1],strToStrArray[2], Integer.parseInt(numTobunum[0]));
-//
-//			
-//		} 
-//		//안산시 등의 '시'의 경우
-//		else {
-//			//문자열을 잘라 도,시,동, 번호 구분			
-//			String [] numTobunum = strToStrArray[4].split("-");
-//			if(numTobunum.length >= 2) //부 번호가 있는경우	
-//				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1] + " " + strToStrArray[2],strToStrArray[3], Integer.parseInt(numTobunum[0]),Integer.parseInt(numTobunum[1]));				
-//			else //부 번호가 없는경우	
-//				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1] + " " + strToStrArray[2],strToStrArray[3], Integer.parseInt(numTobunum[0]));				
-//		}
-//		
-//		return zipcode;
+		System.out.println("운송장 조회");
+		System.out.println("1. 회원 조회 2. 비회원 조회");
+		System.out.println("---------------------");
+		System.out.print("메뉴 선택 : ");
+		String subMenuNo = scan.nextLine();
+		if ("1".equals(subMenuNo)) {
+								
+		} else if ("2".equals(subMenuNo)) {
+			
+		} else {
+			MainView.main(null);
+		}
 	}
 
+	public static void waybillList(String nonUserCp) {
+		// 비회원 조회 
+		System.out.println("비회원 운송장 목록");
+		
+	}
+
+	public static void waybillList(String userId, String userPwd) {
+
+		System.out.println("회원 운송장 목록");
+
+	}
 	
+	
+	public static void waybillInfo (String waybillNum) {
+		
+		
+		System.out.println("┌--------------------------------------------------------------------------┐");
+		System.out.println("|                                                                          |");
+		 System.out.printf("| 운송장 번호 : %-30s|| 택배사 : %-23s|","0000000000", "경동택배");
+	}
+	
+	
+	public static void main(String[] args) {
+		waybillInfo("");
+	}
+
 }
