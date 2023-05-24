@@ -187,6 +187,41 @@ public class UserDao {
 		return false;
 	}
 	
+	public List<Useraddress> selectAddrAll(String userId) {
+
+		List<Useraddress> list = new ArrayList<>();
+
+		try {
+			Connection conn = SuperDao.getConnection();
+			String sql = "select * from user_address where user_id=?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userId);
+			ResultSet re = stmt.executeQuery();
+			int i = 1;
+			while (re.next()) {
+				Useraddress vo = new Useraddress();
+				
+				vo.setRcvrName(re.getString("rcvr_name"));
+				vo.setRcvrAddr(re.getString("rcvr_addr"));
+				vo.setRcvrCp(re.getString("rcvr_cp"));
+				list.add(vo);
+				System.out.printf("%-6d%-40s%-40s%-40s\n",
+						i,
+						vo.getRcvrName(),
+						vo.getRcvrAddr(),
+						vo.getRcvrCp()
+						);
+				i++;
+			}
+			re.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
 	
 	public Useraddress selectUserAdddress(String userId) {
 		
