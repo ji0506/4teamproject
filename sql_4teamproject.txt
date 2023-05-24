@@ -5,7 +5,7 @@ DROP TABLE  if exists waybill;
 DROP TABLE  if exists company;
 DROP TABLE  if exists parcel;
 DROP TABLE  if exists user_address;
-DROP TABLE  if exists sigugun
+DROP TABLE  if exists sigugun;
 
 
 CREATE TABLE `user` (
