@@ -28,8 +28,8 @@ create table `waybill` (
 	`rcvr_addr` varchar(100) not null comment '받는사람 주소',
 	`rcvr_cp` varchar(20) not null comment '받는사람 전화번호',
 	`company_cd` varchar(2) comment '택배사 코드',
-	`user_id` varchar(15) not null comment '회원 ID',
-	`non_cp` varchar(20) not null comment '비회원 전화번호',
+	`user_id` varchar(15) comment '회원 ID',
+	`non_cp` varchar(20) comment '비회원 전화번호',
 	`reg_date` DATETIME NOT NULL DEFAULT current_timestamp() comment '등록날짜',
 	`up_date` DATETIME comment '받은날짜',
 	 primary key (`waybill_no`)
@@ -50,3 +50,8 @@ create table parcel(
 	`waybill_no` INT(12) not null comment '운송장 번호',
 	 primary key (`parcel_no`)
 );
+
+select * from parcel p ;
+select * from nonuser n ;
+select * from `user` u ;
+
