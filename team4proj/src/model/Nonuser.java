@@ -5,8 +5,6 @@ import lombok.Data;
 @Data
 public class Nonuser {
 
-
-
 	private String nonuserCp;
 	
 	private String nonuserName;
