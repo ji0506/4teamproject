@@ -50,19 +50,11 @@ public class UserView {
 			nuser.setNonuserCp(usercp);
 			nuser.setNonuserAddr(useraddr);
 
-			nudao.create(nuser);
-			
-						
 			if(nudao.create(nuser) == true)	
 				return "success";
 			
 		} catch (Exception e) {
-			
 			e.printStackTrace();
-
-			System.out.println();
-			System.out.println("다시 시도해 주십시오");
-			MainView.main(null);
 		}
 		return "fail";
 	}
@@ -90,8 +82,6 @@ public class UserView {
 			user.setUserCp(usercp);
 			user.setUserAddr(useraddr);
 
-			udao.create(user);
-			
 			if(udao.create(user) ==true)	
 				return "success";
 			
@@ -104,16 +94,6 @@ public class UserView {
 	public void exit() {
 		System.out.println("** 프로그램 종료 **");
 		System.exit(0);
-	}
-
-	public static void main(String[] args) {
-		try {
-			UserView exam = new UserView();
-			exam.Login();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }
