@@ -16,18 +16,18 @@ public class UserView {
 
 	public String Login() {
 		try {
-		// 로그인창 출력
-		System.out.println("[로그인]");
-		System.out.print("id:");
-		String userid = scan.nextLine();
-		System.out.print("pwd:");
-		String userpwd = scan.nextLine();
+			// 로그인창 출력
+			System.out.println("[로그인]");
+			System.out.print("id:");
+			String userid = scan.nextLine();
+			System.out.print("pwd:");
+			String userpwd = scan.nextLine();
 
-		User user = udao.selectById(userid);
+			User user = udao.selectById(userid);
 
-		if (userpwd.equals(user.getUserPwd()))
-			return userid;
-		
+			if (userpwd.equals(user.getUserPwd()))
+				return userid;
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,15 +51,23 @@ public class UserView {
 			nuser.setNonuserAddr(useraddr);
 
 			nudao.create(nuser);
-
+			
+						
+			if(nudao.create(nuser) == true)	
+				return "success";
+			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
-			exit();
+
+			System.out.println();
+			System.out.println("다시 시도해 주십시오");
+			MainView.main(null);
 		}
-		return "";
+		return "fail";
 	}
 
-	public void JoinUser() {
+	public String JoinUser() {
 		try {
 			System.out.println("[회원 가입]");
 			System.out.println("----------------------");
@@ -84,24 +92,13 @@ public class UserView {
 
 			udao.create(user);
 			
-			System.out.println("회원가입이 완료되었습니다.");
+			if(udao.create(user) ==true)	
+				return "success";
 			
 		} catch (Exception e) {
-			
 			e.printStackTrace();
-//			System.out.println("다시 시도해주십시오");
-//			System.out.println("1. 회원가입 2. 메인메뉴");
-//			String menuNo = scan.nextLine();
-//			
-//			if ("1".equals(menuNo)) {
-//				JoinUser();
-//			} else if ("2".equals(menuNo)) {
-//				MainView.main(null);
-//			} else {
-//				exit();
-//			}
-			exit();
 		}
+		return "fail";
 	}
 
 	public void exit() {

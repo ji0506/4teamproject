@@ -6,10 +6,10 @@ import dao.ParcelDao;
 import dao.SuperDao;
 import model.Parcel;
 
-public class ParcelinfoView {
+public class ParcelinfoView_Nonuser {
 	private static Scanner scan = new Scanner(System.in);
 
-	public static void ParcelInfo(String userId) {
+	public static void ParcelInfo() {
 		
 		Parcel parcel = new Parcel();
 		ParcelDao pdao = new ParcelDao();
@@ -83,30 +83,17 @@ public class ParcelinfoView {
 			parcel.setParcelSize(volume);
 			
 			//데이터 베이스에 입력
-			
-			
 			pdao.create(parcel);
 			
-			int parcelNum = pdao.selectCountId();
 			
-			
-			
-		
-			System.out.println(parcelNum);
 			//마지막 확인 화면 출력
 			System.out.println();
 			System.out.println("--------------------------------------------------------");
-			System.out.println();
-			System.out.println("                   ○ 운송물 정보 확인 ○");
+			System.out.println("운송물 정보 확인");
 			System.out.println("--------------------------------------------------------");
-			System.out.printf("    | 내용 : %s || 크기 : %s || 무게 : %d |\n",parcelName,volume,mass);
+			System.out.printf("| 내용 : %s || 크기 : %s || 무게 : %d |\n",parcelName,volume,mass);
 			System.out.println("--------------------------------------------------------");
 
-			
-			
-			
-			ToReceiverInfoView.receiver(userId,parcelNum);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -120,7 +107,7 @@ public class ParcelinfoView {
 
 	public static void main(String[] args) {
 		SuperDao.Load();
-		ParcelInfo(null);
+		ParcelInfo();
 		SuperDao.close();
 	}
 

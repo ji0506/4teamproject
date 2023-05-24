@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class Waybill {
-	private int waybillNo;
+	private String waybillNo;
 
 	private String rcvrName;
 

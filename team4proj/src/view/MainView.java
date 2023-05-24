@@ -45,7 +45,7 @@ public class MainView {
 
 				if (userId != "fail") {
 					System.out.println("로그인에 성공하셨습니다.");
-					break;
+					
 				} else {
 					System.out.println("로그인에 실패하셨습니다.");
 					continue;
