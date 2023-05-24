@@ -4,6 +4,7 @@ DROP TABLE  if exists nonuser;
 DROP TABLE  if exists waybill;
 DROP TABLE  if exists company;
 DROP TABLE  if exists parcel;
+DROP TABLE  if exists user_address;
 
 
 CREATE TABLE `user` (
@@ -50,6 +51,15 @@ create table parcel(
 	`waybill_no` INT(12) not null comment '운송장 번호',
 	 primary key (`parcel_no`)
 );
+
+create table user_address(
+	user_id VARCHAR(15) NOT NULL  comment '유저ID',
+	rcvr_name VARCHAR(10) not null comment '받는사람 이름',
+	rcvr_addr varchar(100) not null comment '받는사람 주소',
+	rcvr_cp varchar(20) not null comment '받는사람 전화번호',
+	freq int(10) DEFAULT 0 comment '사용빈도'
+);
+
 
 select * from parcel p ;
 select * from nonuser n ;
