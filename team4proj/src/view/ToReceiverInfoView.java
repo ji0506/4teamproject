@@ -29,11 +29,10 @@ public class ToReceiverInfoView {
 			
 			int zipcode = getzipCode(ReceiverAddr);
 			
+			System.out.println(zipcode);
 			//우편번호와 택배 번호를 조합하여 운송장 번호 생성
 			
-			String waybillNum = String.format("%05s+%d",parcelNum,zipcode);
-			wayBill.setWaybillNo(waybillNum);
-			System.out.println(wayBill.getWaybillNo());
+//			wayBill.setWaybillNo(waybillNum);
 			// 운송장 기본 정보 입력
 //			
 //			wayBill.setRcvrName(ReceiverName);

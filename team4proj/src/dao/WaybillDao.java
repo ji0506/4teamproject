@@ -27,7 +27,7 @@ public class WaybillDao {
 			ResultSet re = stmt.executeQuery();
 			while (re.next()) {
 				Waybill vo = new Waybill();
-				vo.setWaybillNo(re.getInt("waybill_no"));
+				vo.setWaybillNo(re.getString("waybill_no"));
 				vo.setRcvrName(re.getString("rcvr_name"));
 				vo.setRcvrAddr(re.getString("rcvr_addr"));
 				vo.setRcvrCp(re.getString("rcvr_cp"));
@@ -60,7 +60,7 @@ public class WaybillDao {
 			ResultSet re = stmt.executeQuery();
 			while (re.next()) {
 				vo = new Waybill();
-				vo.setWaybillNo(re.getInt("waybill_no"));
+				vo.setWaybillNo(re.getString("waybill_no"));
 				vo.setRcvrName(re.getString("rcvr_name"));
 				vo.setRcvrAddr(re.getString("rcvr_addr"));
 				vo.setRcvrCp(re.getString("rcvr_cp"));
@@ -89,7 +89,7 @@ public class WaybillDao {
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
-			stmt.setInt(1, vo.getWaybillNo());
+			stmt.setString(1, vo.getWaybillNo());
 			stmt.setString(2, vo.getRcvrName());
 			stmt.setString(3, vo.getRcvrAddr());
 			stmt.setString(4, vo.getRcvrCp());
@@ -120,7 +120,7 @@ public class WaybillDao {
 			stmt.setString(4, vo.getCompanyCd());
 			stmt.setString(5, vo.getUserId());
 			stmt.setString(6, vo.getNonCp());
-			stmt.setInt(7, vo.getWaybillNo());
+			stmt.setString(7, vo.getWaybillNo());
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -131,7 +131,7 @@ public class WaybillDao {
 
 	}
 
-	public void delete(int waybillNo) {
+	public void delete(String waybillNo) {
 
 		try {
 			Connection conn = SuperDao.getConnection();
@@ -140,7 +140,7 @@ public class WaybillDao {
 			String sql = "delete from waybill where waybill_no=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, waybillNo);
+			stmt.setString(1, waybillNo);
 			stmt.executeUpdate();
 			stmt.close();
 
