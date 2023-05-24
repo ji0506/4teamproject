@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.Scanner;
 
 import lombok.Data;
 
@@ -21,4 +22,5 @@ public class Waybill {
 	private String nonCp;
 	
 	private Date regDate;
+
 }

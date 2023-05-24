@@ -73,11 +73,33 @@ public class ParcelDao {
 			e.printStackTrace();
 		}
 
-		
-
 		return vo;
 	}
 
+	public int selectCountId() {
+		
+		int cnt = 0;
+		try {
+			Connection conn = SuperDao.getConnection();
+			String sql = "select count(*) as cnt from parcel";
+
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet re = stmt.executeQuery();
+			while (re.next()) {
+				cnt = re.getInt("cnt");
+			}
+			re.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		
+
+		return cnt;
+	}
+	
 	public void create(Parcel vo) {
 
 

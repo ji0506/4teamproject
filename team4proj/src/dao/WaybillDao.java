@@ -155,13 +155,73 @@ public class WaybillDao {
 			Connection conn = SuperDao.getConnection();
 			
 
-			String sql = "select DISTINCT  zipcode from sigugun where sido=? and gugun=? and dong like ? and num=?";
+			String sql = "select DISTINCT  zipcode from sigugun where sido=? and sigugun=? and num=? and dong like ? or eup like ? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, sido);
 			stmt.setString(2, gugun);
 			stmt.setString(3, dong + "%");
+			stmt.setString(4, dong + "%");
+			stmt.setInt(5, num);
+
+			ResultSet re = stmt.executeQuery();
+			int i = 0;
+			while (re.next()) {
+				i =re.getInt("zipcode");
+			}
+			stmt.close();
+
+			return i;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return -1;
+	}
+	
+
+	public int selectzipcode(String sido, String gugun, String dong, int num, int bunum) {
+		try {
+			Connection conn = SuperDao.getConnection();
+			
+
+			String sql = "select DISTINCT  zipcode from sigugun where sido=? and sigugun like ? and dong like ? and num=? and bunum=?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, sido);
+			stmt.setString(2, gugun + "%");
+			stmt.setString(3, dong + "%");
 			stmt.setInt(4, num);
+			stmt.setInt(5, bunum);
+
+			ResultSet re = stmt.executeQuery();
+			int i = 0;
+			while (re.next()) {
+				i =re.getInt("zipcode");
+			}
+			stmt.close();
+
+			return i;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return -1;
+	}
+	public int selectzipcode(String gugun, String dong, int num, int bunum) {
+		try {
+			Connection conn = SuperDao.getConnection();
+			
+
+			String sql = "select DISTINCT  zipcode from sigugun where sigugun like ? and dong like ? and num=? and bunum=?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, gugun + "%");
+			stmt.setString(2, dong + "%");
+			stmt.setInt(3, num);
+			stmt.setInt(4, bunum);
 
 			ResultSet re = stmt.executeQuery();
 			int i = 0;
