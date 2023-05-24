@@ -7,8 +7,6 @@ public class User {
 
 	private String userId;
 
-	private String userEmail;
-
 	private String userName;
 
 	private String userPwd;
