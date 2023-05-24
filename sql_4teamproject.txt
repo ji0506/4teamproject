@@ -5,6 +5,7 @@ DROP TABLE  if exists waybill;
 DROP TABLE  if exists company;
 DROP TABLE  if exists parcel;
 DROP TABLE  if exists user_address;
+DROP TABLE  if exists sigugun
 
 
 CREATE TABLE `user` (
@@ -38,7 +39,7 @@ create table `waybill` (
 
 create table company(
 	`company_cd` varchar(2) NOT NULL comment '택배사 코드',
-	`company_name` varchar(10) comment '택배사명',
+	`company_name` varchar(30) comment '택배사명',
 	primary key (`company_cd`)
 );
 
@@ -52,6 +53,16 @@ create table parcel(
 	 primary key (`parcel_no`)
 );
 
+CREATE TABLE `sigugun` (
+	`zipcode` INT(10) NULL DEFAULT NULL,
+	`sido` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`sigugun` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`eup` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`dong` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8mb3_general_ci',
+	`num` INT(10) NULL DEFAULT NULL,
+	`bunum` INT(10) NULL DEFAULT NULL
+);
+
 create table user_address(
 	user_id VARCHAR(15) NOT NULL  comment '유저ID',
 	rcvr_name VARCHAR(10) not null comment '받는사람 이름',
@@ -60,6 +71,7 @@ create table user_address(
 	freq int(10) DEFAULT 0 comment '사용빈도'
 );
 
+load data local infile 'D:\data3.txt' into table sigugun fields terminated BY '\t' lines terminated by '\n';
 
 insert into company values('01', 'CJ대한통운');
 insert into company values('02', '롯데택배');
@@ -82,9 +94,7 @@ insert into company values('18', 'SLX 택배');
 insert into company values('19', '일양로지스');
 insert into company values('20', '홈픽택배');
 
-
 select * from parcel p ;
 select * from nonuser n ;
 select * from `user` u ;
 
-load data local infile 'D:\data3.txt' into table sigugun fields terminated BY '\t' lines terminated by '\n';
