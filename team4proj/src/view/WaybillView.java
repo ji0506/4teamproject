@@ -26,8 +26,10 @@ public class WaybillView {
 		SuperDao.Load();
 
 		System.out.print("주소: ");
+		WaybillView view = new WaybillView();
 		String str = scan.nextLine();
-
+		int zipcode = view.getzipCode(str);
+		System.out.println(zipcode);
 
 		
 		
@@ -39,6 +41,7 @@ public class WaybillView {
 		String[] strToStrArray = line.split(" ");
 		WaybillDao wdao = new WaybillDao();
 		int zipcode = 0;
+		
 		if(strToStrArray.length == 4)
 		{
 			String [] numTobunum = strToStrArray[3].split("-");
@@ -55,8 +58,6 @@ public class WaybillView {
 				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1] + " " + strToStrArray[2],strToStrArray[3], Integer.parseInt(numTobunum[0]),Integer.parseInt(numTobunum[1]));				
 			else
 				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1] + " " + strToStrArray[2],strToStrArray[3], Integer.parseInt(numTobunum[0]));				
-			System.out.println(zipcode);
-
 		}
 		
 		return zipcode;
