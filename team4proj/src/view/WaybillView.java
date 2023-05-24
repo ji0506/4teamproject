@@ -42,21 +42,26 @@ public class WaybillView {
 		WaybillDao wdao = new WaybillDao();
 		int zipcode = 0;
 		
+		
+		//가평군 등의 '군'의 경우
 		if(strToStrArray.length == 4)
 		{
+			//문자열을 잘라 도,시,동, 번호 구분			
 			String [] numTobunum = strToStrArray[3].split("-");
-			if(numTobunum.length >= 2) 
+			if(numTobunum.length >= 2) 	//부 번호가 있는경우			
 				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1],strToStrArray[2], Integer.parseInt(numTobunum[0]),Integer.parseInt(numTobunum[1]));
-			else 
+			else  //부 번호가 없는경우	
 				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1],strToStrArray[2], Integer.parseInt(numTobunum[0]));
 
 			
-		} else {
-			
+		} 
+		//안산시 등의 '시'의 경우
+		else {
+			//문자열을 잘라 도,시,동, 번호 구분			
 			String [] numTobunum = strToStrArray[4].split("-");
-			if(numTobunum.length >= 2) 
+			if(numTobunum.length >= 2) //부 번호가 있는경우	
 				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1] + " " + strToStrArray[2],strToStrArray[3], Integer.parseInt(numTobunum[0]),Integer.parseInt(numTobunum[1]));				
-			else
+			else //부 번호가 없는경우	
 				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1] + " " + strToStrArray[2],strToStrArray[3], Integer.parseInt(numTobunum[0]));				
 		}
 		
