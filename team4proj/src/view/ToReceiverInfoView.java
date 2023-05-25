@@ -43,7 +43,7 @@ public class ToReceiverInfoView implements CommonView {
 						}
 
 						System.out.println("몇번 즐겨찾기를 사용하시겠습니까?");
-						int num = scan.nextInt();
+						int num = Integer.parseInt(scan.nextLine());
 
 						System.out.println(
 								"이름 : " + list.get(num - 1).getRcvrName() + "\n주소 : " + list.get(num - 1).getRcvrAddr()

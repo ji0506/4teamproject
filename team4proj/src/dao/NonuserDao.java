@@ -75,7 +75,7 @@ public class NonuserDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "insert into nonuser values(?,?,?)";
+			String sql = "insert into nonuser(non_cp, non_name, non_addr) values(?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
