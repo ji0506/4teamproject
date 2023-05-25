@@ -14,7 +14,7 @@ public class ToReceiverInfoView implements CommonView {
 	private static ToReceiverInfoView view = new ToReceiverInfoView();
 
 	// 받는곳 입력
-	public void info(String userId, int parcelNum) {
+	public void info(String userId, int parcelNum, int cost) {
 		WaybillDao wbDao = new WaybillDao();
 		UserDao uDao = new UserDao();
 		ParcelDao pDao = new ParcelDao();
@@ -36,6 +36,7 @@ public class ToReceiverInfoView implements CommonView {
 					if (menuNo == 1) {
 						List<Useraddress> list = uDao.selectAddrAll(userId);
 						System.out.println("번호\t받는 사람 이름\t받는사람 주소\t받는사람 전화번호");
+						System.out.println("---------------------------------------------------");
 						// 출력
 						for (int i = 0; i < list.size(); i++) {
 							System.out.println((i + 1) + "\t" + list.get(i).getRcvrName() + "\t"
@@ -50,7 +51,7 @@ public class ToReceiverInfoView implements CommonView {
 										+ "\n전화 번호 : " + list.get(num - 1).getRcvrCp() + "\n 가 맞습니까?");
 						System.out.println("1. 해당 즐겨찾기 선택  2. 취소");
 						System.out.print("메뉴 선택 : ");
-						scan.nextLine();
+						
 						String subMenuNo = scan.nextLine();
 						if ("1".equals(subMenuNo)) {
 
@@ -75,6 +76,7 @@ public class ToReceiverInfoView implements CommonView {
 						ReceiverCp = scan.nextLine();
 
 						System.out.println("이 받는 사람 정보를 즐겨찾기에 저장하시겠습니까?");
+						System.out.println("  1. 저장    2. 저장하지 않고 계속");
 						String subMenuNo = scan.nextLine();
 						if ("1".equals(subMenuNo)) {
 							Useraddress Uaddr = new Useraddress();
@@ -99,7 +101,7 @@ public class ToReceiverInfoView implements CommonView {
 				int zipcode = getzipCode(ReceiverAddr);
 
 				// 넘겨 받은 parcelNum 의 왼쪽의 공백을 0으로 채움
-				String parcelNumStr = String.format("%05d", parcelNum);
+				String parcelNumStr = String.format("%05d", parcelNum+1);
 				System.out.println(parcelNumStr);
 
 				// 우편번호와 택배 번호를 조합하여 운송장 번호 생성
@@ -117,7 +119,7 @@ public class ToReceiverInfoView implements CommonView {
 				}
 
 				// 무게당 요금과 도서 산간지역을 합쳐 최종 요금 계산
-				int totalFee = pDao.selectParcelFee(parcelNum) + surcharge;
+				int totalFee = cost + surcharge;
 
 				// 운송장 기본 정보 입력
 				Waybill wayBill = new Waybill();
@@ -128,9 +130,6 @@ public class ToReceiverInfoView implements CommonView {
 				wayBill.setCompanyCd("01"); // 택배 코드는 나중에 수정필요.
 				wayBill.setTotalFee(totalFee);
 				wayBill.setUserId(userId);
-
-				// 운송장 생성
-				wbDao.create(wayBill);
 
 				// 받는 사람 정보 확인
 				System.out.println();
@@ -177,11 +176,11 @@ public class ToReceiverInfoView implements CommonView {
 
 	}
 
-	public static void main(String[] args) {
-		SuperDao.Load();
-		view.info("kang", 1);
-		SuperDao.close();
-	}
+//	public static void main(String[] args) {
+//		SuperDao.Load();
+//		view.info("kang", 1,1);
+//		SuperDao.close();
+//	}
 
 	public static ToReceiverInfoView getinstance() {
 		return view;
