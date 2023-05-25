@@ -46,7 +46,7 @@ public class WaybillDao {
 		return list;
 	}
 
-	public Waybill selectById(String userId) {
+	public Waybill selectById(String waybillNum) {
 		
 		Waybill vo = null;
 
@@ -56,7 +56,7 @@ public class WaybillDao {
 
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, userId);
+			stmt.setString(1, waybillNum);
 			ResultSet re = stmt.executeQuery();
 			while (re.next()) {
 				vo = new Waybill();

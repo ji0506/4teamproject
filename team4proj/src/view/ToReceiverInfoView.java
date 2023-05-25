@@ -30,6 +30,12 @@ public class ToReceiverInfoView {
 			
 			if("1".equals(menuNo)) {
 				List<Useraddress> list = uDao.selectAddrAll(userId);
+				System.out.println("번호\t받는 사람 이름\t받는사람 주소\t받는사람 전화번호");
+				// 출력
+				for(int i = 0; i<=list.size(); i++) {
+					System.out.println((i+1) +"\t"+list.get(i).getRcvrName()+"\t"+list.get(i).getRcvrAddr()+"\t"+list.get(i).getRcvrCp());
+				}
+				
 				System.out.println("몇번 즐겨찾기를 사용하시겠습니까?");
 				int num = scan.nextInt();
 				

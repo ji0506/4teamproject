@@ -194,14 +194,14 @@ public class UserDao {
 		try {
 			Connection conn = SuperDao.getConnection();
 			String sql = "select * from user_address where user_id=?";
-
+			Useraddress vo;
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
 			ResultSet re = stmt.executeQuery();
 
 			while (re.next()) {
-				Useraddress vo = new Useraddress();
-				
+				vo = new Useraddress();
+				vo.setUserId(re.getString("user_id"));	
 				vo.setRcvrName(re.getString("rcvr_name"));
 				vo.setRcvrAddr(re.getString("rcvr_addr"));
 				vo.setRcvrCp(re.getString("rcvr_cp"));
