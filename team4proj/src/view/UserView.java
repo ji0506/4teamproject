@@ -5,7 +5,7 @@ import dao.UserDao;
 import model.Nonuser;
 import model.User;
 
-public class UserView implements View{
+public class UserView implements CommonView{
 
 	private UserDao udao = new UserDao();
 	private NonuserDao nudao = new NonuserDao();

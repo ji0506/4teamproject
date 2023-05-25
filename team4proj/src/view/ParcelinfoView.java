@@ -4,7 +4,7 @@ import dao.ParcelDao;
 import dao.SuperDao;
 import model.Parcel;
 
-public class ParcelinfoView implements View {
+public class ParcelinfoView implements CommonView {
 
 	private static ParcelinfoView view = new ParcelinfoView();
 
