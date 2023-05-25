@@ -198,7 +198,7 @@ public class UserDao {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
 			ResultSet re = stmt.executeQuery();
-			int i = 1;
+
 			while (re.next()) {
 				Useraddress vo = new Useraddress();
 				
@@ -206,13 +206,6 @@ public class UserDao {
 				vo.setRcvrAddr(re.getString("rcvr_addr"));
 				vo.setRcvrCp(re.getString("rcvr_cp"));
 				list.add(vo);
-				System.out.printf("%-6d%-40s%-40s%-40s\n",
-						i,
-						vo.getRcvrName(),
-						vo.getRcvrAddr(),
-						vo.getRcvrCp()
-						);
-				i++;
 			}
 			re.close();
 			stmt.close();
@@ -247,8 +240,6 @@ public class UserDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		
 
 		return vo;
 	}
