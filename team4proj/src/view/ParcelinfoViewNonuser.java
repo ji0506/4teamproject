@@ -10,7 +10,6 @@ public class ParcelinfoViewNonuser implements View {
 
 	public void info(String nonUserCp) {
 
-		Parcel parcel = new Parcel();
 		ParcelDao pdao = new ParcelDao();
 
 		try {
@@ -68,6 +67,7 @@ public class ParcelinfoViewNonuser implements View {
 				String volume = String.format("%d*%d*%d(cm)", width, length, height);
 
 				// 입력값들 set
+				Parcel parcel = new Parcel();
 				parcel.setParcelName(parcelName);
 				parcel.setParcelFee(cost);
 				parcel.setParcelWeight(mass);
@@ -95,9 +95,9 @@ public class ParcelinfoViewNonuser implements View {
 				String menuNo = scan.nextLine();
 
 				if ("1".equals(menuNo)) {
-					pdao.create(parcel);
 					ToReceiverInfoViewNonuser.getinstance().info(nonUserCp, parcelNum);
-
+					pdao.create(parcel);
+					break;
 				} else if ("2".equals(menuNo)) 
 					continue;
 				else return;

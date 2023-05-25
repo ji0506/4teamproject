@@ -15,9 +15,7 @@ public class ToReceiverInfoView implements View {
 
 	// 받는곳 입력
 	public void info(String userId, int parcelNum) {
-		Waybill wayBill = new Waybill();
 		WaybillDao wbDao = new WaybillDao();
-		Useraddress Uaddr = new Useraddress();
 		UserDao uDao = new UserDao();
 		
 		String ReceiverName = "";
@@ -32,13 +30,12 @@ public class ToReceiverInfoView implements View {
 				System.out.println();
 				System.out.println("받는 사람 정보");
 				System.out.println("1. 즐겨 찾기에서 선택  2. 직접 입력 ");
-				String menuNo = scan.nextLine();
-				
-				if("1".equals(menuNo)) {
+				int menuNo = Integer.parseInt(scan.nextLine()) ;				
+				if(menuNo == 1) {
 					List<Useraddress> list = uDao.selectAddrAll(userId);
 					System.out.println("번호\t받는 사람 이름\t받는사람 주소\t받는사람 전화번호");
 					// 출력
-					for(int i = 0; i<=list.size(); i++) {
+					for(int i = 0; i<list.size(); i++) {
 						System.out.println((i+1) +"\t"+list.get(i).getRcvrName()+"\t"+list.get(i).getRcvrAddr()+"\t"+list.get(i).getRcvrCp());
 					}
 					
@@ -64,7 +61,7 @@ public class ToReceiverInfoView implements View {
 						continue;						
 					}
 					
-				} else if("2".equals(menuNo)){
+				} else if(menuNo == 2){
 					
 					System.out.println();
 					System.out.println("받는 사람 정보");
@@ -78,11 +75,11 @@ public class ToReceiverInfoView implements View {
 					System.out.println("이 받는 사람 정보를 즐겨찾기에 저장하시겠습니까?");
 					String subMenuNo = scan.nextLine();
 					if("1".equals(subMenuNo)) {
-						
+						Useraddress Uaddr = new Useraddress();
+						Uaddr.setUserId(userId);
 						Uaddr.setRcvrName(ReceiverName);
 						Uaddr.setRcvrAddr(ReceiverAddr);
 						Uaddr.setRcvrCp(ReceiverCp);
-						
 						uDao.createUserAddress(Uaddr);
 						break;
 					} else {
@@ -113,7 +110,7 @@ public class ToReceiverInfoView implements View {
 			System.out.println(wbNum);
 			
 			//운송장 기본 정보 입력
-			
+			Waybill wayBill = new Waybill();
 			wayBill.setWaybillNo(wbNum);
 			wayBill.setRcvrName(ReceiverName);
 			wayBill.setRcvrAddr(ReceiverAddr);

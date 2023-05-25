@@ -1,7 +1,5 @@
 package view;
 
-import java.util.Scanner;
-
 import dao.NonuserDao;
 import dao.UserDao;
 import model.Nonuser;
