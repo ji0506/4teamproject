@@ -10,8 +10,13 @@ public class ParcelinfoViewNonuser {
 	
 	private static Scanner scan = new Scanner(System.in);
 
+<<<<<<< Updated upstream:team4proj/src/view/ParcelinfoViewNonuser.java
 	public static void ParcelInfo(String nonUserCp) {
 
+=======
+	public static void ParcelInfo(String nonCp) {
+		
+>>>>>>> Stashed changes:team4proj/src/view/ParcelinfoView_Nonuser.java
 		Parcel parcel = new Parcel();
 		ParcelDao pdao = new ParcelDao();
 

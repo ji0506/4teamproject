@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Company;
 import model.Waybill;
 
 public class WaybillDao {
