@@ -47,8 +47,7 @@ public class NonuserDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "select * from nonuser where non_cp=?";
-
+			String sql = "SELECT * FROM nonuser WHERE non_cp=? ORDER BY reg_date DESC LIMIT 1";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, nonCp);

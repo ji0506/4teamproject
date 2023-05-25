@@ -50,7 +50,7 @@ create table parcel(
 	`parcel_weight` int(10) comment '택배 무게',
 	`parcel_size` varchar(15) comment '택배 크기',
 	`parcel_fee` int(10) comment '요금',
-	`waybill_no` INT(12) not null comment '운송장 번호',
+	`waybill_no` VARCHAR(10) not null comment '운송장 번호',
 	 primary key (`parcel_no`)
 );
 

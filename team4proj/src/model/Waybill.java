@@ -1,7 +1,6 @@
 package model;
 
 import java.util.Date;
-import java.util.Scanner;
 
 import lombok.Data;
 

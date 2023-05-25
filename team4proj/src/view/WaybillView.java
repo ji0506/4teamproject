@@ -1,7 +1,6 @@
 package view;
 
 import java.util.Date;
-import java.util.Scanner;
 
 import dao.NonuserDao;
 import dao.ParcelDao;
@@ -13,22 +12,19 @@ import model.Parcel;
 import model.User;
 import model.Waybill;
 
-public class WaybillView {
+public class WaybillView implements CommonView  {
 
-	private static Scanner scan = new Scanner(System.in);
+	private static WaybillView view = new WaybillView();
+
 
 	public static void main(String[] args) {
 		SuperDao.Load();
-		waybillInfo("0000215546");
+		view.waybillInfo("0000215546");
 		SuperDao.close();
 	}
 
-	public void exit() {
-		System.out.println("** 프로그램 종료 **");
-		System.exit(0);
-	}
 
-	public static void waybillInfo(String waybillNum) {
+	public void waybillInfo(String waybillNum) {
 		while (true) {
 			WaybillDao wbDao = new WaybillDao();
 			ParcelDao pDao = new ParcelDao();
@@ -105,7 +101,7 @@ public class WaybillView {
 		}
 	}
 
-	public static void wbList() {
+	public void wbList() {
 
 		while (true) {
 
@@ -182,5 +178,11 @@ public class WaybillView {
 
 		}
 	}
+	
+	public static WaybillView getinstance()
+	{
+		return view;
+	}
+
 
 }

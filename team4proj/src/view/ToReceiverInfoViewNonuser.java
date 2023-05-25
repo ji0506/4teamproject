@@ -91,7 +91,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 						System.out.println("결제 완료");
 						// 결제 완료 시 운송장데이터 생성
 						wbDao.create(wayBill);
-						WaybillView.waybillInfo(wbNum);
+						WaybillView.getinstance().waybillInfo(wbNum);
 					} else {
 						System.out.println("결제 취소 되었습니다.");
 						continue;
