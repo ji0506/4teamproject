@@ -4,7 +4,7 @@ import dao.ParcelDao;
 import dao.SuperDao;
 import model.Parcel;
 
-public class ParcelinfoViewNonuser implements View {
+public class ParcelinfoViewNonuser implements CommonView {
 
 	private static ParcelinfoViewNonuser view = new ParcelinfoViewNonuser();
 
@@ -32,7 +32,7 @@ public class ParcelinfoViewNonuser implements View {
 				// 무게당 요금 계산
 				while (true) {
 					System.out.print("무게(kg) :");
-					mass = scan.nextInt();
+					mass = Integer.parseInt(scan.nextLine());
 
 					if (mass > 20) {
 						System.out.println("20kg 초과의 택배는 보낼수 없습니다.");
@@ -50,11 +50,11 @@ public class ParcelinfoViewNonuser implements View {
 
 				while (true) {
 					System.out.print("가로(cm) :");
-					width = scan.nextInt();
+					width = Integer.parseInt(scan.nextLine());
 					System.out.print("세로(cm) :");
-					length = scan.nextInt();
+					length = Integer.parseInt(scan.nextLine());
 					System.out.print("높이(cm) :");
-					height = scan.nextInt();
+					height = Integer.parseInt(scan.nextLine());
 
 					if (width + length + height > 160 || width > 100 || length > 100 || height > 100) {
 						System.out.println("가능한 택배 규격이 아닙니다.");

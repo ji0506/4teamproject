@@ -8,7 +8,7 @@ import dao.WaybillDao;
 import model.Useraddress;
 import model.Waybill;
 
-public class ToReceiverInfoView implements View {
+public class ToReceiverInfoView implements CommonView {
 
 	private static ToReceiverInfoView view = new ToReceiverInfoView();	
 	
@@ -126,35 +126,6 @@ public class ToReceiverInfoView implements View {
 			e.printStackTrace();
 		}
  
-	}
-
-
-	
-	public int getzipCode(String line) {
-
-		String[] strToStrArray = line.split(" ");
-		WaybillDao wdao = new WaybillDao();
-		int zipcode = 0;
-		
-		if(strToStrArray.length == 4)
-		{
-			String [] numTobunum = strToStrArray[3].split("-");
-			if(numTobunum.length >= 2) 
-				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1],strToStrArray[2], Integer.parseInt(numTobunum[0]),Integer.parseInt(numTobunum[1]));
-			else 
-				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1],strToStrArray[2], Integer.parseInt(numTobunum[0]));
-
-			
-		} else {
-			
-			String [] numTobunum = strToStrArray[4].split("-");
-			if(numTobunum.length >= 2) 
-				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1] + " " + strToStrArray[2],strToStrArray[3], Integer.parseInt(numTobunum[0]),Integer.parseInt(numTobunum[1]));				
-			else
-				zipcode = wdao.selectzipcode(strToStrArray[0], strToStrArray[1] + " " + strToStrArray[2],strToStrArray[3], Integer.parseInt(numTobunum[0]));				
-		}
-		
-		return zipcode;
 	}
 	
 	public static void main(String[] args) {
