@@ -35,6 +35,7 @@ public class WaybillDao {
 				vo.setUserId(re.getString("user_id"));
 				vo.setNonCp(re.getString("non_cp"));				
 				vo.setRegDate(re.getDate("reg_date"));
+				vo.setMsg(re.getString("msg"));
 				list.add(vo);
 			}
 			re.close();
@@ -69,6 +70,7 @@ public class WaybillDao {
 				vo.setNonCp(re.getString("non_cp"));				
 				vo.setCompanyName(re.getString("company_name"));
 				vo.setRegDate(re.getDate("reg_date"));
+				vo.setMsg(re.getString("msg"));
 			}
 			re.close();
 			stmt.close();
@@ -86,7 +88,7 @@ public class WaybillDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "insert into waybill(waybill_no,rcvr_name,rcvr_addr,rcvr_cp,company_cd,user_id,non_cp) value(?,?,?,?,?,?,?)";
+			String sql = "insert into waybill(waybill_no,rcvr_name,rcvr_addr,rcvr_cp,company_cd,user_id,non_cp,msg) value(?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -97,6 +99,7 @@ public class WaybillDao {
 			stmt.setString(5, vo.getCompanyCd());
 			stmt.setString(6, vo.getUserId());
 			stmt.setString(7, vo.getNonCp());
+			stmt.setString(8, vo.getMsg());
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -112,7 +115,7 @@ public class WaybillDao {
 			Connection conn = SuperDao.getConnection();
 			
 
-			String sql = "update waybill set  rcvr_name = ?,rcvr_addr = ?, rcvr_cp = ?, company_cd= ?, user_id=?, non_cp =?  where waybill_no=? ";
+			String sql = "update waybill set  rcvr_name = ?,rcvr_addr = ?, rcvr_cp = ?, company_cd= ?, user_id=?, non_cp =?, msg=?  where waybill_no=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, vo.getRcvrName());
@@ -121,7 +124,8 @@ public class WaybillDao {
 			stmt.setString(4, vo.getCompanyCd());
 			stmt.setString(5, vo.getUserId());
 			stmt.setString(6, vo.getNonCp());
-			stmt.setString(7, vo.getWaybillNo());
+			stmt.setString(7, vo.getMsg());
+			stmt.setString(8, vo.getWaybillNo());
 
 			stmt.executeUpdate();
 			stmt.close();

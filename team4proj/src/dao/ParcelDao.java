@@ -133,7 +133,7 @@ public class ParcelDao {
 		int cnt = 0;
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "select count(*) as cnt from parcel";
+			String sql = "select MAX(parcel_no)+1 as cnt from parcel";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet re = stmt.executeQuery();

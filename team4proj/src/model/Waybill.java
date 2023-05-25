@@ -25,5 +25,7 @@ public class Waybill {
 	private int totalFee;
 	
 	private Date regDate;
+	
+	private String msg;
 
 }
