@@ -3,12 +3,9 @@ package view;
 import java.util.Scanner;
 
 import dao.SuperDao;
-import model.Nonuser;
-import model.Waybill;
 
 public class MainView {
 
-	private static Scanner scan = new Scanner(System.in);
 
 	public static void exit() {
 		System.out.println("** 프로그램 종료 **");
@@ -18,6 +15,7 @@ public class MainView {
 	public static void main(String[] args) {
 
 		UserView userV = new UserView();
+		Scanner scan = new Scanner(System.in);
 		String userId;
 
 		SuperDao.Load();
@@ -42,7 +40,7 @@ public class MainView {
 
 				if (userId != "fail") {
 					System.out.println("로그인에 성공하셨습니다.");
-					ParcelinfoView.ParcelInfo(userId);
+					ParcelinfoView.getinstance().info(userId);
 				} else {
 					System.out.println("로그인에 실패하셨습니다.");
 					continue;
@@ -53,7 +51,7 @@ public class MainView {
 
 				if (nonusercp != "fail") {
 					System.out.println("비회원 로그인에 성공하셨습니다.");
-					ParcelinfoViewNonuser.ParcelInfo(nonusercp);
+					ParcelinfoViewNonuser.getinstance().info(nonusercp);
 					break;
 				} else {
 					System.out.println("비회원 로그인에 실패하셨습니다. 다시 시도해 주십시오");
@@ -83,5 +81,6 @@ public class MainView {
 		}
 
 	}
+	
 
 }

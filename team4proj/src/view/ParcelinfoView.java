@@ -1,15 +1,15 @@
 package view;
 
-import java.util.Scanner;
-
 import dao.ParcelDao;
 import dao.SuperDao;
 import model.Parcel;
 
-public class ParcelinfoView {
-	private static Scanner scan = new Scanner(System.in);
+public class ParcelinfoView implements View{
 
-	public static void ParcelInfo(String userId) {
+	private static ParcelinfoView view = new ParcelinfoView();
+
+	
+	public void info(String userId) {
 
 		Parcel parcel = new Parcel();
 		ParcelDao pdao = new ParcelDao();
@@ -34,24 +34,16 @@ public class ParcelinfoView {
 				while (true) {
 					System.out.print("무게(kg) :");
 					mass = scan.nextInt();
-					if (mass <= 2) {
-						cost = 5500;
-						break;
-					} else if (mass <= 5) {
-						cost = 6500;
-						break;
-					} else if (mass <= 10) {
-						cost = 7500;
-						break;
-					} else if (mass <= 20) {
-						cost = 8500;
-						break;
-					} else {
+					
+					if(mass > 20) {
 						System.out.println("20kg 초과의 택배는 보낼수 없습니다.");
 						continue;
 					}
+					break;
 				}
-
+				
+				cost = costs(mass);
+				
 				// 택배 규격 확인
 				int width;
 				int length;
@@ -97,7 +89,7 @@ public class ParcelinfoView {
 				System.out.printf("    | 내용 : %s || 크기 : %s || 무게 : %d |\n", parcelName, volume, mass);
 				System.out.println("--------------------------------------------------------");
 
-				ToReceiverInfoView.receiver(userId, parcelNum);
+				ToReceiverInfoView.getinstance().info(userId, parcelNum);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -105,15 +97,14 @@ public class ParcelinfoView {
 
 	}
 
-	public static void exit() {
-		System.out.println("** 프로그램 종료 **");
-		System.exit(0);
-	}
-
 	public static void main(String[] args) {
 		SuperDao.Load();
-		ParcelInfo(null);
+		view.info(null);
 		SuperDao.close();
 	}
 
+	public static ParcelinfoView getinstance()
+	{
+		return view;
+	}
 }

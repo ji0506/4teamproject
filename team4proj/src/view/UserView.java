@@ -6,7 +6,6 @@ import dao.NonuserDao;
 import dao.UserDao;
 import model.Nonuser;
 import model.User;
-import view.MainView;
 
 public class UserView {
 
@@ -29,7 +28,7 @@ public class UserView {
 				return userid;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		return "fail";
 	}

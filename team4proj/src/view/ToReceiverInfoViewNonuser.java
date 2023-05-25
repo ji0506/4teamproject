@@ -1,17 +1,16 @@
 package view;
 
-import java.util.Scanner;
-
 import dao.ParcelDao;
 import dao.SuperDao;
 import dao.WaybillDao;
 import model.Waybill;
 
-public class ToReceiverInfoViewNonuser {
-	private static Scanner scan = new Scanner(System.in);
+public class ToReceiverInfoViewNonuser implements View{
+	
+	private static ToReceiverInfoViewNonuser view = new ToReceiverInfoViewNonuser();
 
 	// 받는곳 입력
-	public static void receiverInfo(String nonUserCp, int parcelNum) {
+	public void info(String nonUserCp, int parcelNum) {
 		Waybill wayBill = new Waybill();
 		WaybillDao wbDao = new WaybillDao();
 		ParcelDao pDao = new ParcelDao();
@@ -102,7 +101,7 @@ public class ToReceiverInfoViewNonuser {
 
 				} else if ("2".equals(menuNo)) {
 
-					receiverInfo(nonUserCp, parcelNum);
+					info(nonUserCp, parcelNum);
 
 				} else {
 
@@ -170,8 +169,13 @@ public class ToReceiverInfoViewNonuser {
 
 	public static void main(String[] args) {
 		SuperDao.Load();
-		receiverInfo(null, 1);
+		view.info(null, 1);
 		SuperDao.close();
+	}
+	
+	public static ToReceiverInfoViewNonuser getinstance()
+	{
+		return view;
 	}
 
 }

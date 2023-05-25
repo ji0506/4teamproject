@@ -1,16 +1,15 @@
 package view;
 
-import java.util.Scanner;
 
 import dao.ParcelDao;
 import dao.SuperDao;
 import model.Parcel;
 
-public class ParcelinfoViewNonuser {
+public class ParcelinfoViewNonuser implements View {
 	
-	private static Scanner scan = new Scanner(System.in);
+	private static ParcelinfoViewNonuser view = new ParcelinfoViewNonuser();
 
-	public static void ParcelInfo(String nonUserCp) {
+	public void info(String nonUserCp) {
 
 
 		Parcel parcel = new Parcel();
@@ -36,23 +35,15 @@ public class ParcelinfoViewNonuser {
 			while (true) {
 				System.out.print("무게(kg) :");
 				mass = scan.nextInt();
-				if (mass <= 2) {
-					cost = 5500;
-					break;
-				} else if (mass <= 5) {
-					cost = 6500;
-					break;
-				} else if (mass <= 10) {
-					cost = 7500;
-					break;
-				} else if (mass <= 20) {
-					cost = 8500;
-					break;
-				} else {
+				
+				if(mass > 20) {
 					System.out.println("20kg 초과의 택배는 보낼수 없습니다.");
 					continue;
 				}
+				break;
 			}
+			
+			cost = costs(mass);
 
 			// 택배 규격 확인
 			int width;
@@ -107,15 +98,15 @@ public class ParcelinfoViewNonuser {
 			if ("1".equals(menuNo)) {
 
 				pdao.create(parcel);
-				ToReceiverInfoViewNonuser.receiverInfo(nonUserCp, parcelNum);
+				ToReceiverInfoViewNonuser.getinstance().info(nonUserCp, parcelNum);
 
 			} else if ("2".equals(menuNo)) {
 
-				ParcelInfo(nonUserCp);
+				//info(nonUserCp);
 
 			} else {
 
-				MainView.main(null);
+				//MainView.main(null);
 				
 			}
 
@@ -125,15 +116,16 @@ public class ParcelinfoViewNonuser {
 
 	}
 
-	public static void exit() {
-		System.out.println("** 프로그램 종료 **");
-		System.exit(0);
-	}
-
 	public static void main(String[] args) {
 		SuperDao.Load();
-		ParcelInfo(null);
+		view.info(null);
 		SuperDao.close();
 	}
 
+	
+	public static ParcelinfoViewNonuser getinstance()
+	{
+		return view;
+	}
+	
 }

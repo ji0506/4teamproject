@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Nonuser;
 import model.Parcel;
-import model.User;
 
 public class ParcelDao {
 
