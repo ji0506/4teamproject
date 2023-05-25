@@ -67,6 +67,7 @@ public class WaybillDao {
 				vo.setCompanyCd(re.getString("company_cd"));
 				vo.setUserId(re.getString("user_id"));
 				vo.setNonCp(re.getString("non_cp"));				
+				vo.setCompanyName(re.getString("company_name"));
 				vo.setRegDate(re.getDate("reg_date"));
 			}
 			re.close();
