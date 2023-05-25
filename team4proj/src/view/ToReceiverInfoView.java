@@ -99,7 +99,6 @@ public class ToReceiverInfoView implements View {
 			
 			//우편번호 찾기
 			//집에서 zipcode 불가!!!
-
 			int zipcode = getzipCode(ReceiverAddr);
 			
 			//넘겨 받은 parcelNum 의 왼쪽의 공백을 0으로 채움

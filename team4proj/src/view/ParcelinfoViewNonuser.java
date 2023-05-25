@@ -1,16 +1,14 @@
 package view;
 
-
 import dao.ParcelDao;
 import dao.SuperDao;
 import model.Parcel;
 
 public class ParcelinfoViewNonuser implements View {
-	
+
 	private static ParcelinfoViewNonuser view = new ParcelinfoViewNonuser();
 
 	public void info(String nonUserCp) {
-
 
 		Parcel parcel = new Parcel();
 		ParcelDao pdao = new ParcelDao();
@@ -21,93 +19,88 @@ public class ParcelinfoViewNonuser implements View {
 			int mass;
 
 			// 화면 출력
-			System.out.println();
-			System.out.println("상품명을 입력해주세요");
-			System.out.print("상품명 : ");
-			String parcelName = scan.nextLine();
-
-			System.out.println("		[무게 및 크기 측정]");
-			System.out.println("---------------------------------------------------------------");
-			System.out.println("무게와 크기를 입력해 주세요");
-			System.out.println("---------------------------------------------------------------");
-
-			// 무게당 요금 계산
 			while (true) {
-				System.out.print("무게(kg) :");
-				mass = scan.nextInt();
-				
-				if(mass > 20) {
-					System.out.println("20kg 초과의 택배는 보낼수 없습니다.");
-					continue;
+				System.out.println();
+				System.out.println("상품명을 입력해주세요");
+				System.out.print("상품명 : ");
+				String parcelName = scan.nextLine();
+
+				System.out.println("		[무게 및 크기 측정]");
+				System.out.println("---------------------------------------------------------------");
+				System.out.println("무게와 크기를 입력해 주세요");
+				System.out.println("---------------------------------------------------------------");
+
+				// 무게당 요금 계산
+				while (true) {
+					System.out.print("무게(kg) :");
+					mass = scan.nextInt();
+
+					if (mass > 20) {
+						System.out.println("20kg 초과의 택배는 보낼수 없습니다.");
+						continue;
+					}
+					break;
 				}
-				break;
-			}
-			
-			cost = costs(mass);
 
-			// 택배 규격 확인
-			int width;
-			int length;
-			int height;
+				cost = costs(mass);
 
-			while (true) {
-				System.out.print("가로(cm) :");
-				width = scan.nextInt();
-				System.out.print("세로(cm) :");
-				length = scan.nextInt();
-				System.out.print("높이(cm) :");
-				height = scan.nextInt();
+				// 택배 규격 확인
+				int width;
+				int length;
+				int height;
 
-				if (width + length + height > 160 || width > 100 || length > 100 || height > 100) {
-					System.out.println("가능한 택배 규격이 아닙니다.");
-					continue;
+				while (true) {
+					System.out.print("가로(cm) :");
+					width = scan.nextInt();
+					System.out.print("세로(cm) :");
+					length = scan.nextInt();
+					System.out.print("높이(cm) :");
+					height = scan.nextInt();
+
+					if (width + length + height > 160 || width > 100 || length > 100 || height > 100) {
+						System.out.println("가능한 택배 규격이 아닙니다.");
+						continue;
+					}
+					break;
 				}
-				break;
-			}
 
-			// 택배 크기 정의
-			String volume = String.format("%d*%d*%d(cm)", width, length, height);
+				// 택배 크기 정의
+				String volume = String.format("%d*%d*%d(cm)", width, length, height);
 
-			// 입력값들 set
-			parcel.setParcelName(parcelName);
-			parcel.setParcelFee(cost);
-			parcel.setParcelWeight(mass);
-			parcel.setParcelSize(volume);
+				// 입력값들 set
+				parcel.setParcelName(parcelName);
+				parcel.setParcelFee(cost);
+				parcel.setParcelWeight(mass);
+				parcel.setParcelSize(volume);
 
-			//택배 번호 설정
-			int parcelNum = pdao.selectCountId();
-			scan.nextLine();// 입력 버퍼를 초기화 하는 역할
-			
-			// 마지막 확인 화면 출력
-			System.out.println();
-			System.out.println("--------------------------------------------------------");
-			System.out.println();
-			System.out.println("                   ○ 운송물 정보 확인 ○");
-			System.out.println();
-			System.out.println("--------------------------------------------------------");
-			System.out.println();
-			System.out.printf("    | 내용 : %s || 크기 : %s || 무게 : %d |\n", parcelName, volume, mass);
-			System.out.println();
-			System.out.println("--------------------------------------------------------");
-			System.out.println();
-			System.out.println("1. 받는 사람 정보 화면으로 2. 택배 정보 다시 입력 3. 메인 메뉴로");
-		
-			System.out.print("메뉴 선택: ");
-			String menuNo = scan.nextLine();
-			
-			if ("1".equals(menuNo)) {
+				// 택배 번호 설정
+				int parcelNum = pdao.selectCountId();
+				scan.nextLine();// 입력 버퍼를 초기화 하는 역할
 
-				pdao.create(parcel);
-				ToReceiverInfoViewNonuser.getinstance().info(nonUserCp, parcelNum);
+				// 마지막 확인 화면 출력
+				System.out.println();
+				System.out.println("--------------------------------------------------------");
+				System.out.println();
+				System.out.println("                   ○ 운송물 정보 확인 ○");
+				System.out.println();
+				System.out.println("--------------------------------------------------------");
+				System.out.println();
+				System.out.printf("    | 내용 : %s || 크기 : %s || 무게 : %d |\n", parcelName, volume, mass);
+				System.out.println();
+				System.out.println("--------------------------------------------------------");
+				System.out.println();
+				System.out.println("1. 받는 사람 정보 화면으로 2. 택배 정보 다시 입력 3. 메인 메뉴로");
 
-			} else if ("2".equals(menuNo)) {
+				System.out.print("메뉴 선택: ");
+				String menuNo = scan.nextLine();
 
-				//info(nonUserCp);
+				if ("1".equals(menuNo)) {
+					pdao.create(parcel);
+					ToReceiverInfoViewNonuser.getinstance().info(nonUserCp, parcelNum);
 
-			} else {
-
-				//MainView.main(null);
-				
+				} else if ("2".equals(menuNo)) 
+					continue;
+				else return;
 			}
 
 		} catch (Exception e) {
@@ -122,10 +115,8 @@ public class ParcelinfoViewNonuser implements View {
 		SuperDao.close();
 	}
 
-	
-	public static ParcelinfoViewNonuser getinstance()
-	{
+	public static ParcelinfoViewNonuser getinstance() {
 		return view;
 	}
-	
+
 }

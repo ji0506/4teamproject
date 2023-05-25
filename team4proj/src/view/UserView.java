@@ -7,9 +7,8 @@ import dao.UserDao;
 import model.Nonuser;
 import model.User;
 
-public class UserView {
+public class UserView implements View{
 
-	private Scanner scan = new Scanner(System.in);
 	private UserDao udao = new UserDao();
 	private NonuserDao nudao = new NonuserDao();
 
@@ -88,11 +87,6 @@ public class UserView {
 			e.printStackTrace();
 		}
 		return "fail";
-	}
-
-	public void exit() {
-		System.out.println("** 프로그램 종료 **");
-		System.exit(0);
 	}
 
 }

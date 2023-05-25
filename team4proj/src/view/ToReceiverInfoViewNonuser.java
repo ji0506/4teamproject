@@ -56,7 +56,6 @@ public class ToReceiverInfoViewNonuser implements View{
 				System.out.println(wbNum);
 
 				// 운송장 기본 정보 입력
-
 				wayBill.setWaybillNo(wbNum);
 				wayBill.setRcvrName(ReceiverName);
 				wayBill.setRcvrAddr(ReceiverAddr);
@@ -66,7 +65,6 @@ public class ToReceiverInfoViewNonuser implements View{
 
 				// 운송장 생성
 //			wbDao.create(wayBill);
-
 				System.out.println();
 				System.out.println("--------------------------------------------------------");
 				System.out.println();
@@ -99,15 +97,11 @@ public class ToReceiverInfoViewNonuser implements View{
 
 					}
 
-				} else if ("2".equals(menuNo)) {
+				} else if ("2".equals(menuNo))
+					continue;
+				else 
+					return;
 
-					info(nonUserCp, parcelNum);
-
-				} else {
-
-					MainView.main(null);
-
-				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
