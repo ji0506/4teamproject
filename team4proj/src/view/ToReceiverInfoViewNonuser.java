@@ -57,14 +57,14 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 
 				// 운송장 기본 정보 입력
 				wayBill.setWaybillNo(wbNum);
+				wayBill.setTotalFee(totalFee);
 				wayBill.setRcvrName(ReceiverName);
 				wayBill.setRcvrAddr(ReceiverAddr);
 				wayBill.setRcvrCp(ReceiverCp);
 				wayBill.setCompanyCd("01"); // 택배 코드는 나중에 수정필요
 				wayBill.setNonCp(nonUserCp);
 
-				// 운송장 생성
-//			wbDao.create(wayBill);
+				// 받는 사람 정보 확인
 				System.out.println();
 				System.out.println("--------------------------------------------------------");
 				System.out.println();
@@ -82,7 +82,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 
 				System.out.print("메뉴 선택: ");
 				String menuNo = scan.nextLine();
-
+				
 				if ("1".equals(menuNo)) {
 
 					String sign = payView(totalFee);
@@ -94,7 +94,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 						WaybillView.waybillInfo(wbNum);
 					} else {
 						System.out.println("결제 취소 되었습니다.");
-
+						continue;
 					}
 
 				} else if ("2".equals(menuNo))
@@ -109,29 +109,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 
 	}
 
-	public static String payView(int totalFee) {
-
-		try {
-			System.out.println("결제 화면 입니다. ");
-
-			System.out.println("결제 요금은 " + totalFee + "입니다.");
-			System.out.println("1. 결제   2. 취소");
-			System.out.println();
-
-			String menuNo = scan.nextLine();
-
-			if ("1".equals(menuNo)) {
-				return "success";
-			} else {
-				return "fail";
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "fail";
-	}
-
+	
 
 	public static void main(String[] args) {
 		SuperDao.Load();

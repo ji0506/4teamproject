@@ -73,6 +73,8 @@ public class WaybillView {
 				break;
 			}
 
+			// 택배 회사
+			String co = wb.getCompanyName();
 			// 택배 중량 크기 내용물
 			String pSize = parcel.getParcelSize();
 			String pName = parcel.getParcelName();

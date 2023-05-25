@@ -71,7 +71,7 @@ public class MainView {
 
 			} else if ("4".equals(menuNo)) {
 				// 택배조회 기능
-				WaybillView.wbList();
+				view.WaybillView.wbList();
 				continue;
 			} else {
 				SuperDao.close();

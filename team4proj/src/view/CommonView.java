@@ -64,6 +64,28 @@ public interface CommonView {
 		return zipcode;
 	}
 
-	
+	public default String payView(int totalFee) {
+
+		try {
+			System.out.println("결제 화면 입니다. ");
+
+			System.out.println("결제 요금은 " + totalFee + "입니다.");
+			System.out.println("1. 결제   2. 취소");
+			System.out.println();
+
+			String menuNo = scan.nextLine();
+
+			if ("1".equals(menuNo)) {
+				return "success";
+			} else {
+				return "fail";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "fail";
+	}
+
 	
 }
