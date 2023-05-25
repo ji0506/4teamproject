@@ -52,7 +52,7 @@ public class WaybillDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "select * from waybill where waybill_no=?";
+			String sql = "SELECT w.*,c.company_name AS company_name from waybill w INNER JOIN company c ON(w.company_cd = c.company_cd) where waybill_no=?";
 
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);

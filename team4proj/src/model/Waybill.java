@@ -17,6 +17,9 @@ public class Waybill {
 
 	private String companyCd;
 
+	private String companyName;
+
+	
 	private String userId;
 
 	private String nonCp;
