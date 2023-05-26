@@ -93,7 +93,6 @@ public class ParcelinfoView implements CommonView {
 
 				if ("1".equals(menuNo)) {
 					ToReceiverInfoView.getinstance().info(userId, parcel, cost);
-					pdao.create(parcel);
 					break;
 				} else if ("2".equals(menuNo)) 
 					continue;
