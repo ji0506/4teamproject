@@ -22,8 +22,8 @@ public class ParcelinfoView implements CommonView {
 
 				// 화면 출력
 				System.out.println();
-				System.out.println("물품의 내용을 입력해주세요");
-				System.out.print("물품 내용 : ");
+				System.out.println("상풍명을 입력해주세요");
+				System.out.print("상품명 : ");
 
 				parcelName = scan.nextLine();
 

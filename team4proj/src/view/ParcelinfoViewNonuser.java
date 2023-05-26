@@ -77,8 +77,6 @@ public class ParcelinfoViewNonuser implements CommonView {
 				parcel.setParcelWeight(mass);
 				parcel.setParcelSize(volume);
 
-				scan.nextLine();// 입력 버퍼를 초기화 하는 역할
-
 				// 마지막 확인 화면 출력
 				System.out.println();
 				System.out.println("--------------------------------------------------------");

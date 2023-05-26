@@ -13,7 +13,9 @@ CREATE TABLE `user` (
 	user_name VARCHAR(10) NOT NULL COMMENT '회원 성함',
 	user_pw VARCHAR(20) not null COMMENT '회원 비밀번호',
 	user_addr VARCHAR(100) not null COMMENT '회원 주소',
-	user_cp VARCHAR(20) not null comment '회원 전화번호'
+	user_cp VARCHAR(20) not null comment '회원 전화번호',
+	user_grade INT(10) comment '등급'
+	
 );
 
 

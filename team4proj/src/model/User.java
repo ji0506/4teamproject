@@ -14,4 +14,6 @@ public class User {
 	private String userCp;
 
 	private String userAddr;
+	
+	private int userGrade;
 }

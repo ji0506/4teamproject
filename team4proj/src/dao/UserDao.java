@@ -31,6 +31,7 @@ public class UserDao {
 				vo.setUserName(re.getString("user_name"));
 				vo.setUserCp(re.getString("user_cp"));
 				vo.setUserAddr(re.getString("user_addr"));
+				vo.setUserGrade(re.getInt("user_grade"));
 				list.add(vo);
 			}
 			re.close();
@@ -61,6 +62,7 @@ public class UserDao {
 				vo.setUserName(re.getString("user_name"));
 				vo.setUserCp(re.getString("user_cp"));
 				vo.setUserAddr(re.getString("user_addr"));
+				vo.setUserGrade(re.getInt("user_grade"));
 			}
 			re.close();
 			stmt.close();
@@ -78,7 +80,7 @@ public class UserDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "insert into user values(?,?,?,?,?)";
+			String sql = "insert into user(user_id,user_name,user_pw,user_addr,user_cp) values(?,?,?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -102,14 +104,15 @@ public class UserDao {
 			Connection conn = SuperDao.getConnection();
 			
 
-			String sql = "update user set  user_name = ?,user_pw = ?, user_addr = ?, user_cp= ? where user_id=? ";
+			String sql = "update user set  user_name = ?,user_pw = ?, user_addr = ?, user_cp= ?, user_grade = ? where user_id=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, vo.getUserName());
 			stmt.setString(2, vo.getUserPwd());
 			stmt.setString(3, vo.getUserAddr());
 			stmt.setString(4, vo.getUserCp());
-			stmt.setString(5, vo.getUserId());
+			stmt.setInt(5, vo.getUserGrade());
+			stmt.setString(6, vo.getUserId());
 
 			stmt.executeUpdate();
 			stmt.close();

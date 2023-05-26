@@ -64,7 +64,8 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				wayBill.setRcvrCp(ReceiverCp);
 				wayBill.setCompanyCd("01"); // 택배 코드는 나중에 수정필요
 				wayBill.setNonCp(nonUserCp);
-
+				parcel.setWaybillNo(wbNum);
+				
 				// 받는 사람 정보 확인
 				System.out.println();
 				System.out.println("--------------------------------------------------------");
