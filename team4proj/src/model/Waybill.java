@@ -26,6 +26,6 @@ public class Waybill {
 	
 	private Date regDate;
 	
-	private String msg;
+	private String msg = "메시지를 입력하지 않았습니다.";
 
 }

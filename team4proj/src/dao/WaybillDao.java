@@ -36,6 +36,7 @@ public class WaybillDao {
 				vo.setNonCp(re.getString("non_cp"));				
 				vo.setRegDate(re.getDate("reg_date"));
 				vo.setMsg(re.getString("msg"));
+				vo.setTotalFee(re.getInt("total_fee"));
 				list.add(vo);
 			}
 			re.close();
@@ -54,7 +55,6 @@ public class WaybillDao {
 		try {
 			Connection conn = SuperDao.getConnection();
 			String sql = "SELECT w.*,c.company_name AS company_name from waybill w INNER JOIN company c ON(w.company_cd = c.company_cd) where waybill_no=?";
-
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, waybillNum);
@@ -71,6 +71,7 @@ public class WaybillDao {
 				vo.setCompanyName(re.getString("company_name"));
 				vo.setRegDate(re.getDate("reg_date"));
 				vo.setMsg(re.getString("msg"));
+				vo.setTotalFee(re.getInt("total_fee"));
 			}
 			re.close();
 			stmt.close();
@@ -88,7 +89,7 @@ public class WaybillDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "insert into waybill(waybill_no,rcvr_name,rcvr_addr,rcvr_cp,company_cd,user_id,non_cp,msg) value(?,?,?,?,?,?,?,?)";
+			String sql = "insert into waybill(waybill_no,rcvr_name,rcvr_addr,rcvr_cp,company_cd,user_id,non_cp,msg,total_fee) value(?,?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -100,6 +101,7 @@ public class WaybillDao {
 			stmt.setString(6, vo.getUserId());
 			stmt.setString(7, vo.getNonCp());
 			stmt.setString(8, vo.getMsg());
+			stmt.setInt(9, vo.getTotalFee());
 
 			stmt.executeUpdate();
 			stmt.close();

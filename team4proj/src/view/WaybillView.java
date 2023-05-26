@@ -1,5 +1,6 @@
 package view;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import dao.NonuserDao;
@@ -68,7 +69,14 @@ public class WaybillView implements CommonView  {
 			String pName = parcel.getParcelName();
 			int pWeight = parcel.getParcelWeight();
 			// 택배 접수일(발송일)
+	        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+
 			Date date = wb.getRegDate();
+			if(date == null) {
+		        date = new Date();
+//		        String nowTime1 = sdf1.format(date);
+			}
+				
 			// 요금 
 		
 			// 주의사항?
@@ -86,7 +94,7 @@ public class WaybillView implements CommonView  {
 			System.out.printf("| 상품명 : %-50s\t\t   |\n", pName);
 			System.out.printf("| 상품 무게 : %-20d  상품 크기: %-25s\t   |\n", pWeight, pSize);
 			System.out.println("|--------------------------------------------------------------------------|");
-			System.out.printf("|  %-33s| 요금 : %-10s |  %-10s\t   |\n", "메세지창","요금" ,date );
+			System.out.printf("|  %-33s| 요금 : %-10s |  %-10s\t   |\n", wb.getMsg(), wb.getTotalFee() ,sdf1.format(date) );
 			System.out.println("└--------------------------------------------------------------------------┘");	
 	}
 
