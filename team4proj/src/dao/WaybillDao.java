@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Company;
 import model.Waybill;
 
 public class WaybillDao {
@@ -272,6 +273,29 @@ public class WaybillDao {
 //
 //		return list;
 //	}
+	
+	public String selectCompanyByName(String companyCd) {
+
+		String name = null;
+
+		try {
+			Connection conn = SuperDao.getConnection();
+			String sql = "select * from company where company_cd = ?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, companyCd);
+			ResultSet re = stmt.executeQuery();
+			while (re.next()) {
+				name = re.getString("company_name");
+			}
+			re.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return name;
+	}
 	
 
 }

@@ -28,7 +28,8 @@ public class WaybillView implements CommonView  {
 	public void waybillInfo(Waybill wb, Parcel parcel) {
 			UserDao uDao = new UserDao();
 			NonuserDao nuDao = new NonuserDao();
-
+			WaybillDao wDao = new WaybillDao();
+			
 		//	String parcelNumStr = String.valueOf(parcelNum);
 
 			User user = uDao.selectById(wb.getUserId());
@@ -75,6 +76,11 @@ public class WaybillView implements CommonView  {
 			if(date == null) {
 		        date = new Date();
 //		        String nowTime1 = sdf1.format(date);
+			}
+			
+			if(wb.getCompanyName() == null)
+			{
+				wb.setCompanyName(wDao.selectCompanyByName(wb.getCompanyCd()));
 			}
 				
 			// 요금 
@@ -147,7 +153,7 @@ public class WaybillView implements CommonView  {
 					System.out.println("해당 기능을 사용하시려면 해당 택배를 접수할 때 사용하신 전화번호를 입력하셔야 합니다.");
 
 					String inputNonCp = scan.nextLine();
-					if (wb.getNonCp() == inputNonCp) {
+					if (inputNonCp.equals(wb.getNonCp())) {
 						System.out.println("비회원 로그인에 성공하셨습니다.");
 						System.out.println("1. 재출력  2. 삭제");
 						System.out.print("메뉴 선택 : ");

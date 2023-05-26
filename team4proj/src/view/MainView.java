@@ -52,7 +52,6 @@ public class MainView {
 				if (nonusercp != "fail") {
 					System.out.println("비회원 로그인에 성공하셨습니다.");
 					ParcelinfoViewNonuser.getinstance().info(nonusercp);
-					break;
 				} else {
 					System.out.println("비회원 로그인에 실패하셨습니다. 다시 시도해 주십시오");
 					continue;
