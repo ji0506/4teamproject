@@ -24,10 +24,11 @@ public class ToReceiverInfoView implements CommonView {
 		String ReceiverAddr = "";
 		String ReceiverCp = "";
 		int zipcode = 0;
+		String msg = "";
 		try {
 			// 화면 출력
 			while (true) {
-				
+
 				while (true) {
 
 					System.out.println();
@@ -52,7 +53,7 @@ public class ToReceiverInfoView implements CommonView {
 										+ "\n전화 번호 : " + list.get(num - 1).getRcvrCp() + "\n 가 맞습니까?");
 						System.out.println("1. 해당 즐겨찾기 선택  2. 취소");
 						System.out.print("메뉴 선택 : ");
-						
+
 						String subMenuNo = scan.nextLine();
 						if ("1".equals(subMenuNo)) {
 
@@ -102,17 +103,18 @@ public class ToReceiverInfoView implements CommonView {
 				}
 				// 받는 분 정보 입력
 
-
 				// 넘겨 받은 parcelNum 의 왼쪽의 공백을 0으로 채움
 				String parcelNumStr = String.format("%05d", parcel.getParcelNo());
 				System.out.println(parcelNumStr);
 
+
 				// 우편번호와 택배 번호를 조합하여 운송장 번호 생성
-				//int zipcode = 12323; // 임시 zipcode
+				// int zipcode = 12323; // 임시 zipcode
 
 				String wbNum = parcelNumStr + zipcode;
 
 				System.out.println(wbNum);
+
 
 				// 도서 산간지역 요금 추가
 				int surcharge = 0;
@@ -121,9 +123,55 @@ public class ToReceiverInfoView implements CommonView {
 					surcharge = 4000;
 				}
 
+
 				// 무게당 요금과 도서 산간지역을 합쳐 최종 요금 계산
 				int totalFee = cost + surcharge;
 
+				
+				// 택배 요청사항 기능
+				while (true) {
+
+					
+
+					System.out.println("--------------------------------------------------------");
+					System.out.println("                      택배 요청사항");
+					System.out.println();
+					System.out.println("\t\t 1. 선택 안함");
+					System.out.println("\t\t 2. 배송 전 연락주세요");
+					System.out.println("\t\t 3. 빠른 배송 부탁드립니다.");
+					System.out.println("\t\t 4. 부재 시, 경비실에 맡겨주세요.");
+					System.out.println();
+					System.out.println("\t\t 0을 입력시 직접입력 창으로 이동합니다.");
+					System.out.println("--------------------------------------------------------");
+					System.out.print("요청사항 선택 : ");
+					int menuNum = Integer.parseInt(scan.nextLine());
+
+					switch (menuNum) {
+
+					case 0:
+						msg = scan.nextLine();
+						break;
+					case 1:
+						msg = "요청사항 없음";
+						break;
+					case 2:
+						msg = "배송 전 연락주세요";
+						break;
+					case 3:
+						msg = "빠른 배송 부탁드립니다.";
+						break;
+					case 4:
+						msg = "부재 시 경비실에 맡겨주세요";
+						break;
+					default:
+						System.out.println("다시 시도해 주십시오");
+						continue;
+					}
+					
+					break;
+				}
+				
+				
 				// 운송장 기본 정보 입력
 				Waybill wayBill = new Waybill();
 				wayBill.setWaybillNo(wbNum);
@@ -133,7 +181,12 @@ public class ToReceiverInfoView implements CommonView {
 				wayBill.setCompanyCd("01"); // 택배 코드는 나중에 수정필요.
 				wayBill.setTotalFee(totalFee);
 				wayBill.setUserId(userId);
+				wayBill.setMsg(msg);
 				parcel.setWaybillNo(wbNum);
+
+				
+				
+				
 
 				// 받는 사람 정보 확인
 				System.out.println();
@@ -181,11 +234,9 @@ public class ToReceiverInfoView implements CommonView {
 		}
 
 	}
-
+//
 //	public static void main(String[] args) {
-//		SuperDao.Load();
-//		view.info("kang", 1,1);
-//		SuperDao.close();
+//		
 //	}
 
 	public static ToReceiverInfoView getinstance() {
