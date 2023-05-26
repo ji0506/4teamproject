@@ -66,14 +66,17 @@ public class ParcelinfoView implements CommonView {
 				// 택배 크기 정의
 				volume = String.format("%d*%d*%d(cm)", width, length, height);
 
+
+				int parcelNum = pdao.selectCountId() + 1;
+
 				// 입력값들 set
 				Parcel parcel = new Parcel();
+				parcel.setParcelNo(parcelNum);
 				parcel.setParcelName(parcelName);
 				parcel.setParcelFee(cost);
 				parcel.setParcelWeight(mass);
 				parcel.setParcelSize(volume);
 
-				int parcelNum = pdao.selectCountId();
 
 				System.out.println(parcelNum);
 				// 마지막 확인 화면 출력
@@ -89,7 +92,7 @@ public class ParcelinfoView implements CommonView {
 				String menuNo = scan.nextLine();
 
 				if ("1".equals(menuNo)) {
-					ToReceiverInfoView.getinstance().info(userId, parcelNum, cost);
+					ToReceiverInfoView.getinstance().info(userId, parcel, cost);
 					pdao.create(parcel);
 					break;
 				} else if ("2".equals(menuNo)) 

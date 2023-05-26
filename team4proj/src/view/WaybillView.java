@@ -19,23 +19,17 @@ public class WaybillView implements CommonView  {
 
 	public static void main(String[] args) {
 		SuperDao.Load();
-		view.waybillInfo("0000215546");
+		//view.waybillInfo("0000215546");
 		SuperDao.close();
 	}
 
 
-	public void waybillInfo(String waybillNum) {
-		while (true) {
-			WaybillDao wbDao = new WaybillDao();
-			ParcelDao pDao = new ParcelDao();
+	public void waybillInfo(Waybill wb, Parcel parcel) {
 			UserDao uDao = new UserDao();
 			NonuserDao nuDao = new NonuserDao();
 
-			int parcelNum = Integer.parseInt(waybillNum.substring(0, 5));
-			String parcelNumStr = String.valueOf(parcelNum);
+		//	String parcelNumStr = String.valueOf(parcelNum);
 
-			Waybill wb = wbDao.selectById(waybillNum);
-			Parcel parcel = pDao.selectById(parcelNumStr);
 			User user = uDao.selectById(wb.getUserId());
 			Nonuser Nuser = nuDao.selectById(wb.getNonCp());
 
@@ -66,11 +60,9 @@ public class WaybillView implements CommonView  {
 			} else {
 				// 오류
 				System.out.println("오류 입니다. 다시 시도하여 주십시오");
-				break;
+				return;
 			}
 
-			// 택배 회사
-			String co = wb.getCompanyName();
 			// 택배 중량 크기 내용물
 			String pSize = parcel.getParcelSize();
 			String pName = parcel.getParcelName();
@@ -83,7 +75,7 @@ public class WaybillView implements CommonView  {
 
 			// 운송장 정보 출력
 			System.out.println("┌--------------------------------------------------------------------------┐");
-			System.out.printf("| 운송장번호 : %-30s| 택배사 : %-12s\t   |\n", waybillNum , wb.getCompanyName());
+			System.out.printf("| 운송장번호 : %-30s| 택배사 : %-12s\t   |\n", wb.getWaybillNo() , wb.getCompanyName());
 			System.out.println("|--------------------------------------------------------------------------|");
 			System.out.printf("| 보내는사람 : %-20s  보내는사람 전화번호: %-16s\t   |\n", Sname, Scp);
 			System.out.printf("| 보내는사람 주소 : %-50s\t   |\n", Saddr);
@@ -95,10 +87,7 @@ public class WaybillView implements CommonView  {
 			System.out.printf("| 상품 무게 : %-20d  상품 크기: %-25s\t   |\n", pWeight, pSize);
 			System.out.println("|--------------------------------------------------------------------------|");
 			System.out.printf("|  %-33s| 요금 : %-10s |  %-10s\t   |\n", "메세지창","요금" ,date );
-			System.out.println("└--------------------------------------------------------------------------┘");
-			
-			break;
-		}
+			System.out.println("└--------------------------------------------------------------------------┘");	
 	}
 
 	public void wbList() {
@@ -107,29 +96,30 @@ public class WaybillView implements CommonView  {
 
 			try {
 				WaybillDao wbDao = new WaybillDao();
+				ParcelDao pDao = new ParcelDao();
 				UserView userV = new UserView();
-
-				Waybill wb;
 
 				System.out.println("조회할 송장의 송장번호를 입력해주세요.");
 				System.out.print("송장 번호 : ");
 				String wbNum = scan.nextLine();
-				wb = wbDao.selectById(wbNum);
+				Waybill wb = wbDao.selectById(wbNum);
+				Parcel pc = pDao.selectWaybillNo(wb.getWaybillNo());
 
+				
 				// 운송장이 회원으로 접수 되었을때
 				if (wb.getUserId() != null) {
 					// 해당 택배를 접수했을때 아이디와 비밀번호를 입력 후 같을 경우 택배 재출력 및 접수 취소를 시킨다.
 					System.out.println("해당 기능을 사용하시려면 로그인을 하셔야 합니다.");
 					String userId = userV.Login();
 
-					if (wb.getUserId() == userId) {
+					if (userId.equals(wb.getUserId()) ) {
 						System.out.println("로그인에 성공하셨습니다.");
 						System.out.println("1. 재출력  2. 삭제");
 						System.out.print("메뉴 선택 : ");
 						String menuNum = scan.nextLine();
 
 						if ("1".equals(menuNum)) {
-							waybillInfo(wbNum);
+							waybillInfo(wb,pc);
 							break;
 						} else {
 							wbDao.delete(wbNum);
@@ -156,7 +146,7 @@ public class WaybillView implements CommonView  {
 						String menuNum = scan.nextLine();
 
 						if ("1".equals(menuNum)) {
-							waybillInfo(wbNum);
+							waybillInfo(wb,pc);
 							break;
 						} else {
 							wbDao.delete(wbNum);

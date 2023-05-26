@@ -34,7 +34,7 @@ public interface CommonView {
 	// 작성자 : 명지완
 	// 작성일자 : 2023-05-25
 	//설명 : 주소 값을 받아 분리하는 기능 
-	public default int getzipCode(String line) {
+	public default int getZipCode(String line) {
 
 		String[] strToStrArray = line.split(" ");
 		WaybillDao wdao = new WaybillDao();

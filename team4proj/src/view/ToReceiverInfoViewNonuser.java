@@ -3,6 +3,7 @@ package view;
 import dao.ParcelDao;
 import dao.SuperDao;
 import dao.WaybillDao;
+import model.Parcel;
 import model.Waybill;
 
 public class ToReceiverInfoViewNonuser implements CommonView{
@@ -10,8 +11,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 	private static ToReceiverInfoViewNonuser view = new ToReceiverInfoViewNonuser();
 
 	// 받는곳 입력
-	public void info(String nonUserCp, int parcelNum) {
-		Waybill wayBill = new Waybill();
+	public void info(String nonUserCp, Parcel parcel) {
 		WaybillDao wbDao = new WaybillDao();
 		ParcelDao pDao = new ParcelDao();
 
@@ -31,10 +31,10 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				// 우편번호 찾기
 				// 집에서 zipcode() 불가!!!
 
-				int zipcode = getzipCode(ReceiverAddr);
+				int zipcode = getZipCode(ReceiverAddr);
 
 				// 넘겨 받은 parcelNum 의 왼쪽의 공백을 0으로 채움
-				String parcelNumStr = String.format("%05d", parcelNum);
+				String parcelNumStr = String.format("%05d", parcel.getParcelNo());
 
 //				int zipcode = 63500; // 임시 zipcode
 
@@ -46,7 +46,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				}
 
 				// 무게당 요금과 도서 산간지역을 합쳐 최종 요금 계산
-				int totalFee = pDao.selectParcelFee(parcelNum) + surcharge;
+				int totalFee = parcel.getParcelFee() + surcharge;
 
 				System.out.println(totalFee);
 
@@ -56,6 +56,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				System.out.println(wbNum);
 
 				// 운송장 기본 정보 입력
+				Waybill wayBill = new Waybill();
 				wayBill.setWaybillNo(wbNum);
 				wayBill.setTotalFee(totalFee);
 				wayBill.setRcvrName(ReceiverName);
@@ -91,7 +92,9 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 						System.out.println("결제 완료");
 						// 결제 완료 시 운송장데이터 생성
 						wbDao.create(wayBill);
-						WaybillView.getinstance().waybillInfo(wbNum);
+						pDao.create(parcel);
+						WaybillView.getinstance().waybillInfo(wayBill,parcel);
+						break;
 					} else {
 						System.out.println("결제 취소 되었습니다.");
 						continue;
@@ -113,7 +116,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 
 	public static void main(String[] args) {
 		SuperDao.Load();
-		view.info(null, 1);
+		//view.info(null, 1);
 		SuperDao.close();
 	}
 	

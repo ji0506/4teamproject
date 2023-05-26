@@ -6,6 +6,7 @@ import dao.ParcelDao;
 import dao.SuperDao;
 import dao.UserDao;
 import dao.WaybillDao;
+import model.Parcel;
 import model.Useraddress;
 import model.Waybill;
 
@@ -14,7 +15,7 @@ public class ToReceiverInfoView implements CommonView {
 	private static ToReceiverInfoView view = new ToReceiverInfoView();
 
 	// 받는곳 입력
-	public void info(String userId, int parcelNum, int cost) {
+	public void info(String userId, Parcel parcel, int cost) {
 		WaybillDao wbDao = new WaybillDao();
 		UserDao uDao = new UserDao();
 		ParcelDao pDao = new ParcelDao();
@@ -22,7 +23,7 @@ public class ToReceiverInfoView implements CommonView {
 		String ReceiverName = "";
 		String ReceiverAddr = "";
 		String ReceiverCp = "";
-
+		int zipcode = 0;
 		try {
 			// 화면 출력
 			while (true) {
@@ -75,10 +76,14 @@ public class ToReceiverInfoView implements CommonView {
 						System.out.print("받는 사람 전화번호 : ");
 						ReceiverCp = scan.nextLine();
 
+						// 우편번호 찾기
+						// 집에서 zipcode 불가!!!
+						zipcode = getZipCode(ReceiverAddr);
+
 						System.out.println("이 받는 사람 정보를 즐겨찾기에 저장하시겠습니까?");
 						System.out.println("  1. 저장    2. 저장하지 않고 계속");
 						String subMenuNo = scan.nextLine();
-						if ("1".equals(subMenuNo)) {
+						if ("1".equals(subMenuNo) && zipcode != 0) {
 							Useraddress Uaddr = new Useraddress();
 							Uaddr.setUserId(userId);
 							Uaddr.setRcvrName(ReceiverName);
@@ -87,6 +92,7 @@ public class ToReceiverInfoView implements CommonView {
 							uDao.createUserAddress(Uaddr);
 							break;
 						} else {
+							System.out.println("잘못 입력하셨습니다");
 							break;
 						}
 					} else {
@@ -96,16 +102,13 @@ public class ToReceiverInfoView implements CommonView {
 				}
 				// 받는 분 정보 입력
 
-				// 우편번호 찾기
-				// 집에서 zipcode 불가!!!
-				int zipcode = getzipCode(ReceiverAddr);
 
 				// 넘겨 받은 parcelNum 의 왼쪽의 공백을 0으로 채움
-				String parcelNumStr = String.format("%05d", parcelNum+1);
+				String parcelNumStr = String.format("%05d", parcel.getParcelNo());
 				System.out.println(parcelNumStr);
 
 				// 우편번호와 택배 번호를 조합하여 운송장 번호 생성
-//			int zipcode = 12323; // 임시 zipcode
+				//int zipcode = 12323; // 임시 zipcode
 
 				String wbNum = parcelNumStr + zipcode;
 
@@ -130,6 +133,7 @@ public class ToReceiverInfoView implements CommonView {
 				wayBill.setCompanyCd("01"); // 택배 코드는 나중에 수정필요.
 				wayBill.setTotalFee(totalFee);
 				wayBill.setUserId(userId);
+				parcel.setWaybillNo(wbNum);
 
 				// 받는 사람 정보 확인
 				System.out.println();
@@ -158,7 +162,9 @@ public class ToReceiverInfoView implements CommonView {
 						System.out.println("결제 완료");
 						// 결제 완료 시 운송장데이터 생성
 						wbDao.create(wayBill);
-						WaybillView.getinstance().waybillInfo(wbNum);
+						pDao.create(parcel);
+						WaybillView.getinstance().waybillInfo(wayBill, parcel);
+						break;
 					} else {
 						System.out.println("결제 취소 되었습니다.");
 						continue;

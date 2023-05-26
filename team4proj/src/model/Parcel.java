@@ -14,11 +14,8 @@ public class Parcel {
 
 	private int parcelFee;
 
-	private int waybillNo;
+	private String waybillNo;
 
 	
-	public int feecalculate() {
 
-		return 0;
-	}
 }

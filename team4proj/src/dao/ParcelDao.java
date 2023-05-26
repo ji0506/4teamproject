@@ -32,7 +32,7 @@ public class ParcelDao {
 				vo.setParcelWeight(re.getInt("parcel_weight"));
 				vo.setParcelSize(re.getString("parcel_size"));
 				vo.setParcelFee(re.getInt("parcel_fee"));
-				vo.setWaybillNo(re.getInt("waybill_no"));
+				vo.setWaybillNo(re.getString("waybill_no"));
 				list.add(vo);
 			}
 			re.close();
@@ -62,7 +62,7 @@ public class ParcelDao {
 				vo.setParcelWeight(re.getInt("parcel_weight"));
 				vo.setParcelSize(re.getString("parcel_size"));
 				vo.setParcelFee(re.getInt("parcel_fee"));
-				vo.setWaybillNo(re.getInt("waybill_no"));
+				vo.setWaybillNo(re.getString("waybill_no"));
 			}
 			re.close();
 			stmt.close();
@@ -73,6 +73,37 @@ public class ParcelDao {
 		return vo;
 	}
 
+	
+	public Parcel selectWaybillNo(String waybillNo) {
+
+		Parcel vo = null;
+
+		try {
+			Connection conn = SuperDao.getConnection();
+			String sql = "select * from parcel where waybill_no=?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, waybillNo);
+			ResultSet re = stmt.executeQuery();
+			while (re.next()) {
+				vo = new Parcel();
+				vo.setParcelNo(re.getInt("parcel_no"));
+				vo.setParcelName(re.getString("parcel_name"));
+				vo.setParcelWeight(re.getInt("parcel_weight"));
+				vo.setParcelSize(re.getString("parcel_size"));
+				vo.setParcelFee(re.getInt("parcel_fee"));
+				vo.setWaybillNo(re.getString("waybill_no"));
+			}
+			re.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return vo;
+	}
+
+	
 	public Parcel selectByCp(String nonCp) {
 
 		Parcel vo = null;
@@ -91,7 +122,7 @@ public class ParcelDao {
 				vo.setParcelWeight(re.getInt("parcel_weight"));
 				vo.setParcelSize(re.getString("parcel_size"));
 				vo.setParcelFee(re.getInt("parcel_fee"));
-				vo.setWaybillNo(re.getInt("waybill_no"));
+				vo.setWaybillNo(re.getString("waybill_no"));
 			}
 			re.close();
 			stmt.close();
@@ -160,7 +191,7 @@ public class ParcelDao {
 			stmt.setInt(2, vo.getParcelWeight());
 			stmt.setString(3, vo.getParcelSize());
 			stmt.setInt(4, vo.getParcelFee());
-			stmt.setInt(5, vo.getWaybillNo());
+			stmt.setString(5, vo.getWaybillNo());
 
 			stmt.executeUpdate();
 
@@ -183,7 +214,7 @@ public class ParcelDao {
 			stmt.setInt(2, vo.getParcelWeight());
 			stmt.setString(3, vo.getParcelSize());
 			stmt.setInt(4, vo.getParcelFee());
-			stmt.setInt(5, vo.getWaybillNo());
+			stmt.setString(5, vo.getWaybillNo());
 			stmt.setInt(6, vo.getParcelNo());
 
 			stmt.executeUpdate();
