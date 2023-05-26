@@ -10,6 +10,11 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 	
 	private static ToReceiverInfoViewNonuser view = new ToReceiverInfoViewNonuser();
 
+	private int comindex = 0;
+	
+	private String [] companyCd = {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20"} ;
+
+	
 	// 받는곳 입력
 	public void info(String nonUserCp, Parcel parcel) {
 		WaybillDao wbDao = new WaybillDao();
@@ -48,7 +53,6 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				// 무게당 요금과 도서 산간지역을 합쳐 최종 요금 계산
 				int totalFee = parcel.getParcelFee() + surcharge;
 
-				System.out.println(totalFee);
 
 				// 우편번호와 택배 번호를 조합하여 운송장 번호 생성
 				String wbNum = parcelNumStr + zipcode;
@@ -62,7 +66,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				wayBill.setRcvrName(ReceiverName);
 				wayBill.setRcvrAddr(ReceiverAddr);
 				wayBill.setRcvrCp(ReceiverCp);
-				wayBill.setCompanyCd("01"); // 택배 코드는 나중에 수정필요
+				wayBill.setCompanyCd(companyCd[comindex++]); // 택배 코드는 나중에 수정필요
 				wayBill.setNonCp(nonUserCp);
 				parcel.setWaybillNo(wbNum);
 				

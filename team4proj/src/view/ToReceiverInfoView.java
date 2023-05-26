@@ -3,7 +3,6 @@ package view;
 import java.util.List;
 
 import dao.ParcelDao;
-import dao.SuperDao;
 import dao.UserDao;
 import dao.WaybillDao;
 import model.Parcel;
@@ -13,7 +12,10 @@ import model.Waybill;
 public class ToReceiverInfoView implements CommonView {
 
 	private static ToReceiverInfoView view = new ToReceiverInfoView();
-
+	
+	private int comindex = 0;
+	
+	private String [] companyCd = {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20"} ;
 	// 받는곳 입력
 	public void info(String userId, Parcel parcel, int cost) {
 		WaybillDao wbDao = new WaybillDao();
@@ -178,13 +180,12 @@ public class ToReceiverInfoView implements CommonView {
 				wayBill.setRcvrName(ReceiverName);
 				wayBill.setRcvrAddr(ReceiverAddr);
 				wayBill.setRcvrCp(ReceiverCp);
-				wayBill.setCompanyCd("01"); // 택배 코드는 나중에 수정필요.
+				wayBill.setCompanyCd(companyCd[comindex++]); // 택배 코드는 나중에 수정필요.
 				wayBill.setTotalFee(totalFee);
 				wayBill.setUserId(userId);
 				wayBill.setMsg(msg);
 				parcel.setWaybillNo(wbNum);
 
-				
 				
 				
 
@@ -238,6 +239,11 @@ public class ToReceiverInfoView implements CommonView {
 //	public static void main(String[] args) {
 //		
 //	}
+	
+	public void ChangeCompanyCd()
+	{
+		
+	}
 
 	public static ToReceiverInfoView getinstance() {
 		return view;

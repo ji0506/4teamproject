@@ -47,7 +47,7 @@ public class UserView implements CommonView{
 			nuser.setNonuserAddr(useraddr);
 
 			if(nudao.create(nuser) == true)	
-				return "success";
+				return usercp;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
