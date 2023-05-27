@@ -13,11 +13,18 @@ public class UserView implements CommonView{
 	public String Login() {
 		try {
 			// 로그인창 출력
-			System.out.println("[로그인]");
-			System.out.print("ID\t : ");
+			System.out.println("-----------------------------------------------------");
+			System.out.println();
+			System.out.println("                     [ 로그인 ]");
+			System.out.println();
+			System.out.println("-----------------------------------------------------");
+			System.out.println();
+			System.out.print(" I      D : ");
 			String userid = scan.nextLine();
-			System.out.print("Password : ");
+			System.out.println();
+			System.out.print(" Password : ");
 			String userpwd = scan.nextLine();
+			System.out.println();
 
 			User user = udao.selectById(userid);
 
@@ -34,12 +41,19 @@ public class UserView implements CommonView{
 		try {
 			Nonuser nuser = new Nonuser();
 
-			System.out.println("[비회원 로그인]");
-			System.out.print("이름 : ");
+			System.out.println("-----------------------------------------------------");
+			System.out.println();
+			System.out.println("                   [ 비회원 로그인 ]");
+			System.out.println();
+			System.out.println("-----------------------------------------------------");
+			System.out.println();
+			System.out.print(" 이   름\t: ");
 			String username = scan.nextLine();
-			System.out.print("전화번호 :");
+			System.out.println();
+			System.out.print(" 전화 번호\t: ");
 			String usercp = scan.nextLine();
-			System.out.print("주소 :");
+			System.out.println();
+			System.out.print(" 주   소\t: ");
 			String useraddr = scan.nextLine();
 
 			nuser.setNonuserName(username);
@@ -59,39 +73,148 @@ public class UserView implements CommonView{
 		try {
 			
 			System.out.println();
-			System.out.println("--------------------------------------------------------");
+			System.out.println("-----------------------------------------------------");
 			System.out.println();
-			System.out.println("                   ○  회  원  가  입  ○");
+			System.out.println("                  ○  회  원  가  입  ○");
 			System.out.println();
-			System.out.println("--------------------------------------------------------");
 			String userid;
+			String userpw;
+			String username;
+			String useraddr;
+			String usercp;
+			
+			//아이디 입력
 			while (true) {
+				System.out.println("-----------------------------------------------------");
+				System.out.println();
 				System.out.println("ID를 입력해 주십시오 (15글자 제한)  ");
-				System.out.print("I      D  : ");
+				System.out.println();
+				System.out.printf("    %-10s\t: ","I      D");
 				userid = scan.nextLine();
+				
 				User vo = udao.selectById(userid);
 				
-				if(vo == null) {
+				//빈칸일시
+				if(userid == "") {
+					System.out.println("-----------------------------------------------------");
+					System.out.println("아이디는 필수 입력 사항입니다.");
+					System.out.println("다시 시도하여 주십시오.");
+					System.out.println("-----------------------------------------------------");
+					continue;
+				} else if(vo == null) {
 					break;
 				} else {
-					System.out.println("-----------------------");
+					System.out.println();
+					System.out.println("-----------------------------------------------------");
 					System.out.println("중복된 아이디가 존재합니다.");
 					System.out.println("다시 시도하여 주십시오.");
-					System.out.println("-----------------------");
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
 					continue;
 				}
 			}
-			System.out.print("Password  : ");
-			String userpw = scan.nextLine();
-			System.out.print("성     함  : ");
-			String username = scan.nextLine();
-			System.out.print("전 화 번 호 : ");
-			String usercp = scan.nextLine();
-			System.out.print("주      소 : ");
-			String useraddr = scan.nextLine();
+			System.out.println();
+			
+			//비밀번호 입력
+			while(true){
+				
+				System.out.println("-----------------------------------------------------");
+				System.out.println();
+				System.out.println("Password를 입력해 주십시오.");
+				System.out.println();
+				System.out.printf("    %-10s\t: ","Password");
+				userpw = scan.nextLine();
+
+				if(userpw != "") {
+					break;
+				} else {
+					System.out.println();
+					System.out.println("-----------------------------------------------------");
+					System.out.println("비밀 번호는 필수 입력 사항입니다.");
+					System.out.println("다시 시도하여 주십시오.");
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					continue;
+				}
+			}
+			System.out.println();
+
+			//이름 입력
+			while (true) {
+				System.out.println("-----------------------------------------------------");
+				System.out.println();
+				System.out.println("이름을 입력해 주십시오.");
+				System.out.println();
+				System.out.printf("    %-9s\t: ","이     름");
+				username = scan.nextLine();	
+				if (username != "") {
+					break;
+				} else {
+					System.out.println();
+					System.out.println("-----------------------------------------------------");
+					System.out.println("이름은 필수 입력 사항입니다.");
+					System.out.println("다시 시도하여 주십시오.");
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					continue;
+				}
+			}
+			System.out.println();
+
+			//전화번호 입력
+			while (true) {
+				System.out.println("-----------------------------------------------------");
+				System.out.println();
+				System.out.println("전화번호를 입력해 주십시오. 숫자만 입력해 주십시오.");
+				System.out.println();
+				System.out.printf("    %-8s\t: ","전 화 번 호");
+				usercp = scan.nextLine();
+				if (username != "") {
+					break;
+				} else {
+					System.out.println();
+					System.out.println("-----------------------------------------------------");
+					System.out.println("전화번호는 필수 입력 사항입니다.");
+					System.out.println("다시 시도하여 주십시오.");
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					continue;
+				}
+			}
+			System.out.println();
+			
+			//주소 입력
+			while (true) {
+				System.out.println("-----------------------------------------------------");
+				System.out.println( );
+				System.out.println("주소를 입력해 주십시오.");
+				System.out.println();
+				System.out.printf("    %-9s\t: ","주     소");
+				useraddr = scan.nextLine();
+
+				System.out.println();
+				if (username != "") {
+					break;
+				} else {
+					System.out.println();
+					System.out.println("-----------------------------------------------------");
+					System.out.println("주소는 필수 입력 사항입니다.");
+					System.out.println("다시 시도하여 주십시오.");
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					continue;
+				}
+			}
+
+			System.out.println();
+			
+			
+			
 
 			User user = new User();
-
+			
+			System.out.println(userid + " " +username + " " +useraddr + " " );
+			
 			user.setUserId(userid);
 			user.setUserPwd(userpw);
 			user.setUserName(username);
