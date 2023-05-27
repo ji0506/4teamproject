@@ -37,6 +37,7 @@ create table `waybill` (
 	`reg_date` DATETIME NOT NULL DEFAULT current_timestamp() comment '등록날짜',
 	`total_fee` int(20) comment '최종 요금',
 	`up_date` DATETIME comment '받은날짜',
+	`msg` varchar(30) comment '요청사항'
 	 primary key (`waybill_no`)
 );
 
@@ -96,8 +97,4 @@ insert into company values('17', 'KGB택배');
 insert into company values('18', 'SLX 택배');
 insert into company values('19', '일양로지스');
 insert into company values('20', '홈픽택배');
-
-select * from parcel p ;
-select * from nonuser n ;
-select * from `user` u ;
 
