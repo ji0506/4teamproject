@@ -7,6 +7,7 @@ import dao.SuperDao;
 import dao.UserDao;
 import dao.WaybillDao;
 import model.Parcel;
+import model.User;
 import model.Useraddress;
 import model.Waybill;
 
@@ -24,7 +25,8 @@ public class ToReceiverInfoView implements CommonView {
 		WaybillDao wbDao = new WaybillDao();
 		UserDao uDao = new UserDao();
 		ParcelDao pDao = new ParcelDao();
-
+		User user = new User();
+		
 		String ReceiverName = "";
 		String ReceiverAddr = "";
 		String ReceiverCp = "";
@@ -209,24 +211,40 @@ public class ToReceiverInfoView implements CommonView {
 				String menuNo = scan.nextLine();
 
 				if ("1".equals(menuNo)) {
-
-					String sign = payView(cost, surcharge);
+					int grade = user.getUserGrade();
+					String sign = payView(cost, surcharge, grade);
 
 					if (sign != "fail") {
-						System.out.println("결제가 완료되었습니다");
 
+						System.out.println("-----------------------------------------------------");
+						System.out.println();
+						System.out.println("                     결 제   완 료");
+						System.out.println();
+						System.out.println("-----------------------------------------------------");
+						
 						// 결제 완료 시 택배 요청사항 작성
 						String msg = message();
 						wayBill.setMsg(msg);
-
+						
+						// 결제 완료 시 등급 +1
+						grade++;
+						user.setUserGrade(grade);
+						uDao.gradeUpdate(userId, grade);
+						
 						// 결제 완료 시 운송장데이터 생성
 						wbDao.create(wayBill);
 						pDao.create(parcel);
-
+						
+						// 운송장 출력 화면으로
 						WaybillView.getinstance().waybillInfo(wayBill, parcel);
 						break;
 					} else {
-						System.out.println("결제 취소 되었습니다.");
+						
+						System.out.println("-----------------------------------------------------");
+						System.out.println();
+						System.out.println("           결제 취소 되었습니다. 다시 시도해 주십시오.");
+						System.out.println();
+						System.out.println("-----------------------------------------------------");
 						continue;
 					}
 

@@ -122,6 +122,26 @@ public class UserDao {
 		}
 
 	}
+	public void gradeUpdate(String userid, int grade) {
+		try {
+			
+			Connection conn = SuperDao.getConnection();
+			
+			String sql = "update user set user_grade = ? where user_id=? ";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setInt(1, grade);
+			stmt.setString(2, userid);
+
+			stmt.executeUpdate();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	public void delete(User vo) {
 
