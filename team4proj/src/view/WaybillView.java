@@ -102,7 +102,7 @@ public class WaybillView implements CommonView  {
 			System.out.printf("| 보내는사람 : %-20s  보내는사람 전화번호: %-16s\t   |\n", Sname, Scp);
 			System.out.printf("| 보내는사람 주소 : %-50s\t   |\n","( " + Szipcode+" ) " + Saddr + " " + SDetailAddr);
 			System.out.println("|--------------------------------------------------------------------------|");
-			System.out.printf("| 받는사람 : %-20s  받는사람 전화번호: %-20s\t   |\n", Rname, Rcp);
+			System.out.printf("| 받는사람 : %-20s    받는사람 전화번호: %-20s\t   |\n", Rname, Rcp);
 			System.out.printf("| 받는사람 주소 : %-50s\t   |\n","( " + Rzipcode + " ) " + Raddr + " " + RDetailAddr);
 			System.out.println("|--------------------------------------------------------------------------|");
 			System.out.printf("| 상품명 : %-50s\t\t   |\n", pName);
@@ -111,9 +111,20 @@ public class WaybillView implements CommonView  {
 			System.out.printf("|  %-30s| 요금 : %-10s |  %-10s\t   |\n", wb.getMsg(), wb.getTotalFee() ,sdf1.format(date) );
 			System.out.println("└--------------------------------------------------------------------------┘");	
 			System.out.println();
-			System.out.println("                              이용해 주셔서 감사합니다.");
+			System.out.println("                            이용해 주셔서 감사합니다.");
 			System.out.println();
-			System.out.println();
+			System.out.println(" 1. 메인 메뉴로    2. 시스템 종료");
+			System.out.println("-----------------------------------------------------");
+			System.out.print(" 메뉴 선택 : ");
+			String menuNO = scan.nextLine();
+			
+			if("1".equals(menuNO)) {
+				System.out.println();
+				System.out.println();
+				System.out.println();
+			} else {
+				exit();
+			}
 	}
 
 	public void wbList() {
@@ -189,8 +200,12 @@ public class WaybillView implements CommonView  {
 
 				} else { // 운송장이 비회원으로 접수 되었을때
 					// 핸드폰 번호를 입력하고 해당 송장번호와 핸드폰 번호가 같을 경우 채출력 및 접수 취소를 시킨다.
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
 					System.out.println("해당 기능을 사용하시려면 해당 택배를 접수할 때 사용하신 전화번호를 입력하셔야 합니다.");
-
+					System.out.println();
+					System.out.println("-----------------------------------------------------");
+					System.out.print("전화 번호 입력(- 없이 입력해주세요) : ");
 					String inputNonCp = scan.nextLine();
 					if (inputNonCp.equals(wb.getNonCp())) {
 						System.out.println();

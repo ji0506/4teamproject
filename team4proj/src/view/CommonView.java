@@ -92,18 +92,11 @@ public interface CommonView {
 		return "fail";
 	}
 	
-	public default String payView(int cost, int surcharge, int grade) {
+	public default String payView(int cost, int surcharge, int discount) {
 
 		try {
-			int discount = 0;
 			
-			if(grade <= 100) {
-				discount = 200;
-			} else if (grade <= 200) {
-				discount = 500;
-			} else {
-				discount = 1000;
-			}
+			
 
 			System.out.println("-----------------------------------------------------");
 			System.out.println();
@@ -123,9 +116,9 @@ public interface CommonView {
 			System.out.println(" 1. 결제   2. 취소");
 			System.out.println("-----------------------------------------------------");
 			System.out.print(" 메뉴 선택 : ");
-
 			String menuNo = scan.nextLine();
-
+			System.out.println();
+			
 			if ("1".equals(menuNo)) {
 				return "success";
 			} else {
@@ -149,19 +142,24 @@ public interface CommonView {
 			System.out.println("-----------------------------------------------------");
 			System.out.println("                      택배 요청사항");
 			System.out.println();
-			System.out.println("\t\t 1. 선택 안함");
-			System.out.println("\t\t 2. 배송 전 연락주세요");
-			System.out.println("\t\t 3. 빠른 배송 부탁드립니다.");
-			System.out.println("\t\t 4. 부재 시, 경비실에 맡겨주세요.");
+			System.out.println("      택배 요청 사항을 선택하시면 바로 운송장 출력이 진행됩니다.");
 			System.out.println();
-			System.out.println("\t\t 0을 입력시 직접입력 창으로 이동합니다.");
+			System.out.println("\t      1. 선택 안함");
+			System.out.println("\t      2. 배송 전 연락주세요");
+			System.out.println("\t      3. 빠른 배송 부탁드립니다.");
+			System.out.println("\t      4. 부재 시, 경비실에 맡겨주세요.");
+			System.out.println();
+			System.out.println("\t      0을 입력시 직접입력 창으로 이동합니다.");
 			System.out.println("-----------------------------------------------------");
-			System.out.print("요청사항 선택 : ");
+			System.out.print(" 요청사항 선택 : ");
 			int menuNum = Integer.parseInt(scan.nextLine());
-
+			System.out.println();
+			
 			switch (menuNum) {
 
 			case 0:
+				System.out.println("-----------------------------------------------------");
+				System.out.print(" 택배 요청사항(30자 제한) : ");
 				msg = scan.nextLine();
 				break;
 			case 1:
