@@ -41,11 +41,15 @@ public class WaybillView implements CommonView  {
 			String Rname = wb.getRcvrName();
 			String Rcp = wb.getRcvrCp();
 			String Raddr = wb.getRcvrAddr();
+			String RDetailAddr = wb.getRcvrDetailAddr();
+			int Rzipcode = getZipCode(Raddr);
 			
 			//보내는 사람 이름 번호 주소
 			String Sname;
 			String Scp;
 			String Saddr;
+			String SDetailAddr;
+			
 
 			// 보내는 사람이 회원인가 비회원인가
 			if (wb.getNonCp() == null && wb.getUserId() != null) {
@@ -53,18 +57,22 @@ public class WaybillView implements CommonView  {
 				Sname = user.getUserName();
 				Scp = user.getUserCp();
 				Saddr = user.getUserAddr();
+				SDetailAddr = user.getUserDetailAddr();
 
 			} else if (wb.getNonCp() != null && wb.getUserId() == null) {
 				// 비회원일시 보내는 사람 정보
 				Sname = Nuser.getNonuserName();
 				Scp = Nuser.getNonuserCp();
 				Saddr = Nuser.getNonuserAddr();
+				SDetailAddr = Nuser.getNonuserDetailAddr();
 
 			} else {
 				// 오류
 				System.out.println("오류 입니다. 다시 시도하여 주십시오");
 				return;
 			}
+			
+			int Szipcode = getZipCode(Saddr);
 
 			// 택배 중량 크기 내용물
 			String pSize = parcel.getParcelSize();
@@ -92,10 +100,10 @@ public class WaybillView implements CommonView  {
 			System.out.printf("| 운송장번호 : %-30s| 택배사 : %-12s\t   |\n", wb.getWaybillNo() , wb.getCompanyName());
 			System.out.println("|--------------------------------------------------------------------------|");
 			System.out.printf("| 보내는사람 : %-20s  보내는사람 전화번호: %-16s\t   |\n", Sname, Scp);
-			System.out.printf("| 보내는사람 주소 : %-50s\t   |\n", Saddr);
+			System.out.printf("| 보내는사람 주소 : %-50s\t   |\n","( " + Szipcode+" ) " + Saddr + " " + SDetailAddr);
 			System.out.println("|--------------------------------------------------------------------------|");
 			System.out.printf("| 받는사람 : %-20s  받는사람 전화번호: %-20s\t   |\n", Rname, Rcp);
-			System.out.printf("| 받는사람 주소 : %-50s\t   |\n", Raddr);
+			System.out.printf("| 받는사람 주소 : %-50s\t   |\n","( " + Rzipcode + " ) " + Raddr + " " + RDetailAddr);
 			System.out.println("|--------------------------------------------------------------------------|");
 			System.out.printf("| 상품명 : %-50s\t\t   |\n", pName);
 			System.out.printf("| 상품 무게 : %-20d  상품 크기: %-25s\t   |\n", pWeight, pSize);

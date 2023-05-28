@@ -30,7 +30,9 @@ public class ToReceiverInfoView implements CommonView {
 		String ReceiverName = "";
 		String ReceiverAddr = "";
 		String ReceiverCp = "";
+		String ReceiverDetailAddr = "";
 		int zipcode = 0;
+		int totalFee = 0;
 		try {
 			// 화면 출력
 			while (true) {
@@ -64,7 +66,7 @@ public class ToReceiverInfoView implements CommonView {
 							for (int i = 0; i < list.size(); i++) {
 								System.out.println();
 								System.out.println("  "+(i + 1) + "\t " + list.get(i).getRcvrName() + "\t\t"
-										+ list.get(i).getRcvrCp() + "\t  " + list.get(i).getRcvrAddr());
+										+ list.get(i).getRcvrCp() + "\t  " + list.get(i).getRcvrAddr() +" "+list.get(i).getRcvrDetailAddr());
 							}
 							System.out.println();
 							System.out.println("-----------------------------------------------------");
@@ -75,7 +77,7 @@ public class ToReceiverInfoView implements CommonView {
 							System.out.println("-----------------------------------------------------");
 							System.out.println();
 							System.out.println("  이름 : " + list.get(num - 1).getRcvrName() + "\n  주소 : "
-									+ list.get(num - 1).getRcvrAddr() + "\n  전화 번호 : " + list.get(num - 1).getRcvrCp());
+									+ list.get(num - 1).getRcvrAddr() + "\n  전화 번호 : " + list.get(num - 1).getRcvrCp()+" "+list.get(num-1).getRcvrDetailAddr());
 							System.out.println();
 							System.out.println("  이 받는 사람 정보가 맞습니까?");
 							System.out.println();
@@ -93,6 +95,7 @@ public class ToReceiverInfoView implements CommonView {
 								ReceiverName = list.get(num - 1).getRcvrName();
 								ReceiverAddr = list.get(num - 1).getRcvrAddr();
 								ReceiverCp = list.get(num - 1).getRcvrCp();
+								ReceiverDetailAddr = list.get(num - 1).getRcvrDetailAddr();
 
 								System.out.println("해당 즐겨찾기를 선택하셨습니다.");
 								break;
@@ -122,11 +125,14 @@ public class ToReceiverInfoView implements CommonView {
 						System.out.print(" 받는 사람 성함 : ");
 						ReceiverName = scan.nextLine();
 						System.out.println();
+						System.out.print(" 받는 사람 전화번호 : ");
+						ReceiverCp = scan.nextLine();
+						System.out.println();
 						System.out.print(" 받는 사람 주소 : ");
 						ReceiverAddr = scan.nextLine();
 						System.out.println();
-						System.out.print(" 받는 사람 전화번호 : ");
-						ReceiverCp = scan.nextLine();
+						System.out.print(" 받는 사람 상세 주소 : ");
+						ReceiverDetailAddr = scan.nextLine();
 						System.out.println();
 						System.out.println("-----------------------------------------------------");
 						System.out.println();
@@ -143,33 +149,34 @@ public class ToReceiverInfoView implements CommonView {
 							Uaddr.setRcvrName(ReceiverName);
 							Uaddr.setRcvrAddr(ReceiverAddr);
 							Uaddr.setRcvrCp(ReceiverCp);
+							Uaddr.setRcvrDetailAddr(ReceiverDetailAddr);
 							uDao.createUserAddress(Uaddr);
-							System.out.println("즐겨찾기에 저장되었습니다");
+							System.out.println("-----------------------------------------------------");
+							System.out.println();
+							System.out.println("                즐겨찾기에 저장되었습니다");
 							break;
 						} else {
 							break;
 						}
 						
 					} else {
-						System.out.println("잘못 입력하셨습니다");
+						System.out.println("-----------------------------------------------------");
+						System.out.println();
+						System.out.println("                  잘못 입력하셨습니다");
 						continue;
 					}
 				}
-				System.out.println(ReceiverAddr);
 				// 우편번호 찾기
 				zipcode = getZipCode(ReceiverAddr);
 
 				
 				// 넘겨 받은 parcelNum 의 왼쪽의 공백을 0으로 채움
 				String parcelNumStr = String.format("%05d", parcel.getParcelNo());
-				System.out.println(parcelNumStr);
 
 				// 우편번호와 택배 번호를 조합하여 운송장 번호 생성
-//				zipcode = 12323; // 임시 zipcode
 
 				String wbNum = parcelNumStr + zipcode;
 
-				System.out.println(wbNum);
 
 				// 도서 산간지역 요금 추가
 				int surcharge = 0;
@@ -179,16 +186,15 @@ public class ToReceiverInfoView implements CommonView {
 				}
 
 				// 무게당 요금과 도서 산간지역을 합쳐 최종 요금 계산
-				int totalFee = cost + surcharge;
 
 				// 운송장 기본 정보 입력
 				Waybill wayBill = new Waybill();
 				wayBill.setWaybillNo(wbNum);
 				wayBill.setRcvrName(ReceiverName);
 				wayBill.setRcvrAddr(ReceiverAddr);
+				wayBill.setRcvrDetailAddr(ReceiverDetailAddr);
 				wayBill.setRcvrCp(ReceiverCp);
-				wayBill.setCompanyCd(companyCd[comindex++]); // 택배 코드는 나중에 수정필요.
-				wayBill.setTotalFee(totalFee);
+				wayBill.setCompanyCd(companyCd[comindex++]);
 				wayBill.setUserId(userId);
 				parcel.setWaybillNo(wbNum);
 
@@ -202,23 +208,39 @@ public class ToReceiverInfoView implements CommonView {
 				System.out.println();
 				System.out.printf("    | 이름 : %s || 전화번호 : %s |\n", ReceiverName, ReceiverCp);
 				System.out.println();
-				System.out.printf("    | 주소 : %s |\n", ReceiverAddr);
+				System.out.printf("    | 주소 : %s |\n", ReceiverAddr+" "+ReceiverDetailAddr);
 				System.out.println();
 				System.out.println(" 1. 결제 화면으로  2. 받는 사람 정보 다시 입력  3. 메인 메뉴로");
 				System.out.println("-----------------------------------------------------");
-
 				System.out.print(" 메뉴 선택 : ");
 				String menuNo = scan.nextLine();
+				System.out.println();
 
 				if ("1".equals(menuNo)) {
+					
 					int grade = user.getUserGrade();
-					String sign = payView(cost, surcharge, grade);
-
+					int discount;
+					
+					//등급 별 할인 값 구하기
+					if(grade <= 100) {
+						discount = 200;
+					} else if (grade <= 200) {
+						discount = 500;
+					} else {
+						discount = 1000;
+					}
+								
+					String sign = payView(cost, surcharge, discount);
+					
+					// 등급 고려하여 최종요금
+					totalFee = cost + surcharge - discount;
+					wayBill.setTotalFee(totalFee);
+					
 					if (sign != "fail") {
 
 						System.out.println("-----------------------------------------------------");
 						System.out.println();
-						System.out.println("                     결 제   완 료");
+						System.out.println("                   ○ 결 제   완 료 ○");
 						System.out.println();
 						System.out.println("-----------------------------------------------------");
 						

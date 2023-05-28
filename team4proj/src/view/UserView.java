@@ -56,10 +56,14 @@ public class UserView implements CommonView{
 			System.out.print(" 주   소\t: ");
 			String useraddr = scan.nextLine();
 			System.out.println();
+			System.out.print(" 상세 주소\t: ");
+			String userDaddr = scan.nextLine();
+			System.out.println();
 			
 			nuser.setNonuserName(username);
 			nuser.setNonuserCp(usercp);
 			nuser.setNonuserAddr(useraddr);
+			nuser.setNonuserDetailAddr(userDaddr);
 
 			if(nudao.create(nuser) == true)	
 				return usercp;
@@ -82,6 +86,7 @@ public class UserView implements CommonView{
 			String userpw;
 			String username;
 			String useraddr;
+			String userDaddr;
 			String usercp;
 			
 			//아이디 입력
@@ -208,6 +213,28 @@ public class UserView implements CommonView{
 					continue;
 				}
 			}
+			
+			while (true) {
+				System.out.println("-----------------------------------------------------");
+				System.out.println( );
+				System.out.println("주소를 입력해 주십시오.");
+				System.out.println();
+				System.out.printf("    %-9s\t: ","상 세  주 소");
+				userDaddr = scan.nextLine();
+
+				System.out.println();
+				if (userDaddr != "") {
+					break;
+				} else {
+					System.out.println();
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("                상세 주소는 필수 입력 사항입니다.");
+					System.out.println("                  다시 시도하여 주십시오.");
+					System.out.println();
+					continue;
+				}
+			}
 
 			System.out.println();
 			
@@ -223,6 +250,7 @@ public class UserView implements CommonView{
 			user.setUserName(username);
 			user.setUserCp(usercp);
 			user.setUserAddr(useraddr);
+			user.setUserDetailAddr(userDaddr);
 
 			if(udao.create(user) ==true)	
 				return "success";

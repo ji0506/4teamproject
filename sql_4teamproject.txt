@@ -14,6 +14,7 @@ CREATE TABLE `user` (
 	user_pw VARCHAR(20) not null COMMENT '회원 비밀번호',
 	user_addr VARCHAR(100) not null COMMENT '회원 주소',
 	user_cp VARCHAR(20) not null comment '회원 전화번호',
+	user_DAddr VARCHAR(30) NOT NULL COMMENT '회원 상세주소',
 	user_grade INT(10) comment '등급'
 	
 );
@@ -23,6 +24,7 @@ create table `nonuser` (
 	`non_cp` VARCHAR(20) not null comment '비회원 전화번호',
 	`non_name` VARCHAR(10) NOT NULL COMMENT '비회원 성함',
 	`non_addr` VARCHAR(100) not null COMMENT '비회원 주소',
+	`non_Daddr` varchar(30) not null comment '비회원 상세주소',
 	`reg_date` DATETIME NOT NULL DEFAULT current_timestamp() comment '등록날짜',
 	PRIMARY KEY (`non_cp`)
 );
@@ -31,6 +33,7 @@ create table `waybill` (
 	`waybill_no` varchar(10) not null comment '운송장 번호',
 	`rcvr_name` VARCHAR(10) not null comment '받는사람 이름',
 	`rcvr_addr` varchar(100) not null comment '받는사람 주소',
+	`rcvr_Daddr` varchar(30) not null comment '받는사람 상세주소',
 	`rcvr_cp` varchar(20) not null comment '받는사람 전화번호',
 	`company_cd` varchar(2) comment '택배사 코드',
 	`user_id` varchar(15) comment '회원 ID',
@@ -72,8 +75,8 @@ create table user_address(
 	user_id VARCHAR(15) NOT NULL  comment '유저ID',
 	rcvr_name VARCHAR(10) not null comment '받는사람 이름',
 	rcvr_addr varchar(100) not null comment '받는사람 주소',
-	rcvr_cp varchar(20) not null comment '받는사람 전화번호',
-	freq int(10) DEFAULT 0 comment '사용빈도'
+	rcvr_Daddr varchar(30) not null comment '받는사람 상세주소',
+	rcvr_cp varchar(20) not null comment '받는사람 전화번호'
 );
 
 load data local infile 'D:\data3.txt' into table sigugun fields terminated BY '\t' lines terminated by '\n';

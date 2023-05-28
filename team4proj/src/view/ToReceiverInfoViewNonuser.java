@@ -34,12 +34,15 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				System.out.print("  받는 사람 이름\t: ");
 				String ReceiverName = scan.nextLine();
 				System.out.println();
+				System.out.print("  받는 사람 전화번호 : ");
+				String ReceiverCp = scan.nextLine();
+				System.out.println();
 				System.out.print("  받는 사람 주소\t: ");
 				String ReceiverAddr = scan.nextLine();
 				System.out.println();
-				System.out.print("  받는 사람 전화번호 : ");
-				String ReceiverCp = scan.nextLine();
-
+				System.out.print("  받는 사람 상세 주소\t: ");
+				String ReceiverDetailAddr = scan.nextLine();
+			
 				// 우편번호 찾기
 				// 집에서 zipcode() 불가!!!
 
@@ -87,7 +90,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				System.out.println();
 				System.out.printf("    | 이름 : %s || 전화번호 : %s |\n", ReceiverName, ReceiverCp);
 				System.out.println();
-				System.out.printf("    | 주소 : %s |\n", ReceiverAddr);
+				System.out.printf("    | 주소 : %s |\n", ReceiverAddr + " " + ReceiverDetailAddr);
 				System.out.println();
 				System.out.println("1. 결제 화면으로  2. 받는 사람 정보 다시 입력  3. 메인 메뉴로");
 				System.out.println("-----------------------------------------------------");

@@ -30,6 +30,7 @@ public class WaybillDao {
 				vo.setWaybillNo(re.getString("waybill_no"));
 				vo.setRcvrName(re.getString("rcvr_name"));
 				vo.setRcvrAddr(re.getString("rcvr_addr"));
+				vo.setRcvrDetailAddr(re.getString("rcvr_Daddr"));
 				vo.setRcvrCp(re.getString("rcvr_cp"));
 				vo.setCompanyCd(re.getString("company_cd"));
 				vo.setUserId(re.getString("user_id"));
@@ -64,6 +65,7 @@ public class WaybillDao {
 				vo.setWaybillNo(re.getString("waybill_no"));
 				vo.setRcvrName(re.getString("rcvr_name"));
 				vo.setRcvrAddr(re.getString("rcvr_addr"));
+				vo.setRcvrDetailAddr(re.getString("rcvr_Daddr"));
 				vo.setRcvrCp(re.getString("rcvr_cp"));
 				vo.setCompanyCd(re.getString("company_cd"));
 				vo.setUserId(re.getString("user_id"));
@@ -89,19 +91,20 @@ public class WaybillDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "insert into waybill(waybill_no,rcvr_name,rcvr_addr,rcvr_cp,company_cd,user_id,non_cp,msg,total_fee) value(?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into waybill(waybill_no,rcvr_name,rcvr_addr,rcvr_Daddr,rcvr_cp,company_cd,user_id,non_cp,msg,total_fee) value(?,?,?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, vo.getWaybillNo());
 			stmt.setString(2, vo.getRcvrName());
 			stmt.setString(3, vo.getRcvrAddr());
-			stmt.setString(4, vo.getRcvrCp());
-			stmt.setString(5, vo.getCompanyCd());
-			stmt.setString(6, vo.getUserId());
-			stmt.setString(7, vo.getNonCp());
-			stmt.setString(8, vo.getMsg());
-			stmt.setInt(9, vo.getTotalFee());
+			stmt.setString(4, vo.getRcvrDetailAddr());
+			stmt.setString(5, vo.getRcvrCp());
+			stmt.setString(6, vo.getCompanyCd());
+			stmt.setString(7, vo.getUserId());
+			stmt.setString(8, vo.getNonCp());
+			stmt.setString(9, vo.getMsg());
+			stmt.setInt(10, vo.getTotalFee());
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -117,17 +120,18 @@ public class WaybillDao {
 			Connection conn = SuperDao.getConnection();
 			
 
-			String sql = "update waybill set  rcvr_name = ?,rcvr_addr = ?, rcvr_cp = ?, company_cd= ?, user_id=?, non_cp =?, msg=?  where waybill_no=? ";
+			String sql = "update waybill set  rcvr_name = ?,rcvr_addr = ?, rcvr_Daddr = ?, rcvr_cp = ?, company_cd= ?, user_id=?, non_cp =?, msg=?  where waybill_no=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, vo.getRcvrName());
 			stmt.setString(2, vo.getRcvrAddr());
-			stmt.setString(3, vo.getRcvrCp());
-			stmt.setString(4, vo.getCompanyCd());
-			stmt.setString(5, vo.getUserId());
-			stmt.setString(6, vo.getNonCp());
-			stmt.setString(7, vo.getMsg());
-			stmt.setString(8, vo.getWaybillNo());
+			stmt.setString(3, vo.getRcvrDetailAddr());
+			stmt.setString(4, vo.getRcvrCp());
+			stmt.setString(5, vo.getCompanyCd());
+			stmt.setString(6, vo.getUserId());
+			stmt.setString(7, vo.getNonCp());
+			stmt.setString(8, vo.getMsg());
+			stmt.setString(9, vo.getWaybillNo());
 
 			stmt.executeUpdate();
 			stmt.close();

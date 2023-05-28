@@ -62,6 +62,7 @@ public class UserDao {
 				vo.setUserName(re.getString("user_name"));
 				vo.setUserCp(re.getString("user_cp"));
 				vo.setUserAddr(re.getString("user_addr"));
+				vo.setUserDetailAddr(re.getString("user_DAddr"));
 				vo.setUserGrade(re.getInt("user_grade"));
 			}
 			re.close();
@@ -80,7 +81,7 @@ public class UserDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "insert into user(user_id,user_name,user_pw,user_addr,user_cp) values(?,?,?,?,?)";
+			String sql = "insert into user(user_id,user_name,user_pw,user_addr,user_DAddr,user_cp) values(?,?,?,?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -88,7 +89,8 @@ public class UserDao {
 			stmt.setString(2, vo.getUserName());
 			stmt.setString(3, vo.getUserPwd());
 			stmt.setString(4, vo.getUserAddr());
-			stmt.setString(5, vo.getUserCp());
+			stmt.setString(5, vo.getUserDetailAddr());
+			stmt.setString(6, vo.getUserCp());
 
 			stmt.executeUpdate(); // 여기서 에러
 			stmt.close();
@@ -104,15 +106,16 @@ public class UserDao {
 			Connection conn = SuperDao.getConnection();
 			
 
-			String sql = "update user set  user_name = ?,user_pw = ?, user_addr = ?, user_cp= ?, user_grade = ? where user_id=? ";
+			String sql = "update user set  user_name = ?,user_pw = ?, user_addr = ?,user_DAddr = ?, user_cp= ?, user_grade = ? where user_id=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, vo.getUserName());
 			stmt.setString(2, vo.getUserPwd());
 			stmt.setString(3, vo.getUserAddr());
-			stmt.setString(4, vo.getUserCp());
-			stmt.setInt(5, vo.getUserGrade());
-			stmt.setString(6, vo.getUserId());
+			stmt.setString(4, vo.getUserDetailAddr());
+			stmt.setString(5, vo.getUserCp());
+			stmt.setInt(6, vo.getUserGrade());
+			stmt.setString(7, vo.getUserId());
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -166,18 +169,19 @@ public class UserDao {
 
 	
 	
-	public boolean createUserAddress(String userId, String rcvrName, String rcvrAddr, String rcvrCp) {
+	public boolean createUserAddress(String userId, String rcvrName, String rcvrAddr, String rcvrDetailAddr, String rcvrCp) {
 
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "insert into user_address(user_id,rcvr_name,rcvr_addr,rcvr_cp) values(?,?,?,?)";
+			String sql = "insert into user_address(user_id,rcvr_name,rcvr_addr,rcvr_DAddr,rcvr_cp) values(?,?,?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, userId);
 			stmt.setString(2, rcvrName);
 			stmt.setString(3, rcvrAddr);
-			stmt.setString(4, rcvrCp);
+			stmt.setString(4, rcvrDetailAddr);
+			stmt.setString(5, rcvrCp);
 
 			stmt.executeUpdate(); // 여기서 에러
 			stmt.close();
@@ -193,13 +197,14 @@ public class UserDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "insert into user_address(user_id,rcvr_name,rcvr_addr,rcvr_cp) values(?,?,?,?)";
+			String sql = "insert into user_address(user_id,rcvr_name,rcvr_addr,rcvr_DAddr,rcvr_cp) values(?,?,?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, vo.getUserId());
 			stmt.setString(2, vo.getRcvrName());
 			stmt.setString(3, vo.getRcvrAddr());
-			stmt.setString(4, vo.getRcvrCp());
+			stmt.setString(4, vo.getRcvrDetailAddr());
+			stmt.setString(5, vo.getRcvrCp());
 
 			stmt.executeUpdate(); // 여기서 에러
 			stmt.close();
@@ -227,6 +232,7 @@ public class UserDao {
 				vo.setUserId(re.getString("user_id"));	
 				vo.setRcvrName(re.getString("rcvr_name"));
 				vo.setRcvrAddr(re.getString("rcvr_addr"));
+				vo.setRcvrDetailAddr(re.getString("rcvr_DAddr"));
 				vo.setRcvrCp(re.getString("rcvr_cp"));
 				list.add(vo);
 			}
@@ -268,26 +274,25 @@ public class UserDao {
 	}
 	
 	
-	public void updateAddressCount(Useraddress vo) {
-		try {
-			Connection conn = SuperDao.getConnection();
-			
-
-			String sql = "update user set freq  = ? where user_id=? and rcvr_name=? and rcvr_addr=? and rcvr_cp=? ";
-
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, vo.getFreq());
-			stmt.setString(2, vo.getUserId());
-			stmt.setString(3, vo.getRcvrName());
-			stmt.setString(4, vo.getRcvrAddr());
-			stmt.setString(5, vo.getRcvrCp());
-
-			stmt.executeUpdate();
-			stmt.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
+//	public void updateAddressCount(Useraddress vo) {
+//		try {
+//			Connection conn = SuperDao.getConnection();
+//			
+//
+//			String sql = "update user set freq  = ? where user_id=? and rcvr_name=? and rcvr_addr=? and rcvr_cp=? ";
+//
+//			PreparedStatement stmt = conn.prepareStatement(sql);
+//			stmt.setString(2, vo.getUserId());
+//			stmt.setString(3, vo.getRcvrName());
+//			stmt.setString(4, vo.getRcvrAddr());
+//			stmt.setString(5, vo.getRcvrCp());
+//
+//			stmt.executeUpdate();
+//			stmt.close();
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
 }

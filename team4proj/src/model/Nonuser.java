@@ -10,5 +10,7 @@ public class Nonuser {
 	private String nonuserName;
 
 	private String nonuserAddr;
+	
+	private String nonuserDetailAddr;
 
 }

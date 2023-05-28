@@ -30,6 +30,7 @@ public class NonuserDao {
 				vo.setNonuserCp(re.getString("non_cp"));
 				vo.setNonuserName(re.getString("non_name"));
 				vo.setNonuserAddr(re.getString("non_addr"));
+				vo.setNonuserDetailAddr(re.getString("non_Daddr"));
 				list.add(vo);
 			}
 			re.close();
@@ -57,6 +58,7 @@ public class NonuserDao {
 				vo.setNonuserCp(re.getString("non_cp"));
 				vo.setNonuserName(re.getString("non_name"));
 				vo.setNonuserAddr(re.getString("non_addr"));
+				vo.setNonuserDetailAddr(re.getString("non_Daddr"));
 			}
 			re.close();
 			stmt.close();
@@ -74,13 +76,14 @@ public class NonuserDao {
 
 		try {
 			Connection conn = SuperDao.getConnection();
-			String sql = "insert into nonuser(non_cp, non_name, non_addr) values(?,?,?)";
+			String sql = "insert into nonuser(non_cp, non_name, non_addr, non_Daddr) values(?,?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, vo.getNonuserCp());
 			stmt.setString(2, vo.getNonuserName());
 			stmt.setString(3, vo.getNonuserAddr());
+			stmt.setString(4, vo.getNonuserDetailAddr());
 			
 			stmt.executeUpdate();
 			stmt.close();

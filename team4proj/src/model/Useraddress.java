@@ -10,8 +10,8 @@ public class Useraddress {
 	private String rcvrName;
 
 	private String rcvrAddr;
-
+	
+	private String rcvrDetailAddr;
+	
 	private String rcvrCp;
-
-	private int freq;
 }

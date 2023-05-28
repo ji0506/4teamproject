@@ -118,7 +118,7 @@ public interface CommonView {
 			} else {
 				System.out.println(" 또한 회원 님의 등급인 VVIP 등급은 " + discount +"원 할인이 되므로");
 			}
-			System.out.println(" 총 요금은 " +(cost+surcharge+discount) + "원 입니다.");
+			System.out.println(" 총 요금은 " +(cost+surcharge-discount) + "원 입니다.");
 			System.out.println();
 			System.out.println(" 1. 결제   2. 취소");
 			System.out.println("-----------------------------------------------------");

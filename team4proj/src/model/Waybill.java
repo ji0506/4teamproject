@@ -11,6 +11,8 @@ public class Waybill {
 	private String rcvrName;
 
 	private String rcvrAddr;
+	
+	private String rcvrDetailAddr;
 
 	private String rcvrCp;
 

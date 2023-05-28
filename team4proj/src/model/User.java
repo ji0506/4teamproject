@@ -15,5 +15,7 @@ public class User {
 
 	private String userAddr;
 	
+	private String userDetailAddr;
+	
 	private int userGrade;
 }
