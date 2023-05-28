@@ -23,6 +23,7 @@ create table `nonuser` (
 	`non_cp` VARCHAR(20) not null comment '비회원 전화번호',
 	`non_name` VARCHAR(10) NOT NULL COMMENT '비회원 성함',
 	`non_addr` VARCHAR(100) not null COMMENT '비회원 주소',
+	`reg_date` DATETIME NOT NULL DEFAULT current_timestamp() comment '등록날짜',
 	PRIMARY KEY (`non_cp`)
 );
 
