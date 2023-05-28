@@ -95,8 +95,6 @@ public interface CommonView {
 	public default String payView(int cost, int surcharge, int discount) {
 
 		try {
-			
-			
 
 			System.out.println("-----------------------------------------------------");
 			System.out.println();

@@ -78,7 +78,8 @@ public class ParcelinfoViewNonuser implements CommonView {
 					System.out.println();
 					
 					if (width + length + height > 160 || width > 100 || length > 100 || height > 100) {
-						System.out.println("가능한 택배 규격이 아닙니다.");
+						System.out.println("              가능한 택배 규격이 아닙니다.");
+						System.out.println();
 						continue;
 					}
 					break;

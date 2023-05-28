@@ -46,12 +46,10 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				// 우편번호 찾기
 				// 집에서 zipcode() 불가!!!
 
-//				int zipcode = getZipCode(ReceiverAddr);
+				int zipcode = getZipCode(ReceiverAddr);
 
 				// 넘겨 받은 parcelNum 의 왼쪽의 공백을 0으로 채움
 				String parcelNumStr = String.format("%05d", parcel.getParcelNo());
-
-				int zipcode = 63500; // 임시 zipcode
 
 				// 도서 산간지역 요금 추가
 				int surcharge = 0;
@@ -66,8 +64,6 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 
 				// 우편번호와 택배 번호를 조합하여 운송장 번호 생성
 				String wbNum = parcelNumStr + zipcode;
-
-				System.out.println(wbNum);
 
 				// 운송장 기본 정보 입력
 				Waybill wayBill = new Waybill();
