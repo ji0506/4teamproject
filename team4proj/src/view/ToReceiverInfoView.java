@@ -130,8 +130,9 @@ public class ToReceiverInfoView implements CommonView {
 						System.out.println();
 						System.out.println("-----------------------------------------------------");
 						System.out.println();
-						System.out.println("  이 받는 사람 정보를 즐겨찾기에 저장하시겠습니까?");
-						System.out.println("   1. 저장    2. 저장하지 않고 계속");
+						System.out.println("       이 받는 사람 정보를 즐겨찾기에 저장하시겠습니까?");
+						System.out.println();
+						System.out.println(" 1. 저장    2. 저장하지 않고 계속");
 						System.out.println("-----------------------------------------------------");
 						System.out.print(" 메뉴 선택 : ");
 						String subMenuNo = scan.nextLine();
@@ -156,16 +157,15 @@ public class ToReceiverInfoView implements CommonView {
 				}
 				System.out.println(ReceiverAddr);
 				// 우편번호 찾기
-//				zipcode = getZipCode(ReceiverAddr);
+				zipcode = getZipCode(ReceiverAddr);
 
-				System.out.println(zipcode);
 				
 				// 넘겨 받은 parcelNum 의 왼쪽의 공백을 0으로 채움
 				String parcelNumStr = String.format("%05d", parcel.getParcelNo());
 				System.out.println(parcelNumStr);
 
 				// 우편번호와 택배 번호를 조합하여 운송장 번호 생성
-				zipcode = 12323; // 임시 zipcode
+//				zipcode = 12323; // 임시 zipcode
 
 				String wbNum = parcelNumStr + zipcode;
 

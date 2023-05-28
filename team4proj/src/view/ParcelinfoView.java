@@ -24,7 +24,7 @@ public class ParcelinfoView implements CommonView {
 				System.out.println();
 				System.out.println("-----------------------------------------------------");
 				System.out.println();
-				System.out.println("                    [ 상품 정보 입력창 ]");
+				System.out.println("                   [ 상품 정보 입력창 ]");
 				System.out.println();
 				System.out.println("-----------------------------------------------------");
 				System.out.print("상품명 (10 글자 제한) : ");

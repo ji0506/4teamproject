@@ -89,12 +89,12 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				System.out.println();
 				System.out.printf("    | 주소 : %s |\n", ReceiverAddr);
 				System.out.println();
-				System.out.println("-----------------------------------------------------");
-				System.out.println();
 				System.out.println("1. 결제 화면으로  2. 받는 사람 정보 다시 입력  3. 메인 메뉴로");
+				System.out.println("-----------------------------------------------------");
 
 				System.out.print("메뉴 선택: ");
 				String menuNo = scan.nextLine();
+				System.out.println();
 				
 				if ("1".equals(menuNo)) {
 

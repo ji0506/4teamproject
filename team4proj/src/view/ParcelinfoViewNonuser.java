@@ -24,21 +24,21 @@ public class ParcelinfoViewNonuser implements CommonView {
 			// 화면 출력
 			while (true) {
 				System.out.println();
-				System.out.println("--------------------------------------------------------");
+				System.out.println("-----------------------------------------------------");
 				System.out.println();
-				System.out.println("                     [ 상품 정보 입력창 ]");
+				System.out.println("                    [ 상품 정보 입력창 ]");
 				System.out.println();
-				System.out.println("--------------------------------------------------------");
+				System.out.println("-----------------------------------------------------");
 				System.out.println();
 				System.out.print("상품명 (10 글자 제한) : ");
 				parcelName = scan.nextLine();
 				
 				System.out.println();
-				System.out.println("--------------------------------------------------------");
+				System.out.println("-----------------------------------------------------");
 				System.out.println();
 				System.out.println("                     [무게 및 크기 측정]");
 				System.out.println();
-				System.out.println("--------------------------------------------------------");
+				System.out.println("-----------------------------------------------------");
 				System.out.println();
 				System.out.println(" 무게와 크기를 입력해 주세요");
 				System.out.println();
@@ -56,7 +56,7 @@ public class ParcelinfoViewNonuser implements CommonView {
 				}
 				
 				System.out.println();
-				System.out.println("--------------------------------------------------------");
+				System.out.println("-----------------------------------------------------");
 				
 				cost = costs(mass);
 
@@ -65,7 +65,7 @@ public class ParcelinfoViewNonuser implements CommonView {
 
 				while (true) {
 					System.out.println();
-					System.out.println("택배의 크기를 입력해 주세요.");
+					System.out.println("          택배의 크기를 입력해 주세요.");
 					System.out.println();
 					System.out.print("가로(cm) : ");
 					width = Integer.parseInt(scan.nextLine());
@@ -100,15 +100,15 @@ public class ParcelinfoViewNonuser implements CommonView {
 
 				// 마지막 확인 화면 출력
 				System.out.println();
-				System.out.println("--------------------------------------------------------");
+				System.out.println("-----------------------------------------------------");
 				System.out.println();
 				System.out.println("                   ○ 운송물 정보 확인 ○");
 				System.out.println();
-				System.out.println("--------------------------------------------------------");
+				System.out.println("-----------------------------------------------------");
 				System.out.println();
 				System.out.printf("    | 내용 : %s || 크기 : %s || 무게 : %d |\n", parcelName, volume, mass);
 				System.out.println();
-				System.out.println("--------------------------------------------------------");
+				System.out.println("-----------------------------------------------------");
 				System.out.println();
 				System.out.println("1. 받는 사람 정보 화면으로 2. 택배 정보 다시 입력 3. 메인 메뉴로");
 				System.out.println();

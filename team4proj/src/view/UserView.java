@@ -15,7 +15,7 @@ public class UserView implements CommonView{
 			// 로그인창 출력
 			System.out.println("-----------------------------------------------------");
 			System.out.println();
-			System.out.println("                     [ 로그인 ]");
+			System.out.println("                     [ 로 그 인 ]");
 			System.out.println();
 			System.out.println("-----------------------------------------------------");
 			System.out.println();
@@ -55,7 +55,8 @@ public class UserView implements CommonView{
 			System.out.println();
 			System.out.print(" 주   소\t: ");
 			String useraddr = scan.nextLine();
-
+			System.out.println();
+			
 			nuser.setNonuserName(username);
 			nuser.setNonuserCp(usercp);
 			nuser.setNonuserAddr(useraddr);
@@ -96,19 +97,21 @@ public class UserView implements CommonView{
 				
 				//빈칸일시
 				if(userid == "") {
+					System.out.println();
 					System.out.println("-----------------------------------------------------");
-					System.out.println("아이디는 필수 입력 사항입니다.");
-					System.out.println("다시 시도하여 주십시오.");
-					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("                아이디는 필수 입력 사항입니다.");
+					System.out.println("                  다시 시도하여 주십시오.");
+					System.out.println();
 					continue;
 				} else if(vo == null) {
 					break;
 				} else {
 					System.out.println();
 					System.out.println("-----------------------------------------------------");
-					System.out.println("중복된 아이디가 존재합니다.");
-					System.out.println("다시 시도하여 주십시오.");
-					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("                 중복된 아이디가 존재합니다.");
+					System.out.println("                  다시 시도하여 주십시오.");
 					System.out.println();
 					continue;
 				}
@@ -130,9 +133,9 @@ public class UserView implements CommonView{
 				} else {
 					System.out.println();
 					System.out.println("-----------------------------------------------------");
-					System.out.println("비밀 번호는 필수 입력 사항입니다.");
-					System.out.println("다시 시도하여 주십시오.");
-					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("              비밀 번호는 필수 입력 사항입니다.");
+					System.out.println("                 다시 시도하여 주십시오.");
 					System.out.println();
 					continue;
 				}
@@ -152,9 +155,9 @@ public class UserView implements CommonView{
 				} else {
 					System.out.println();
 					System.out.println("-----------------------------------------------------");
-					System.out.println("이름은 필수 입력 사항입니다.");
-					System.out.println("다시 시도하여 주십시오.");
-					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("                이름은 필수 입력 사항입니다.");
+					System.out.println("                 다시 시도하여 주십시오.");
 					System.out.println();
 					continue;
 				}
@@ -169,14 +172,14 @@ public class UserView implements CommonView{
 				System.out.println();
 				System.out.printf("    %-8s\t: ","전 화 번 호");
 				usercp = scan.nextLine();
-				if (username != "") {
+				if (usercp != "") {
 					break;
 				} else {
 					System.out.println();
 					System.out.println("-----------------------------------------------------");
-					System.out.println("전화번호는 필수 입력 사항입니다.");
-					System.out.println("다시 시도하여 주십시오.");
-					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("               전화번호는 필수 입력 사항입니다.");
+					System.out.println("                  다시 시도하여 주십시오.");
 					System.out.println();
 					continue;
 				}
@@ -193,14 +196,14 @@ public class UserView implements CommonView{
 				useraddr = scan.nextLine();
 
 				System.out.println();
-				if (username != "") {
+				if (useraddr != "") {
 					break;
 				} else {
 					System.out.println();
 					System.out.println("-----------------------------------------------------");
-					System.out.println("주소는 필수 입력 사항입니다.");
-					System.out.println("다시 시도하여 주십시오.");
-					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("                주소는 필수 입력 사항입니다.");
+					System.out.println("                  다시 시도하여 주십시오.");
 					System.out.println();
 					continue;
 				}

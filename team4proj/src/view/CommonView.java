@@ -70,15 +70,14 @@ public interface CommonView {
 
 			System.out.println("-----------------------------------------------------");
 			System.out.println();
-			System.out.println("                   [ 결    제 ]");
+			System.out.println("                     [ 결    제 ]");
 			System.out.println();
-			System.out.println("무게별 요금 " + cost +"원과 지역별 요금 " + surcharge+"을 합쳐");
-			System.out.println("총 요금은 " + (cost+surcharge)+"원 입니다.");
+			System.out.println(" 무게별 요금 " + cost +"원과 지역별 요금 " + surcharge+"을 합쳐");
+			System.out.println(" 총 요금은 " + (cost+surcharge)+"원 입니다.");
 			System.out.println();
-			System.out.println("1. 결제   2. 취소");
+			System.out.println(" 1. 결제   2. 취소");
 			System.out.println("-----------------------------------------------------");
-			System.out.println();
-
+			System.out.print(" 메뉴 선택 : ");
 			String menuNo = scan.nextLine();
 
 			if ("1".equals(menuNo)) {
@@ -108,18 +107,18 @@ public interface CommonView {
 
 			System.out.println("-----------------------------------------------------");
 			System.out.println();
-			System.out.println("                     [ 결    제 ]");
+			System.out.println("                      [ 결    제 ]");
 			System.out.println();
-			System.out.println("무게별 요금 " + cost +"원과 지역별 요금 " + surcharge+"을 합쳐");
-			System.out.println("요금은 " + (cost+surcharge)+"원 입니다.");
+			System.out.println(" 무게별 요금 " + cost +"원과 지역별 요금 " + surcharge+"을 합쳐");
+			System.out.println(" 요금은 " + (cost+surcharge)+"원 입니다.");
 			if(discount == 200) {
-				System.out.println("또한 회원 님의 등급인 플래티넘 등급은 " + discount +"원 할인이 되므로");
+				System.out.println(" 또한 회원 님의 등급인 플래티넘 등급은 " + discount +"원 할인이 되므로");
 			} else if(discount == 500) {
-				System.out.println("또한 회원 님의 등급인 VIP 등급은 " + discount +"원 할인이 되므로");
+				System.out.println(" 또한 회원 님의 등급인 VIP 등급은 " + discount +"원 할인이 되므로");
 			} else {
-				System.out.println("또한 회원 님의 등급인 VVIP 등급은 " + discount +"원 할인이 되므로");
+				System.out.println(" 또한 회원 님의 등급인 VVIP 등급은 " + discount +"원 할인이 되므로");
 			}
-			System.out.println("총 요금은 " +(cost+surcharge+discount) + "원 입니다.");
+			System.out.println(" 총 요금은 " +(cost+surcharge+discount) + "원 입니다.");
 			System.out.println();
 			System.out.println(" 1. 결제   2. 취소");
 			System.out.println("-----------------------------------------------------");
@@ -147,7 +146,7 @@ public interface CommonView {
 
 			
 
-			System.out.println("--------------------------------------------------------");
+			System.out.println("-----------------------------------------------------");
 			System.out.println("                      택배 요청사항");
 			System.out.println();
 			System.out.println("\t\t 1. 선택 안함");
@@ -156,7 +155,7 @@ public interface CommonView {
 			System.out.println("\t\t 4. 부재 시, 경비실에 맡겨주세요.");
 			System.out.println();
 			System.out.println("\t\t 0을 입력시 직접입력 창으로 이동합니다.");
-			System.out.println("--------------------------------------------------------");
+			System.out.println("-----------------------------------------------------");
 			System.out.print("요청사항 선택 : ");
 			int menuNum = Integer.parseInt(scan.nextLine());
 

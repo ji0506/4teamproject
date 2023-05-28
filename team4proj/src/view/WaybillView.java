@@ -85,6 +85,9 @@ public class WaybillView implements CommonView  {
 			}
 
 			// 운송장 정보 출력
+			System.out.println();
+			System.out.println("                               운 송 장    출 력");
+			System.out.println();
 			System.out.println("┌--------------------------------------------------------------------------┐");
 			System.out.printf("| 운송장번호 : %-30s| 택배사 : %-12s\t   |\n", wb.getWaybillNo() , wb.getCompanyName());
 			System.out.println("|--------------------------------------------------------------------------|");
@@ -100,7 +103,9 @@ public class WaybillView implements CommonView  {
 			System.out.printf("|  %-30s| 요금 : %-10s |  %-10s\t   |\n", wb.getMsg(), wb.getTotalFee() ,sdf1.format(date) );
 			System.out.println("└--------------------------------------------------------------------------┘");	
 			System.out.println();
-			System.out.println("이용해 주셔서 감사합니다.");
+			System.out.println("                              이용해 주셔서 감사합니다.");
+			System.out.println();
+			System.out.println();
 	}
 
 	public void wbList() {
@@ -114,7 +119,7 @@ public class WaybillView implements CommonView  {
 				
 				System.out.println("-----------------------------------------------------");
 				System.out.println();
-				System.out.println("                     [ 메인 메뉴 ]");
+				System.out.println("                    [ 택배 조회 메뉴 ]");
 				System.out.println();
 				System.out.println("조회할 송장의 송장번호를 입력해주세요.");
 				System.out.println("-----------------------------------------------------");
@@ -130,7 +135,7 @@ public class WaybillView implements CommonView  {
 					System.out.println();
 					System.out.println("-----------------------------------------------------");
 					System.out.println();
-					System.out.println("해당 기능을 사용하시려면 로그인을 하셔야 합니다.");
+					System.out.println("       해당 기능을 사용하시려면 로그인을 하셔야 합니다.");
 					System.out.println();
 					String userId = userV.Login();
 
@@ -180,9 +185,14 @@ public class WaybillView implements CommonView  {
 
 					String inputNonCp = scan.nextLine();
 					if (inputNonCp.equals(wb.getNonCp())) {
-						System.out.println("비회원 로그인에 성공하셨습니다.");
-						System.out.println("1. 재출력  2. 삭제");
-						System.out.print("메뉴 선택 : ");
+						System.out.println();
+						System.out.println("-----------------------------------------------------");
+						System.out.println();
+						System.out.println("        비회원 로그인에 성공하셨습니다. 메뉴를 선택해 주십시오.");
+						System.out.println();
+						System.out.println(" 1. 재출력  2. 삭제");
+						System.out.println("-----------------------------------------------------");
+						System.out.print(" 메뉴 선택 : ");
 						String menuNum = scan.nextLine();
 
 						if ("1".equals(menuNum)) {

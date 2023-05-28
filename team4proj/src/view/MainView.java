@@ -38,16 +38,23 @@ public class MainView {
 
 			System.out.print("메뉴 선택 : ");
 			String menuNo = scan.nextLine();
+			System.out.println();
 
 			if ("1".equals(menuNo)) {
 				userId = userV.Login();
 
 				if (userId != "fail") {
-					System.out.println("로그인에 성공하셨습니다.");
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("                  로그인에 성공하셨습니다.");
+					System.out.println();
 		
 					ParcelinfoView.getinstance().info(userId);
 				} else {
-					System.out.println("로그인에 실패하셨습니다.");
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("                  로그인에 실패하셨습니다.");
+					System.out.println();
 					continue;
 				}
 
@@ -55,10 +62,16 @@ public class MainView {
 				String nonusercp = userV.Non_userlogin();
 
 				if (nonusercp != "fail") {
-					System.out.println("비회원 로그인에 성공하셨습니다.");
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("               비회원 로그인에 성공하셨습니다.");
+					System.out.println();
+
 					ParcelinfoViewNonuser.getinstance().info(nonusercp);
 				} else {
-					System.out.println("비회원 로그인에 실패하셨습니다. 다시 시도해 주십시오");
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("       비회원 로그인에 실패하셨습니다. 다시 시도해 주십시오");
 					continue;
 				}
 
@@ -66,10 +79,14 @@ public class MainView {
 
 				String sign = userV.JoinUser();
 				if (sign != "fail") {
-					System.out.println("회원 가입이 완료하셨습니다.");
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("                 회원 가입이 완료하셨습니다.");
 					continue;
 				} else {
-					System.out.println("회원 가입에 실패하셨습니다. 다시 시도해 주십시오");
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
+					System.out.println("         회원 가입에 실패하셨습니다. 다시 시도해 주십시오");
 					continue;
 				}
 
