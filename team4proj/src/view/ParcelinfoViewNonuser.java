@@ -65,7 +65,7 @@ public class ParcelinfoViewNonuser implements CommonView {
 
 				while (true) {
 					System.out.println();
-					System.out.println("          택배의 크기를 입력해 주세요.");
+					System.out.println("              택배의 크기를 입력해 주세요.");
 					System.out.println();
 					System.out.print("가로(cm) : ");
 					width = Integer.parseInt(scan.nextLine());
