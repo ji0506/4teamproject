@@ -16,7 +16,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 
 	
 	// 받는곳 입력
-	public void info(String nonUserCp, Parcel parcel) {
+	public void info(String nonUserCp, Parcel parcel, int cost) {
 		WaybillDao wbDao = new WaybillDao();
 		ParcelDao pDao = new ParcelDao();
 
@@ -25,23 +25,30 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				// 화면 출력
 				// 받는 분 정보 입력
 				System.out.println();
-				System.out.println("받는 사람 정보");
-				System.out.print("받는 사람 이름 : ");
+				System.out.println("-----------------------------------------------------");
+				System.out.println();
+				System.out.println("                 받는사람 정보를 입력해 주세요");
+				System.out.println();
+				System.out.println("-----------------------------------------------------");
+				System.out.println();
+				System.out.print("  받는 사람 이름\t: ");
 				String ReceiverName = scan.nextLine();
-				System.out.print("받는 사람 주소 : ");
+				System.out.println();
+				System.out.print("  받는 사람 주소\t: ");
 				String ReceiverAddr = scan.nextLine();
-				System.out.print("받는 사람 전화번호 : ");
+				System.out.println();
+				System.out.print("  받는 사람 전화번호 : ");
 				String ReceiverCp = scan.nextLine();
 
 				// 우편번호 찾기
 				// 집에서 zipcode() 불가!!!
 
-				int zipcode = getZipCode(ReceiverAddr);
+//				int zipcode = getZipCode(ReceiverAddr);
 
 				// 넘겨 받은 parcelNum 의 왼쪽의 공백을 0으로 채움
 				String parcelNumStr = String.format("%05d", parcel.getParcelNo());
 
-//				int zipcode = 63500; // 임시 zipcode
+				int zipcode = 63500; // 임시 zipcode
 
 				// 도서 산간지역 요금 추가
 				int surcharge = 0;
@@ -72,17 +79,17 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				
 				// 받는 사람 정보 확인
 				System.out.println();
-				System.out.println("--------------------------------------------------------");
+				System.out.println("-----------------------------------------------------");
 				System.out.println();
 				System.out.println("                   ○ 받는 사람 정보 확인 ○");
 				System.out.println();
-				System.out.println("--------------------------------------------------------");
+				System.out.println("-----------------------------------------------------");
 				System.out.println();
 				System.out.printf("    | 이름 : %s || 전화번호 : %s |\n", ReceiverName, ReceiverCp);
 				System.out.println();
 				System.out.printf("    | 주소 : %s |\n", ReceiverAddr);
 				System.out.println();
-				System.out.println("--------------------------------------------------------");
+				System.out.println("-----------------------------------------------------");
 				System.out.println();
 				System.out.println("1. 결제 화면으로  2. 받는 사람 정보 다시 입력  3. 메인 메뉴로");
 
@@ -91,17 +98,32 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 				
 				if ("1".equals(menuNo)) {
 
-					String sign = payView(totalFee);
+					String sign = payView(cost, surcharge);
 
 					if (sign != "fail") {
-						System.out.println("결제 완료");
+						
+						System.out.println("-----------------------------------------------------");
+						System.out.println();
+						System.out.println("                     결 제   완 료");
+						System.out.println();
+						System.out.println("-----------------------------------------------------");
+						
+						// 결제 완료 시 택배 요청사항 작성
+						String msg = message();
+						wayBill.setMsg(msg);
+						
 						// 결제 완료 시 운송장데이터 생성
+						
 						wbDao.create(wayBill);
 						pDao.create(parcel);
 						WaybillView.getinstance().waybillInfo(wayBill,parcel);
 						break;
 					} else {
-						System.out.println("결제 취소 되었습니다.");
+						System.out.println("-----------------------------------------------------");
+						System.out.println();
+						System.out.println("           결제 취소 되었습니다. 다시 시도해 주십시오.");
+						System.out.println();
+						System.out.println("-----------------------------------------------------");
 						continue;
 					}
 
@@ -121,7 +143,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 
 	public static void main(String[] args) {
 		SuperDao.Load();
-		//view.info(null, 1);
+		view.info(null, null, 0);
 		SuperDao.close();
 	}
 	

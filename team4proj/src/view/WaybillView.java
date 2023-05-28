@@ -33,6 +33,7 @@ public class WaybillView implements CommonView  {
 		//	String parcelNumStr = String.valueOf(parcelNum);
 
 			User user = uDao.selectById(wb.getUserId());
+//			Unknown column 'reg_date' in 'order clause'
 			Nonuser Nuser = nuDao.selectById(wb.getNonCp());
 
 			// 들어가야 하는것
@@ -82,10 +83,6 @@ public class WaybillView implements CommonView  {
 			{
 				wb.setCompanyName(wDao.selectCompanyByName(wb.getCompanyCd()));
 			}
-				
-			// 요금 
-		
-			// 주의사항?
 
 			// 운송장 정보 출력
 			System.out.println("┌--------------------------------------------------------------------------┐");
@@ -100,8 +97,10 @@ public class WaybillView implements CommonView  {
 			System.out.printf("| 상품명 : %-50s\t\t   |\n", pName);
 			System.out.printf("| 상품 무게 : %-20d  상품 크기: %-25s\t   |\n", pWeight, pSize);
 			System.out.println("|--------------------------------------------------------------------------|");
-			System.out.printf("|  %-33s| 요금 : %-10s |  %-10s\t   |\n", wb.getMsg(), wb.getTotalFee() ,sdf1.format(date) );
+			System.out.printf("|  %-30s| 요금 : %-10s |  %-10s\t   |\n", wb.getMsg(), wb.getTotalFee() ,sdf1.format(date) );
 			System.out.println("└--------------------------------------------------------------------------┘");	
+			System.out.println();
+			System.out.println("이용해 주셔서 감사합니다.");
 	}
 
 	public void wbList() {
@@ -112,8 +111,13 @@ public class WaybillView implements CommonView  {
 				WaybillDao wbDao = new WaybillDao();
 				ParcelDao pDao = new ParcelDao();
 				UserView userV = new UserView();
-
+				
+				System.out.println("-----------------------------------------------------");
+				System.out.println();
+				System.out.println("                     [ 메인 메뉴 ]");
+				System.out.println();
 				System.out.println("조회할 송장의 송장번호를 입력해주세요.");
+				System.out.println("-----------------------------------------------------");
 				System.out.print("송장 번호 : ");
 				String wbNum = scan.nextLine();
 				Waybill wb = wbDao.selectById(wbNum);
@@ -123,13 +127,22 @@ public class WaybillView implements CommonView  {
 				// 운송장이 회원으로 접수 되었을때
 				if (wb.getUserId() != null) {
 					// 해당 택배를 접수했을때 아이디와 비밀번호를 입력 후 같을 경우 택배 재출력 및 접수 취소를 시킨다.
+					System.out.println();
+					System.out.println("-----------------------------------------------------");
+					System.out.println();
 					System.out.println("해당 기능을 사용하시려면 로그인을 하셔야 합니다.");
+					System.out.println();
 					String userId = userV.Login();
 
 					if (userId.equals(wb.getUserId()) ) {
-						System.out.println("로그인에 성공하셨습니다.");
-						System.out.println("1. 재출력  2. 삭제");
-						System.out.print("메뉴 선택 : ");
+
+						System.out.println("-----------------------------------------------------");
+						System.out.println();
+						System.out.println("        로그인에 성공하셨습니다. 메뉴를 선택해 주십시오.");
+						System.out.println();
+						System.out.println(" 1. 재출력  2. 삭제");
+						System.out.println("-----------------------------------------------------");
+						System.out.print(" 메뉴 선택 : ");
 						String menuNum = scan.nextLine();
 
 						if ("1".equals(menuNum)) {
@@ -137,14 +150,27 @@ public class WaybillView implements CommonView  {
 							break;
 						} else {
 							wbDao.delete(wbNum);
-							System.out.println("접수가 취소되었습니다.");
+							
+							System.out.println("-----------------------------------------------------");
+							System.out.println();
+							System.out.println("                 접수가 취소되었습니다.");
+							System.out.println();
+							System.out.println("-----------------------------------------------------");
 							break;
 						}
 					} else if (userId != "fail") {
-						System.out.println("해당 계정의 송장이 아닙니다.");
+						System.out.println("-----------------------------------------------------");
+						System.out.println();
+						System.out.println("               해당 계정의 송장이 아닙니다.");
+						System.out.println();
+						System.out.println("-----------------------------------------------------");
 						break;
 					} else {
-						System.out.println("아이디 패스워드가 틀립니다.");
+						System.out.println("-----------------------------------------------------");
+						System.out.println();
+						System.out.println("               아이디 패스워드가 틀립니다.");
+						System.out.println();
+						System.out.println("-----------------------------------------------------");
 						break;
 					}
 
@@ -164,11 +190,19 @@ public class WaybillView implements CommonView  {
 							break;
 						} else {
 							wbDao.delete(wbNum);
-							System.out.println("접수가 취소되었습니다.");
+							System.out.println("-----------------------------------------------------");
+							System.out.println();
+							System.out.println("                  접수가 취소되었습니다.");
+							System.out.println();
+							System.out.println("-----------------------------------------------------");
 							break;
 						}
 					} else {
-						System.out.println("전화번호가 일치하지 않습니다.");
+						System.out.println("-----------------------------------------------------");
+						System.out.println();
+						System.out.println("               전화번호가 일치하지 않습니다.");
+						System.out.println();
+						System.out.println("-----------------------------------------------------");
 						break;
 					}
 				}

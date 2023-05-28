@@ -64,13 +64,19 @@ public interface CommonView {
 		return zipcode;
 	}
 
-	public default String payView(int totalFee) {
+	public default String payView(int cost, int surcharge) {
 
 		try {
-			System.out.println("결제 화면 입니다. ");
 
-			System.out.println("결제 요금은 " + totalFee + "입니다.");
+			System.out.println("-----------------------------------------------------");
+			System.out.println();
+			System.out.println("                   [ 결    제 ]");
+			System.out.println();
+			System.out.println("무게별 요금 " + cost +"원과 지역별 요금 " + surcharge+"을 합쳐");
+			System.out.println("총 요금은 " + (cost+surcharge)+"원 입니다.");
+			System.out.println();
 			System.out.println("1. 결제   2. 취소");
+			System.out.println("-----------------------------------------------------");
 			System.out.println();
 
 			String menuNo = scan.nextLine();
@@ -86,6 +92,100 @@ public interface CommonView {
 		}
 		return "fail";
 	}
+	
+	public default String payView(int cost, int surcharge, int grade) {
 
+		try {
+			int discount = 0;
+			
+			if(grade <= 100) {
+				discount = 200;
+			} else if (grade <= 200) {
+				discount = 500;
+			} else {
+				discount = 1000;
+			}
+
+			System.out.println("-----------------------------------------------------");
+			System.out.println();
+			System.out.println("                     [ 결    제 ]");
+			System.out.println();
+			System.out.println("무게별 요금 " + cost +"원과 지역별 요금 " + surcharge+"을 합쳐");
+			System.out.println("요금은 " + (cost+surcharge)+"원 입니다.");
+			if(discount == 200) {
+				System.out.println("또한 회원 님의 등급인 플래티넘 등급은 " + discount +"원 할인이 되므로");
+			} else if(discount == 500) {
+				System.out.println("또한 회원 님의 등급인 VIP 등급은 " + discount +"원 할인이 되므로");
+			} else {
+				System.out.println("또한 회원 님의 등급인 VVIP 등급은 " + discount +"원 할인이 되므로");
+			}
+			System.out.println("총 요금은 " +(cost+surcharge+discount) + "원 입니다.");
+			System.out.println();
+			System.out.println(" 1. 결제   2. 취소");
+			System.out.println("-----------------------------------------------------");
+			System.out.print(" 메뉴 선택 : ");
+
+			String menuNo = scan.nextLine();
+
+			if ("1".equals(menuNo)) {
+				return "success";
+			} else {
+				return "fail";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "fail";
+	}
+
+	public default String message() {
+		
+		String msg  ="";
+		
+		while (true) {
+
+			
+
+			System.out.println("--------------------------------------------------------");
+			System.out.println("                      택배 요청사항");
+			System.out.println();
+			System.out.println("\t\t 1. 선택 안함");
+			System.out.println("\t\t 2. 배송 전 연락주세요");
+			System.out.println("\t\t 3. 빠른 배송 부탁드립니다.");
+			System.out.println("\t\t 4. 부재 시, 경비실에 맡겨주세요.");
+			System.out.println();
+			System.out.println("\t\t 0을 입력시 직접입력 창으로 이동합니다.");
+			System.out.println("--------------------------------------------------------");
+			System.out.print("요청사항 선택 : ");
+			int menuNum = Integer.parseInt(scan.nextLine());
+
+			switch (menuNum) {
+
+			case 0:
+				msg = scan.nextLine();
+				break;
+			case 1:
+				msg = "요청사항 없음";
+				break;
+			case 2:
+				msg = "배송 전 연락주세요";
+				break;
+			case 3:
+				msg = "빠른 배송 부탁드립니다.";
+				break;
+			case 4:
+				msg = "부재 시 경비실에 맡겨주세요";
+				break;
+			default:
+				System.out.println("다시 시도해 주십시오");
+				continue;
+			}
+			
+			break;
+		}
+		
+		return msg;
+	}
 	
 }

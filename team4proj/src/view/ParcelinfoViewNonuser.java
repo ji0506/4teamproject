@@ -11,27 +11,41 @@ public class ParcelinfoViewNonuser implements CommonView {
 	public void info(String nonUserCp) {
 
 		ParcelDao pdao = new ParcelDao();
+		int width = 0;
+		int length = 0;
+		int height = 0;
+		int cost = 0;
+		int mass = 0;
 
+		String parcelName = "";
+		String volume = "";
+		
 		try {
-
-			int cost;
-			int mass;
-
 			// 화면 출력
 			while (true) {
 				System.out.println();
-				System.out.println("상품명을 입력해주세요");
-				System.out.print("상품명 : ");
-				String parcelName = scan.nextLine();
-
-				System.out.println("		[무게 및 크기 측정]");
-				System.out.println("---------------------------------------------------------------");
-				System.out.println("무게와 크기를 입력해 주세요");
-				System.out.println("---------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------");
+				System.out.println();
+				System.out.println("                     [ 상품 정보 입력창 ]");
+				System.out.println();
+				System.out.println("--------------------------------------------------------");
+				System.out.println();
+				System.out.print("상품명 (10 글자 제한) : ");
+				parcelName = scan.nextLine();
+				
+				System.out.println();
+				System.out.println("--------------------------------------------------------");
+				System.out.println();
+				System.out.println("                     [무게 및 크기 측정]");
+				System.out.println();
+				System.out.println("--------------------------------------------------------");
+				System.out.println();
+				System.out.println(" 무게와 크기를 입력해 주세요");
+				System.out.println();
 
 				// 무게당 요금 계산
 				while (true) {
-					System.out.print("무게(kg) :");
+					System.out.print("무게(kg) : ");
 					mass = Integer.parseInt(scan.nextLine());
 
 					if (mass > 20) {
@@ -40,22 +54,29 @@ public class ParcelinfoViewNonuser implements CommonView {
 					}
 					break;
 				}
-
+				
+				System.out.println();
+				System.out.println("--------------------------------------------------------");
+				
 				cost = costs(mass);
 
 				// 택배 규격 확인
-				int width;
-				int length;
-				int height;
+
 
 				while (true) {
-					System.out.print("가로(cm) :");
+					System.out.println();
+					System.out.println("택배의 크기를 입력해 주세요.");
+					System.out.println();
+					System.out.print("가로(cm) : ");
 					width = Integer.parseInt(scan.nextLine());
-					System.out.print("세로(cm) :");
+					System.out.println();
+					System.out.print("세로(cm) : ");
 					length = Integer.parseInt(scan.nextLine());
-					System.out.print("높이(cm) :");
+					System.out.println();
+					System.out.print("높이(cm) : ");
 					height = Integer.parseInt(scan.nextLine());
-
+					System.out.println();
+					
 					if (width + length + height > 160 || width > 100 || length > 100 || height > 100) {
 						System.out.println("가능한 택배 규격이 아닙니다.");
 						continue;
@@ -64,7 +85,7 @@ public class ParcelinfoViewNonuser implements CommonView {
 				}
 
 				// 택배 크기 정의
-				String volume = String.format("%d*%d*%d(cm)", width, length, height);
+				volume = String.format("%d*%d*%d(cm)", width, length, height);
 
 				// 택배 번호 설정
 				int parcelNum = pdao.selectCountId();
@@ -90,12 +111,12 @@ public class ParcelinfoViewNonuser implements CommonView {
 				System.out.println("--------------------------------------------------------");
 				System.out.println();
 				System.out.println("1. 받는 사람 정보 화면으로 2. 택배 정보 다시 입력 3. 메인 메뉴로");
-
+				System.out.println();
 				System.out.print("메뉴 선택: ");
 				String menuNo = scan.nextLine();
 
 				if ("1".equals(menuNo)) {
-					ToReceiverInfoViewNonuser.getinstance().info(nonUserCp, parcel);
+					ToReceiverInfoViewNonuser.getinstance().info(nonUserCp, parcel, cost);
 					break;
 				} else if ("2".equals(menuNo)) 
 					continue;

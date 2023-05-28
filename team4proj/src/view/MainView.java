@@ -3,6 +3,7 @@ package view;
 import java.util.Scanner;
 
 import dao.SuperDao;
+import model.User;
 
 public class MainView {
 
@@ -16,13 +17,16 @@ public class MainView {
 
 		UserView userV = new UserView();
 		Scanner scan = new Scanner(System.in);
+		User u = new User();
 		String userId;
 
 		SuperDao.Load();
 
 		while (true) {
 			System.out.println("-----------------------------------------------------");
-			System.out.println("                      [메인 메뉴]");
+			System.out.println();
+			System.out.println("                     [ 메인 메뉴 ]");
+			System.out.println();
 			System.out.println("-----------------------------------------------------");
 			System.out.println();
 			System.out.printf("\t%-20s\t%-20s\n", "1. 회원 택배 접수", "2. 비회원 택배 접수");
@@ -32,7 +36,7 @@ public class MainView {
 			System.out.println("다른 숫자 입력시 종료됩니다.");
 			System.out.println("-----------------------------------------------------");
 
-			System.out.print("메뉴 선택: ");
+			System.out.print("메뉴 선택 : ");
 			String menuNo = scan.nextLine();
 
 			if ("1".equals(menuNo)) {
@@ -40,6 +44,7 @@ public class MainView {
 
 				if (userId != "fail") {
 					System.out.println("로그인에 성공하셨습니다.");
+		
 					ParcelinfoView.getinstance().info(userId);
 				} else {
 					System.out.println("로그인에 실패하셨습니다.");
