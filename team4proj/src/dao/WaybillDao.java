@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Company;
 import model.Waybill;
 
 public class WaybillDao {
@@ -163,14 +162,13 @@ public class WaybillDao {
 			Connection conn = SuperDao.getConnection();
 			
 
-			String sql = "select DISTINCT  zipcode from sigugun where dong like ? or eup like ? and sido=? and sigugun=? and num=?";
+			String sql = "select DISTINCT  zipcode from sigugun where dong like ? and sido=? and sigugun=? and num=?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, dong + "%");
-			stmt.setString(2, dong + "%");
-			stmt.setString(3, sido);
-			stmt.setString(4, gugun);
-			stmt.setInt(5, num);
+			stmt.setString(2, sido);
+			stmt.setString(3, gugun);
+			stmt.setInt(4, num);
 
 			ResultSet re = stmt.executeQuery();
 			int i = 0;
@@ -194,15 +192,14 @@ public class WaybillDao {
 			Connection conn = SuperDao.getConnection();
 			
 
-			String sql = "select DISTINCT  zipcode from sigugun where dong like ? or eup like ? and sido=? and sigugun like ? and num=? and bunum=?";
+			String sql = "select DISTINCT  zipcode from sigugun where dong like ?  and sido=? and sigugun like ? and num=? and bunum=?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, dong + "%");
-			stmt.setString(2, dong + "%");
-			stmt.setString(3, sido);
-			stmt.setString(4, gugun + "%");
-			stmt.setInt(5, num);
-			stmt.setInt(6, bunum);
+			stmt.setString(2, sido);
+			stmt.setString(3, gugun + "%");
+			stmt.setInt(4, num);
+			stmt.setInt(5, bunum);
 
 			ResultSet re = stmt.executeQuery();
 			int i = 0;
@@ -224,14 +221,13 @@ public class WaybillDao {
 			Connection conn = SuperDao.getConnection();
 			
 
-			String sql = "select DISTINCT  zipcode from sigugun where dong like ? or eup like ? and sigugun like ? and num=? and bunum=?";
+			String sql = "select DISTINCT  zipcode from sigugun where dong like ? and sigugun like ? and num=? and bunum=?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, dong + "%");
-			stmt.setString(2, dong + "%");
-			stmt.setString(3, gugun + "%");
-			stmt.setInt(4, num);
-			stmt.setInt(5, bunum);
+			stmt.setString(2, gugun + "%");
+			stmt.setInt(3, num);
+			stmt.setInt(4, bunum);
 
 			ResultSet re = stmt.executeQuery();
 			int i = 0;
