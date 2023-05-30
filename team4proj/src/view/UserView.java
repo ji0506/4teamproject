@@ -75,6 +75,15 @@ public class UserView implements CommonView{
 	}
 
 	public String JoinUser() {
+
+		String userid;
+		String userpw;
+		String username;
+		String useraddr;
+		String userDaddr;
+		String usercp;
+		
+
 		try {
 			
 			System.out.println();
@@ -82,13 +91,6 @@ public class UserView implements CommonView{
 			System.out.println();
 			System.out.println("                  ○  회  원  가  입  ○");
 			System.out.println();
-			String userid;
-			String userpw;
-			String username;
-			String useraddr;
-			String userDaddr;
-			String usercp;
-			
 			//아이디 입력
 			while (true) {
 				System.out.println("-----------------------------------------------------");
