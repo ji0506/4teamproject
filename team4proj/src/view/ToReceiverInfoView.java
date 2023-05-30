@@ -174,7 +174,6 @@ public class ToReceiverInfoView implements CommonView {
 				String parcelNumStr = String.format("%05d", parcel.getParcelNo());
 
 				// 우편번호와 택배 번호를 조합하여 운송장 번호 생성
-
 				String wbNum = parcelNumStr + zipcode;
 
 
@@ -281,18 +280,7 @@ public class ToReceiverInfoView implements CommonView {
 		}
 
 	}
-
-	public static void main(String[] args) {
-		SuperDao.Load();
-//		SuperDao.close();
-		view.info("KangCG", null, 0);
-		SuperDao.close();
-	}
-
-	public void ChangeCompanyCd() {
-
-	}
-
+	
 	public static ToReceiverInfoView getinstance() {
 		return view;
 	}

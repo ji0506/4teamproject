@@ -8,6 +8,7 @@ public class ParcelinfoView implements CommonView {
 
 	private static ParcelinfoView view = new ParcelinfoView();
 
+	
 	public void info(String userId) {
 
 		ParcelDao pdao = new ParcelDao();

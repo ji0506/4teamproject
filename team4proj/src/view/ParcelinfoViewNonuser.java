@@ -130,11 +130,6 @@ public class ParcelinfoViewNonuser implements CommonView {
 
 	}
 
-	public static void main(String[] args) {
-		SuperDao.Load();
-		view.info(null);
-		SuperDao.close();
-	}
 
 	public static ParcelinfoViewNonuser getinstance() {
 		return view;

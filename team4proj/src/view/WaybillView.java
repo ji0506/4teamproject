@@ -16,15 +16,7 @@ import model.Waybill;
 public class WaybillView implements CommonView  {
 
 	private static WaybillView view = new WaybillView();
-
-
-	public static void main(String[] args) {
-		SuperDao.Load();
-		//view.waybillInfo("0000215546");
-		SuperDao.close();
-	}
-
-
+	
 	public void waybillInfo(Waybill wb, Parcel parcel) {
 			UserDao uDao = new UserDao();
 			NonuserDao nuDao = new NonuserDao();

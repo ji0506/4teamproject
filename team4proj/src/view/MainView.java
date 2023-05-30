@@ -17,7 +17,6 @@ public class MainView {
 
 		UserView userV = new UserView();
 		Scanner scan = new Scanner(System.in);
-		User u = new User();
 		String userId;
 
 		SuperDao.Load();

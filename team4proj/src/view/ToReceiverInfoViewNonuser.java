@@ -139,14 +139,7 @@ public class ToReceiverInfoViewNonuser implements CommonView{
 
 	}
 
-	
-
-	public static void main(String[] args) {
-		SuperDao.Load();
-		view.info(null, null, 0);
-		SuperDao.close();
-	}
-	
+		
 	public static ToReceiverInfoViewNonuser getinstance()
 	{
 		return view;
